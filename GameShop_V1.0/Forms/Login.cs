@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GameShop_V1._0.Forms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,12 @@ namespace GameShop_V1._0
         public Login()
         {
             InitializeComponent();
+        }
+
+        private void homeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Home home = new Home();
+            home.ShowDialog();
         }
     }
 }
