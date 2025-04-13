@@ -21,14 +21,7 @@ namespace GameShop_V1._0.Forms
 
         private void Home_Load(object sender, EventArgs e)
         {
-            TypeProduct typeProduct =
-                new TypeProduct { Name = "Game" };
-            GameShopContext context = new GameShopContext();
-            context.TypeProducts.Add(typeProduct);
-            context.SaveChanges();
-
-            List<TypeProduct> types = context.TypeProducts.ToList();
-            dataGridView1.DataSource = types;
+            lbCurrentUser.Text = GlobalInfo.CurrentUser.UserName;
         }
     }
 }

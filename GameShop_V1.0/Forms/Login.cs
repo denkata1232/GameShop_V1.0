@@ -1,4 +1,7 @@
-﻿using GameShop_V1._0.Forms;
+﻿using Business.businessLogic;
+using Data;
+using Data.Models;
+using GameShop_V1._0.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,12 +10,15 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Forms;
 
 namespace GameShop_V1._0
 {
     public partial class Login : Form
     {
+        private UserBusiness userBusiness = new UserBusiness(new GameShopContext());
+
         public Login()
         {
             InitializeComponent();
@@ -23,12 +29,10 @@ namespace GameShop_V1._0
             lbUsername.Visible = true;
             lbPassword.Visible = true;
             lbEmail.Visible = false;
-            lbAdminPassword.Visible = false;
 
             tbUsername.Visible = true;
             tbPassword.Visible = true;
             tbEmail.Visible = false;
-            tbAdminPassword.Visible = false;
 
             btnLogin.Visible = true;
             btnRegister.Visible = false;
@@ -41,12 +45,10 @@ namespace GameShop_V1._0
             lbUsername.Visible = true;
             lbPassword.Visible = true;
             lbEmail.Visible = true;
-            lbAdminPassword.Visible = false;
 
             tbUsername.Visible = true;
             tbPassword.Visible = true;
             tbEmail.Visible = true;
-            tbAdminPassword.Visible = false;
 
             btnLogin.Visible = false;
             btnRegister.Visible = true;
@@ -56,14 +58,61 @@ namespace GameShop_V1._0
 
         private void rbUser_CheckedChanged(object sender, EventArgs e)
         {
-            tbAdminPassword.Visible = false;
-            lbAdminPassword.Visible = false;
+            
         }
 
         private void rbAdmin_CheckedChanged(object sender, EventArgs e)
         {
-            tbAdminPassword.Visible = true;
-            lbAdminPassword.Visible = true;
+            
+        }
+
+        private void btnRegister_Click(object sender, EventArgs e)
+        {
+            string username = tbUsername.Text;
+            string password = tbPassword.Text;
+            string email = tbEmail.Text;
+            User user = new User()
+            {
+                UserName = username,
+                Password = password,
+                Email = email
+            };
+
+            if (rbAdmin.Checked && tbPassword.Text == GlobalInfo.SecretAdminPassword)
+            {
+                user.IsAdmin = true;
+            }
+
+            MessageBox.Show(userBusiness.AddUser(user));
+
+            Login login = new Login();
+            login.Show();
+            login.FormClosing += (obj, args) => { this.Close(); };
+            this.Hide();
+
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            string username = tbUsername.Text;
+            string password = tbPassword.Text;
+
+            User user = userBusiness.GetUser(username, password);
+
+            if (user == null)
+            {
+                MessageBox.Show($"User: {username} doesn't exist!");
+                return;
+            }
+
+            MessageBox.Show($"Successfully loged in as {username}");
+
+            GlobalInfo.CurrentUser = user;
+
+            Home home = new Home();
+            home.Show();
+            home.FormClosing += (obj, args) => { this.Close(); };
+            this.Hide();
         }
     }
 }

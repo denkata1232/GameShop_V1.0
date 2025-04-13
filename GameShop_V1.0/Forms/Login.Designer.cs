@@ -42,8 +42,7 @@
             this.rbAdmin = new System.Windows.Forms.RadioButton();
             this.rbUser = new System.Windows.Forms.RadioButton();
             this.btnRegister = new System.Windows.Forms.Button();
-            this.tbAdminPassword = new System.Windows.Forms.TextBox();
-            this.lbAdminPassword = new System.Windows.Forms.Label();
+            this.lbMessage = new System.Windows.Forms.Label();
             this.gb1.SuspendLayout();
             this.gb2.SuspendLayout();
             this.SuspendLayout();
@@ -90,6 +89,7 @@
             // 
             this.tbPassword.Location = new System.Drawing.Point(132, 61);
             this.tbPassword.Name = "tbPassword";
+            this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(178, 20);
             this.tbPassword.TabIndex = 4;
             // 
@@ -146,6 +146,7 @@
             this.btnLogin.TabIndex = 9;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // gb2
             // 
@@ -194,25 +195,17 @@
             this.btnRegister.Text = "Register";
             this.btnRegister.UseVisualStyleBackColor = true;
             this.btnRegister.Visible = false;
+            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             // 
-            // tbAdminPassword
+            // lbMessage
             // 
-            this.tbAdminPassword.Location = new System.Drawing.Point(175, 240);
-            this.tbAdminPassword.Name = "tbAdminPassword";
-            this.tbAdminPassword.Size = new System.Drawing.Size(135, 20);
-            this.tbAdminPassword.TabIndex = 12;
-            this.tbAdminPassword.Visible = false;
-            // 
-            // lbAdminPassword
-            // 
-            this.lbAdminPassword.AutoSize = true;
-            this.lbAdminPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lbAdminPassword.Location = new System.Drawing.Point(39, 240);
-            this.lbAdminPassword.Name = "lbAdminPassword";
-            this.lbAdminPassword.Size = new System.Drawing.Size(130, 20);
-            this.lbAdminPassword.TabIndex = 11;
-            this.lbAdminPassword.Text = "Admin password:";
-            this.lbAdminPassword.Visible = false;
+            this.lbMessage.AutoSize = true;
+            this.lbMessage.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbMessage.Location = new System.Drawing.Point(148, 382);
+            this.lbMessage.Name = "lbMessage";
+            this.lbMessage.Size = new System.Drawing.Size(0, 18);
+            this.lbMessage.TabIndex = 13;
+            this.lbMessage.Visible = false;
             // 
             // Login
             // 
@@ -220,8 +213,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(348, 420);
-            this.Controls.Add(this.tbAdminPassword);
-            this.Controls.Add(this.lbAdminPassword);
+            this.Controls.Add(this.lbMessage);
             this.Controls.Add(this.btnRegister);
             this.Controls.Add(this.gb2);
             this.Controls.Add(this.btnLogin);
@@ -259,8 +251,7 @@
         private System.Windows.Forms.RadioButton rbAdmin;
         private System.Windows.Forms.RadioButton rbUser;
         private System.Windows.Forms.Button btnRegister;
-        private System.Windows.Forms.TextBox tbAdminPassword;
-        private System.Windows.Forms.Label lbAdminPassword;
+        private System.Windows.Forms.Label lbMessage;
     }
 }
 

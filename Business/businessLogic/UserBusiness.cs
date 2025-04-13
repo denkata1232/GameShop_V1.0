@@ -27,11 +27,20 @@ namespace Business.businessLogic
             return context.Users.Find(id);
         }
 
+        public User GetUser(string username, string password)
+        {
+            return context.Users.FirstOrDefault(x => x.UserName == username && x.Password == password);
+        }
+
         public string AddUser(User user)
         {
+            if (context.Users.Any(x => x.UserName == user.UserName || x.Email == user.Email))
+            {
+                return $"User: {user.UserName} already exists!";
+            }
             context.Users.Add(user);
             context.SaveChanges();
-            return $"User: {user.UserName} added successfully";
+            return $"User: {user.UserName} added successfully!";
         }
 
         public string UpdateUser(User user)
@@ -41,9 +50,9 @@ namespace Business.businessLogic
             {
                 context.Entry(userToUpdate).CurrentValues.SetValues(user);
                 context.SaveChanges();
-                return $"User: {user.UserName} updated successfully";
+                return $"User: {user.UserName} updated successfully!";
             }
-            return $"User with Name: {user.UserName} not found";
+            return $"User with Name: {user.UserName} not found!";
         }
 
         public string DeleteUser(User user)
@@ -53,9 +62,9 @@ namespace Business.businessLogic
             {
                 context.Users.Remove(userToDelete);
                 context.SaveChanges();
-                return $"User: {userToDelete.UserName} deleted successfully";
+                return $"User: {userToDelete.UserName} deleted successfully!";
             }
-            return $"User with Name: {user.UserName} not found";
+            return $"User with Name: {user.UserName} not found!";
         }
     }
 }
