@@ -28,39 +28,216 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.homeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1.SuspendLayout();
+            this.lbUsername = new System.Windows.Forms.Label();
+            this.lbPassword = new System.Windows.Forms.Label();
+            this.lbEmail = new System.Windows.Forms.Label();
+            this.tbUsername = new System.Windows.Forms.TextBox();
+            this.tbPassword = new System.Windows.Forms.TextBox();
+            this.tbEmail = new System.Windows.Forms.TextBox();
+            this.rbLogin = new System.Windows.Forms.RadioButton();
+            this.rbRegister = new System.Windows.Forms.RadioButton();
+            this.gb1 = new System.Windows.Forms.GroupBox();
+            this.btnLogin = new System.Windows.Forms.Button();
+            this.gb2 = new System.Windows.Forms.GroupBox();
+            this.rbAdmin = new System.Windows.Forms.RadioButton();
+            this.rbUser = new System.Windows.Forms.RadioButton();
+            this.btnRegister = new System.Windows.Forms.Button();
+            this.tbAdminPassword = new System.Windows.Forms.TextBox();
+            this.lbAdminPassword = new System.Windows.Forms.Label();
+            this.gb1.SuspendLayout();
+            this.gb2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // menuStrip1
+            // lbUsername
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.homeToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            this.lbUsername.AutoSize = true;
+            this.lbUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbUsername.Location = new System.Drawing.Point(39, 30);
+            this.lbUsername.Name = "lbUsername";
+            this.lbUsername.Size = new System.Drawing.Size(87, 20);
+            this.lbUsername.TabIndex = 0;
+            this.lbUsername.Text = "Username:";
             // 
-            // homeToolStripMenuItem
+            // lbPassword
             // 
-            this.homeToolStripMenuItem.Name = "homeToolStripMenuItem";
-            this.homeToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
-            this.homeToolStripMenuItem.Text = "Home";
-            this.homeToolStripMenuItem.Click += new System.EventHandler(this.homeToolStripMenuItem_Click);
+            this.lbPassword.AutoSize = true;
+            this.lbPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbPassword.Location = new System.Drawing.Point(39, 61);
+            this.lbPassword.Name = "lbPassword";
+            this.lbPassword.Size = new System.Drawing.Size(82, 20);
+            this.lbPassword.TabIndex = 1;
+            this.lbPassword.Text = "Password:";
+            // 
+            // lbEmail
+            // 
+            this.lbEmail.AutoSize = true;
+            this.lbEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbEmail.Location = new System.Drawing.Point(39, 90);
+            this.lbEmail.Name = "lbEmail";
+            this.lbEmail.Size = new System.Drawing.Size(52, 20);
+            this.lbEmail.TabIndex = 2;
+            this.lbEmail.Text = "Email:";
+            this.lbEmail.Visible = false;
+            // 
+            // tbUsername
+            // 
+            this.tbUsername.Location = new System.Drawing.Point(132, 30);
+            this.tbUsername.Name = "tbUsername";
+            this.tbUsername.Size = new System.Drawing.Size(178, 20);
+            this.tbUsername.TabIndex = 3;
+            // 
+            // tbPassword
+            // 
+            this.tbPassword.Location = new System.Drawing.Point(132, 61);
+            this.tbPassword.Name = "tbPassword";
+            this.tbPassword.Size = new System.Drawing.Size(178, 20);
+            this.tbPassword.TabIndex = 4;
+            // 
+            // tbEmail
+            // 
+            this.tbEmail.Location = new System.Drawing.Point(132, 92);
+            this.tbEmail.Name = "tbEmail";
+            this.tbEmail.Size = new System.Drawing.Size(178, 20);
+            this.tbEmail.TabIndex = 5;
+            this.tbEmail.Visible = false;
+            // 
+            // rbLogin
+            // 
+            this.rbLogin.AutoSize = true;
+            this.rbLogin.Checked = true;
+            this.rbLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.rbLogin.Location = new System.Drawing.Point(63, 17);
+            this.rbLogin.Name = "rbLogin";
+            this.rbLogin.Size = new System.Drawing.Size(62, 22);
+            this.rbLogin.TabIndex = 6;
+            this.rbLogin.TabStop = true;
+            this.rbLogin.Text = "Login";
+            this.rbLogin.UseVisualStyleBackColor = true;
+            this.rbLogin.CheckedChanged += new System.EventHandler(this.rbLogin_CheckedChanged);
+            // 
+            // rbRegister
+            // 
+            this.rbRegister.AutoSize = true;
+            this.rbRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.rbRegister.Location = new System.Drawing.Point(174, 17);
+            this.rbRegister.Name = "rbRegister";
+            this.rbRegister.Size = new System.Drawing.Size(81, 22);
+            this.rbRegister.TabIndex = 7;
+            this.rbRegister.Text = "Register";
+            this.rbRegister.UseVisualStyleBackColor = true;
+            this.rbRegister.CheckedChanged += new System.EventHandler(this.rbRegister_CheckedChanged);
+            // 
+            // gb1
+            // 
+            this.gb1.Controls.Add(this.rbRegister);
+            this.gb1.Controls.Add(this.rbLogin);
+            this.gb1.Location = new System.Drawing.Point(12, 123);
+            this.gb1.Name = "gb1";
+            this.gb1.Size = new System.Drawing.Size(324, 49);
+            this.gb1.TabIndex = 8;
+            this.gb1.TabStop = false;
+            // 
+            // btnLogin
+            // 
+            this.btnLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnLogin.Location = new System.Drawing.Point(15, 330);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(321, 49);
+            this.btnLogin.TabIndex = 9;
+            this.btnLogin.Text = "Login";
+            this.btnLogin.UseVisualStyleBackColor = true;
+            // 
+            // gb2
+            // 
+            this.gb2.Controls.Add(this.rbAdmin);
+            this.gb2.Controls.Add(this.rbUser);
+            this.gb2.Location = new System.Drawing.Point(12, 178);
+            this.gb2.Name = "gb2";
+            this.gb2.Size = new System.Drawing.Size(324, 44);
+            this.gb2.TabIndex = 9;
+            this.gb2.TabStop = false;
+            this.gb2.Visible = false;
+            // 
+            // rbAdmin
+            // 
+            this.rbAdmin.AutoSize = true;
+            this.rbAdmin.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.rbAdmin.Location = new System.Drawing.Point(174, 17);
+            this.rbAdmin.Name = "rbAdmin";
+            this.rbAdmin.Size = new System.Drawing.Size(67, 22);
+            this.rbAdmin.TabIndex = 7;
+            this.rbAdmin.Text = "Admin";
+            this.rbAdmin.UseVisualStyleBackColor = true;
+            this.rbAdmin.CheckedChanged += new System.EventHandler(this.rbAdmin_CheckedChanged);
+            // 
+            // rbUser
+            // 
+            this.rbUser.AutoSize = true;
+            this.rbUser.Checked = true;
+            this.rbUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.rbUser.Location = new System.Drawing.Point(63, 17);
+            this.rbUser.Name = "rbUser";
+            this.rbUser.Size = new System.Drawing.Size(58, 22);
+            this.rbUser.TabIndex = 6;
+            this.rbUser.TabStop = true;
+            this.rbUser.Text = "User";
+            this.rbUser.UseVisualStyleBackColor = true;
+            this.rbUser.CheckedChanged += new System.EventHandler(this.rbUser_CheckedChanged);
+            // 
+            // btnRegister
+            // 
+            this.btnRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnRegister.Location = new System.Drawing.Point(15, 330);
+            this.btnRegister.Name = "btnRegister";
+            this.btnRegister.Size = new System.Drawing.Size(321, 49);
+            this.btnRegister.TabIndex = 10;
+            this.btnRegister.Text = "Register";
+            this.btnRegister.UseVisualStyleBackColor = true;
+            this.btnRegister.Visible = false;
+            // 
+            // tbAdminPassword
+            // 
+            this.tbAdminPassword.Location = new System.Drawing.Point(175, 240);
+            this.tbAdminPassword.Name = "tbAdminPassword";
+            this.tbAdminPassword.Size = new System.Drawing.Size(135, 20);
+            this.tbAdminPassword.TabIndex = 12;
+            this.tbAdminPassword.Visible = false;
+            // 
+            // lbAdminPassword
+            // 
+            this.lbAdminPassword.AutoSize = true;
+            this.lbAdminPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbAdminPassword.Location = new System.Drawing.Point(39, 240);
+            this.lbAdminPassword.Name = "lbAdminPassword";
+            this.lbAdminPassword.Size = new System.Drawing.Size(130, 20);
+            this.lbAdminPassword.TabIndex = 11;
+            this.lbAdminPassword.Text = "Admin password:";
+            this.lbAdminPassword.Visible = false;
             // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(348, 420);
+            this.Controls.Add(this.tbAdminPassword);
+            this.Controls.Add(this.lbAdminPassword);
+            this.Controls.Add(this.btnRegister);
+            this.Controls.Add(this.gb2);
+            this.Controls.Add(this.btnLogin);
+            this.Controls.Add(this.gb1);
+            this.Controls.Add(this.tbEmail);
+            this.Controls.Add(this.tbPassword);
+            this.Controls.Add(this.tbUsername);
+            this.Controls.Add(this.lbEmail);
+            this.Controls.Add(this.lbPassword);
+            this.Controls.Add(this.lbUsername);
             this.Name = "Login";
-            this.Text = "Form1";
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.Text = "Login";
+            this.gb1.ResumeLayout(false);
+            this.gb1.PerformLayout();
+            this.gb2.ResumeLayout(false);
+            this.gb2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -68,8 +245,22 @@
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem homeToolStripMenuItem;
+        private System.Windows.Forms.Label lbUsername;
+        private System.Windows.Forms.Label lbPassword;
+        private System.Windows.Forms.Label lbEmail;
+        private System.Windows.Forms.TextBox tbUsername;
+        private System.Windows.Forms.TextBox tbPassword;
+        private System.Windows.Forms.TextBox tbEmail;
+        private System.Windows.Forms.RadioButton rbLogin;
+        private System.Windows.Forms.RadioButton rbRegister;
+        private System.Windows.Forms.GroupBox gb1;
+        private System.Windows.Forms.Button btnLogin;
+        private System.Windows.Forms.GroupBox gb2;
+        private System.Windows.Forms.RadioButton rbAdmin;
+        private System.Windows.Forms.RadioButton rbUser;
+        private System.Windows.Forms.Button btnRegister;
+        private System.Windows.Forms.TextBox tbAdminPassword;
+        private System.Windows.Forms.Label lbAdminPassword;
     }
 }
 
