@@ -120,6 +120,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="businessLogic\OrderBusiness.cs" />
+    <Compile Include="businessLogic\OrderProductBusiness.cs" />
     <Compile Include="businessLogic\ProductBusiness.cs" />
     <Compile Include="businessLogic\TypeProductBusiness.cs" />
     <Compile Include="businessLogic\UserBusiness.cs" />
