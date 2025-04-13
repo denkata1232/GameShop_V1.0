@@ -37,7 +37,6 @@ namespace GameShop_V1._0
             btnLogin.Visible = true;
             btnRegister.Visible = false;
 
-            gb2.Visible = false;
         }
 
         private void rbRegister_CheckedChanged(object sender, EventArgs e)
@@ -53,7 +52,6 @@ namespace GameShop_V1._0
             btnLogin.Visible = false;
             btnRegister.Visible = true;
 
-            gb2.Visible = true;
         }
 
         private void rbUser_CheckedChanged(object sender, EventArgs e)
@@ -78,7 +76,7 @@ namespace GameShop_V1._0
                 Email = email
             };
 
-            if (rbAdmin.Checked && tbPassword.Text == GlobalInfo.SecretAdminPassword)
+            if (tbPassword.Text == GlobalInfo.SecretAdminPassword)
             {
                 user.IsAdmin = true;
             }

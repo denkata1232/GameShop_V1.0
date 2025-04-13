@@ -38,13 +38,9 @@
             this.rbRegister = new System.Windows.Forms.RadioButton();
             this.gb1 = new System.Windows.Forms.GroupBox();
             this.btnLogin = new System.Windows.Forms.Button();
-            this.gb2 = new System.Windows.Forms.GroupBox();
-            this.rbAdmin = new System.Windows.Forms.RadioButton();
-            this.rbUser = new System.Windows.Forms.RadioButton();
             this.btnRegister = new System.Windows.Forms.Button();
             this.lbMessage = new System.Windows.Forms.Label();
             this.gb1.SuspendLayout();
-            this.gb2.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbUsername
@@ -148,43 +144,6 @@
             this.btnLogin.UseVisualStyleBackColor = true;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
-            // gb2
-            // 
-            this.gb2.Controls.Add(this.rbAdmin);
-            this.gb2.Controls.Add(this.rbUser);
-            this.gb2.Location = new System.Drawing.Point(12, 178);
-            this.gb2.Name = "gb2";
-            this.gb2.Size = new System.Drawing.Size(324, 44);
-            this.gb2.TabIndex = 9;
-            this.gb2.TabStop = false;
-            this.gb2.Visible = false;
-            // 
-            // rbAdmin
-            // 
-            this.rbAdmin.AutoSize = true;
-            this.rbAdmin.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.rbAdmin.Location = new System.Drawing.Point(174, 17);
-            this.rbAdmin.Name = "rbAdmin";
-            this.rbAdmin.Size = new System.Drawing.Size(67, 22);
-            this.rbAdmin.TabIndex = 7;
-            this.rbAdmin.Text = "Admin";
-            this.rbAdmin.UseVisualStyleBackColor = true;
-            this.rbAdmin.CheckedChanged += new System.EventHandler(this.rbAdmin_CheckedChanged);
-            // 
-            // rbUser
-            // 
-            this.rbUser.AutoSize = true;
-            this.rbUser.Checked = true;
-            this.rbUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.rbUser.Location = new System.Drawing.Point(63, 17);
-            this.rbUser.Name = "rbUser";
-            this.rbUser.Size = new System.Drawing.Size(58, 22);
-            this.rbUser.TabIndex = 6;
-            this.rbUser.TabStop = true;
-            this.rbUser.Text = "User";
-            this.rbUser.UseVisualStyleBackColor = true;
-            this.rbUser.CheckedChanged += new System.EventHandler(this.rbUser_CheckedChanged);
-            // 
             // btnRegister
             // 
             this.btnRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -215,7 +174,6 @@
             this.ClientSize = new System.Drawing.Size(348, 420);
             this.Controls.Add(this.lbMessage);
             this.Controls.Add(this.btnRegister);
-            this.Controls.Add(this.gb2);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.gb1);
             this.Controls.Add(this.tbEmail);
@@ -228,8 +186,6 @@
             this.Text = "Login";
             this.gb1.ResumeLayout(false);
             this.gb1.PerformLayout();
-            this.gb2.ResumeLayout(false);
-            this.gb2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -247,9 +203,6 @@
         private System.Windows.Forms.RadioButton rbRegister;
         private System.Windows.Forms.GroupBox gb1;
         private System.Windows.Forms.Button btnLogin;
-        private System.Windows.Forms.GroupBox gb2;
-        private System.Windows.Forms.RadioButton rbAdmin;
-        private System.Windows.Forms.RadioButton rbUser;
         private System.Windows.Forms.Button btnRegister;
         private System.Windows.Forms.Label lbMessage;
     }
