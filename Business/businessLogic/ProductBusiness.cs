@@ -23,6 +23,10 @@ namespace Business.businessLogic
         {
             return context.Products.Find(id);
         }
+        public Product GetProductByName(string name)
+        {
+            return context.Products.FirstOrDefault(x => x.Name == name);
+        }
 
         public string AddProduct(Product product)
         {

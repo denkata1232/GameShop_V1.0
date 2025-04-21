@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,6 +15,12 @@ namespace GameShop_V1._0
         [STAThread]
         static void Main()
         {
+            using (var context = new GameShopContext())
+            {
+                // Seed the database with initial data
+                context.SeedDatabase();
+            }
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Login());

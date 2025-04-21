@@ -112,5 +112,10 @@ namespace GameShop_V1._0
             home.FormClosing += (obj, args) => { this.Close(); };
             this.Hide();
         }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

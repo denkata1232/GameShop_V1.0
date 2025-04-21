@@ -125,6 +125,7 @@
             // 
             // gb1
             // 
+            this.gb1.BackColor = System.Drawing.Color.LightCyan;
             this.gb1.Controls.Add(this.rbRegister);
             this.gb1.Controls.Add(this.rbLogin);
             this.gb1.Location = new System.Drawing.Point(12, 123);
@@ -146,13 +147,14 @@
             // 
             // btnRegister
             // 
+            this.btnRegister.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.btnRegister.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnRegister.Location = new System.Drawing.Point(15, 330);
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new System.Drawing.Size(321, 49);
             this.btnRegister.TabIndex = 10;
             this.btnRegister.Text = "Register";
-            this.btnRegister.UseVisualStyleBackColor = true;
+            this.btnRegister.UseVisualStyleBackColor = false;
             this.btnRegister.Visible = false;
             this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             // 
@@ -170,7 +172,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Control;
+            this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(348, 420);
             this.Controls.Add(this.lbMessage);
             this.Controls.Add(this.btnRegister);
@@ -184,6 +186,7 @@
             this.Controls.Add(this.lbUsername);
             this.Name = "Login";
             this.Text = "Login";
+            this.Load += new System.EventHandler(this.Login_Load);
             this.gb1.ResumeLayout(false);
             this.gb1.PerformLayout();
             this.ResumeLayout(false);

@@ -28,39 +28,265 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvProducts = new System.Windows.Forms.DataGridView();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnLogOut = new System.Windows.Forms.Button();
             this.lbCurrentUser = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.tbDescription = new System.Windows.Forms.TextBox();
+            this.lbPriceText = new System.Windows.Forms.Label();
+            this.lbPrice = new System.Windows.Forms.Label();
+            this.lbType = new System.Windows.Forms.Label();
+            this.lbStock = new System.Windows.Forms.Label();
+            this.tbName = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnCart = new System.Windows.Forms.Button();
+            this.btnAddToCart = new System.Windows.Forms.Button();
+            this.tbQuantity = new System.Windows.Forms.TextBox();
+            this.btnPlus = new System.Windows.Forms.Button();
+            this.btnMinus = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dgvProducts
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(422, 176);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(240, 150);
-            this.dataGridView1.TabIndex = 0;
+            this.dgvProducts.AllowUserToOrderColumns = true;
+            this.dgvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvProducts.Location = new System.Drawing.Point(12, 78);
+            this.dgvProducts.Name = "dgvProducts";
+            this.dgvProducts.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dgvProducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvProducts.Size = new System.Drawing.Size(568, 520);
+            this.dgvProducts.TabIndex = 0;
+            this.dgvProducts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProducts_CellContentClick);
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.btnCart);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.btnLogOut);
+            this.panel1.Controls.Add(this.lbCurrentUser);
+            this.panel1.Location = new System.Drawing.Point(-9, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1109, 52);
+            this.panel1.TabIndex = 1;
+            // 
+            // btnLogOut
+            // 
+            this.btnLogOut.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.btnLogOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogOut.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnLogOut.Location = new System.Drawing.Point(912, 3);
+            this.btnLogOut.Name = "btnLogOut";
+            this.btnLogOut.Size = new System.Drawing.Size(124, 38);
+            this.btnLogOut.TabIndex = 1;
+            this.btnLogOut.Text = "Log out";
+            this.btnLogOut.UseVisualStyleBackColor = false;
+            this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
             // 
             // lbCurrentUser
             // 
             this.lbCurrentUser.AutoSize = true;
-            this.lbCurrentUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lbCurrentUser.Location = new System.Drawing.Point(12, 9);
+            this.lbCurrentUser.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCurrentUser.Location = new System.Drawing.Point(756, 11);
             this.lbCurrentUser.Name = "lbCurrentUser";
-            this.lbCurrentUser.Size = new System.Drawing.Size(0, 20);
-            this.lbCurrentUser.TabIndex = 1;
+            this.lbCurrentUser.Size = new System.Drawing.Size(55, 21);
+            this.lbCurrentUser.TabIndex = 0;
+            this.lbCurrentUser.Text = "label1";
+            // 
+            // tbDescription
+            // 
+            this.tbDescription.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.tbDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbDescription.Font = new System.Drawing.Font("Ebrima", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbDescription.Location = new System.Drawing.Point(598, 183);
+            this.tbDescription.Multiline = true;
+            this.tbDescription.Name = "tbDescription";
+            this.tbDescription.ReadOnly = true;
+            this.tbDescription.Size = new System.Drawing.Size(474, 130);
+            this.tbDescription.TabIndex = 3;
+            this.tbDescription.Text = "discription";
+            // 
+            // lbPriceText
+            // 
+            this.lbPriceText.AutoSize = true;
+            this.lbPriceText.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPriceText.ForeColor = System.Drawing.Color.DarkGreen;
+            this.lbPriceText.Location = new System.Drawing.Point(598, 329);
+            this.lbPriceText.Name = "lbPriceText";
+            this.lbPriceText.Size = new System.Drawing.Size(81, 29);
+            this.lbPriceText.TabIndex = 4;
+            this.lbPriceText.Text = "Price:";
+            // 
+            // lbPrice
+            // 
+            this.lbPrice.AutoSize = true;
+            this.lbPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbPrice.ForeColor = System.Drawing.Color.MediumSeaGreen;
+            this.lbPrice.Location = new System.Drawing.Point(685, 329);
+            this.lbPrice.Name = "lbPrice";
+            this.lbPrice.Size = new System.Drawing.Size(76, 29);
+            this.lbPrice.TabIndex = 5;
+            this.lbPrice.Text = "00.00";
+            // 
+            // lbType
+            // 
+            this.lbType.AutoSize = true;
+            this.lbType.Font = new System.Drawing.Font("AniMe Vision - MB_EN", 9.749999F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbType.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.lbType.Location = new System.Drawing.Point(600, 78);
+            this.lbType.Name = "lbType";
+            this.lbType.Size = new System.Drawing.Size(54, 16);
+            this.lbType.TabIndex = 6;
+            this.lbType.Text = "Type";
+            this.lbType.Click += new System.EventHandler(this.lbType_Click);
+            // 
+            // lbStock
+            // 
+            this.lbStock.AutoSize = true;
+            this.lbStock.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbStock.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.lbStock.Location = new System.Drawing.Point(603, 371);
+            this.lbStock.Name = "lbStock";
+            this.lbStock.Size = new System.Drawing.Size(55, 20);
+            this.lbStock.TabIndex = 7;
+            this.lbStock.Text = "Stock";
+            // 
+            // tbName
+            // 
+            this.tbName.BackColor = System.Drawing.Color.Azure;
+            this.tbName.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbName.Font = new System.Drawing.Font("AniMe Vision - MB_EN", 18F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbName.Location = new System.Drawing.Point(598, 103);
+            this.tbName.Multiline = true;
+            this.tbName.Name = "tbName";
+            this.tbName.ReadOnly = true;
+            this.tbName.Size = new System.Drawing.Size(474, 74);
+            this.tbName.TabIndex = 8;
+            this.tbName.Text = "TITLE";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Montserrat ExtraBold", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.DarkGreen;
+            this.label1.Location = new System.Drawing.Point(19, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(128, 48);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Game";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Montserrat ExtraBold", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.label2.Location = new System.Drawing.Point(138, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(114, 48);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Shop";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.label3.Font = new System.Drawing.Font("Montserrat ExtraBold", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Black;
+            this.label3.Location = new System.Drawing.Point(244, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(69, 48);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "🎮";
+            // 
+            // btnCart
+            // 
+            this.btnCart.BackColor = System.Drawing.Color.YellowGreen;
+            this.btnCart.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCart.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnCart.Location = new System.Drawing.Point(1042, 3);
+            this.btnCart.Name = "btnCart";
+            this.btnCart.Size = new System.Drawing.Size(51, 38);
+            this.btnCart.TabIndex = 5;
+            this.btnCart.Text = " 🛒";
+            this.btnCart.UseVisualStyleBackColor = false;
+            // 
+            // btnAddToCart
+            // 
+            this.btnAddToCart.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.btnAddToCart.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddToCart.Location = new System.Drawing.Point(598, 415);
+            this.btnAddToCart.Name = "btnAddToCart";
+            this.btnAddToCart.Size = new System.Drawing.Size(220, 42);
+            this.btnAddToCart.TabIndex = 9;
+            this.btnAddToCart.Text = "Add to Cart";
+            this.btnAddToCart.UseVisualStyleBackColor = false;
+            // 
+            // tbQuantity
+            // 
+            this.tbQuantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbQuantity.Location = new System.Drawing.Point(874, 422);
+            this.tbQuantity.Name = "tbQuantity";
+            this.tbQuantity.Size = new System.Drawing.Size(27, 29);
+            this.tbQuantity.TabIndex = 10;
+            this.tbQuantity.Text = "1";
+            // 
+            // btnPlus
+            // 
+            this.btnPlus.BackColor = System.Drawing.Color.Honeydew;
+            this.btnPlus.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPlus.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnPlus.Location = new System.Drawing.Point(907, 422);
+            this.btnPlus.Name = "btnPlus";
+            this.btnPlus.Size = new System.Drawing.Size(28, 29);
+            this.btnPlus.TabIndex = 6;
+            this.btnPlus.Text = ">";
+            this.btnPlus.UseVisualStyleBackColor = false;
+            this.btnPlus.Click += new System.EventHandler(this.btnPlus_Click);
+            // 
+            // btnMinus
+            // 
+            this.btnMinus.BackColor = System.Drawing.Color.Honeydew;
+            this.btnMinus.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMinus.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnMinus.Location = new System.Drawing.Point(840, 422);
+            this.btnMinus.Name = "btnMinus";
+            this.btnMinus.Size = new System.Drawing.Size(28, 29);
+            this.btnMinus.TabIndex = 11;
+            this.btnMinus.Text = "<";
+            this.btnMinus.UseVisualStyleBackColor = false;
+            this.btnMinus.Click += new System.EventHandler(this.btnMinus_Click);
             // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.lbCurrentUser);
-            this.Controls.Add(this.dataGridView1);
+            this.BackColor = System.Drawing.Color.Azure;
+            this.ClientSize = new System.Drawing.Size(1098, 626);
+            this.Controls.Add(this.btnMinus);
+            this.Controls.Add(this.btnPlus);
+            this.Controls.Add(this.tbQuantity);
+            this.Controls.Add(this.btnAddToCart);
+            this.Controls.Add(this.tbName);
+            this.Controls.Add(this.lbStock);
+            this.Controls.Add(this.lbType);
+            this.Controls.Add(this.lbPrice);
+            this.Controls.Add(this.lbPriceText);
+            this.Controls.Add(this.tbDescription);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.dgvProducts);
             this.Name = "Home";
             this.Text = "Home";
             this.Load += new System.EventHandler(this.Home_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -68,7 +294,23 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvProducts;
+        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lbCurrentUser;
+        private System.Windows.Forms.TextBox tbDescription;
+        private System.Windows.Forms.Label lbPriceText;
+        private System.Windows.Forms.Label lbPrice;
+        private System.Windows.Forms.Label lbType;
+        private System.Windows.Forms.Label lbStock;
+        private System.Windows.Forms.TextBox tbName;
+        private System.Windows.Forms.Button btnLogOut;
+        private System.Windows.Forms.Button btnCart;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnAddToCart;
+        private System.Windows.Forms.TextBox tbQuantity;
+        private System.Windows.Forms.Button btnPlus;
+        private System.Windows.Forms.Button btnMinus;
     }
 }
