@@ -168,7 +168,15 @@ namespace GameShop_V1._0.Forms
                 Quantity = quantity,
             };
 
-            GlobalInfo.Cart.Add(cartProductView);
+            if (GlobalInfo.Cart.Any(x => x.Name == cartProductView.Name))
+            {
+                CartProductViewModel productToUpdate = GlobalInfo.Cart.FirstOrDefault(x => x.Name == cartProductView.Name);
+                productToUpdate.Quantity += cartProductView.Quantity;
+            }
+            else
+            {
+                GlobalInfo.Cart.Add(cartProductView);
+            }          
             ShowAddedToCartFor2Seconds();
         }
 

@@ -1,4 +1,7 @@
-﻿using GameShop_V1._0.ViewModels;
+﻿using Business.businessLogic;
+using Data;
+using Data.Models;
+using GameShop_V1._0.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,11 +11,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace GameShop_V1._0.Forms
 {
     public partial class Cart : Form
     {
+        private GameShopContext context = new GameShopContext();
+        private ProductBusiness productBusiness => new ProductBusiness(context);
+        private int quantity;
         public Cart()
         {
             InitializeComponent();
@@ -57,6 +64,101 @@ namespace GameShop_V1._0.Forms
         {
             dgvProducts.DataSource = GlobalInfo.Cart;
             dgvProducts.Columns["Name"].Width = 225;
+            dgvProducts.SelectionChanged += dgvProducts_SelectionChanged;
+            dvgProducts_SetSelectedProduct();
+            UpdateTotalPrice();
+        }
+
+        private void btnConfirmPurchase_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRemoveFromCart_Click(object sender, EventArgs e)
+        {
+            if (dgvProducts.CurrentRow != null)
+            {
+                var selectedProduct = dgvProducts.CurrentRow.DataBoundItem as CartProductViewModel;
+                GlobalInfo.Cart.Remove(selectedProduct);
+                UpdateTotalPrice();
+
+                dgvProducts.CurrentRow.Dispose();
+
+                if (!GlobalInfo.Cart.Any())
+                {
+                    lbType.Text = "Type";
+                    tbName.Text = "Title";
+                    lbPrice.Text = "00.00$";
+                    tbQuantity.Text = "1";
+                    dgvProducts.DataSource = new List<CartProductViewModel>();
+                }
+                else
+                {
+                    dgvProducts.Refresh();
+                }
+
+            }
+                
+        }
+
+        private void btnPlus_Click(object sender, EventArgs e)
+        {
+            quantity = int.Parse(tbQuantity.Text);
+            if (quantity + 1 < 100)
+            {
+                quantity++;
+            }
+            tbQuantity.Text = quantity.ToString();
+            NewQuantity(tbName.Text);
+            dvgProducts_SetSelectedProduct();
+            dgvProducts.Refresh();
+            UpdateTotalPrice();
+        }
+
+        private void btnMinus_Click(object sender, EventArgs e)
+        {
+            quantity = int.Parse(tbQuantity.Text);
+            if (quantity - 1 != 0)
+            {
+                quantity--;
+            }
+            tbQuantity.Text = quantity.ToString();
+            NewQuantity(tbName.Text);
+            dvgProducts_SetSelectedProduct();
+            dgvProducts.Refresh();
+            UpdateTotalPrice();
+        }
+
+        private void dvgProducts_SetSelectedProduct()
+        {
+            if (dgvProducts.CurrentRow != null)
+            {
+                var selectedProduct = dgvProducts.CurrentRow.DataBoundItem as CartProductViewModel;
+                tbName.Text = selectedProduct.Name;
+                lbType.Text = selectedProduct.Type;
+                lbPrice.Text = (selectedProduct.Price * selectedProduct.Quantity).ToString() + "$";
+                tbQuantity.Text = selectedProduct.Quantity.ToString();
+                quantity = selectedProduct.Quantity;
+            }       
+        }
+
+        private void dgvProducts_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvProducts.Rows.Count != 0)
+            {
+                dvgProducts_SetSelectedProduct();
+            }      
+        }
+
+        private void NewQuantity(string name)
+        {
+            CartProductViewModel product = GlobalInfo.Cart.FirstOrDefault(p => p.Name == name);
+            product.Quantity = quantity;
+        }
+
+        private void UpdateTotalPrice()
+        {
+            lbTotalPrice.Text = (GlobalInfo.Cart.Sum(x => x.Quantity * x.Price)).ToString() + "$";
         }
     }
 }
