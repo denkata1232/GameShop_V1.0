@@ -129,5 +129,26 @@ namespace GameShop_V1._0.Forms
             }
             tbQuantity.Text = quantity.ToString();
         }
+
+        private void btnCart_Click(object sender, EventArgs e)
+        {
+            Cart cart = new Cart();
+            cart.Show();
+            cart.FormClosing += (obj, args) => { this.Close(); };
+            this.Hide();
+        }
+
+        private void btnAddToCart_Click(object sender, EventArgs e)
+        {
+            var selectedProductView = dgvProducts.CurrentRow.DataBoundItem as ProductViewModel;
+            Product product = productBusiness.GetProductByName(selectedProductView.Name);
+
+            int quantity = int.Parse(tbQuantity.Text);
+        }
+
+        private void tbName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

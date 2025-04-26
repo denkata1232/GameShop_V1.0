@@ -30,6 +30,10 @@
         {
             this.dgvProducts = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnCart = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.btnLogOut = new System.Windows.Forms.Button();
             this.lbCurrentUser = new System.Windows.Forms.Label();
             this.tbDescription = new System.Windows.Forms.TextBox();
@@ -38,10 +42,6 @@
             this.lbType = new System.Windows.Forms.Label();
             this.lbStock = new System.Windows.Forms.Label();
             this.tbName = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.btnCart = new System.Windows.Forms.Button();
             this.btnAddToCart = new System.Windows.Forms.Button();
             this.tbQuantity = new System.Windows.Forms.TextBox();
             this.btnPlus = new System.Windows.Forms.Button();
@@ -55,7 +55,9 @@
             this.dgvProducts.AllowUserToOrderColumns = true;
             this.dgvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProducts.Location = new System.Drawing.Point(12, 78);
+            this.dgvProducts.MultiSelect = false;
             this.dgvProducts.Name = "dgvProducts";
+            this.dgvProducts.ReadOnly = true;
             this.dgvProducts.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgvProducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvProducts.Size = new System.Drawing.Size(568, 520);
@@ -77,6 +79,53 @@
             this.panel1.Size = new System.Drawing.Size(1109, 52);
             this.panel1.TabIndex = 1;
             // 
+            // btnCart
+            // 
+            this.btnCart.BackColor = System.Drawing.Color.YellowGreen;
+            this.btnCart.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCart.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnCart.Location = new System.Drawing.Point(1042, 3);
+            this.btnCart.Name = "btnCart";
+            this.btnCart.Size = new System.Drawing.Size(51, 38);
+            this.btnCart.TabIndex = 5;
+            this.btnCart.Text = " 🛒";
+            this.btnCart.UseVisualStyleBackColor = false;
+            this.btnCart.Click += new System.EventHandler(this.btnCart_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.ForeColor = System.Drawing.Color.Black;
+            this.label3.Location = new System.Drawing.Point(219, 4);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(56, 39);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "🎮";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.ForeColor = System.Drawing.Color.Chocolate;
+            this.label2.Location = new System.Drawing.Point(127, 4);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(101, 39);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Shop";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.DarkGreen;
+            this.label1.Location = new System.Drawing.Point(19, 4);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(116, 39);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Game";
+            // 
             // btnLogOut
             // 
             this.btnLogOut.BackColor = System.Drawing.Color.DarkSeaGreen;
@@ -94,7 +143,7 @@
             // 
             this.lbCurrentUser.AutoSize = true;
             this.lbCurrentUser.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbCurrentUser.Location = new System.Drawing.Point(756, 11);
+            this.lbCurrentUser.Location = new System.Drawing.Point(784, 13);
             this.lbCurrentUser.Name = "lbCurrentUser";
             this.lbCurrentUser.Size = new System.Drawing.Size(55, 21);
             this.lbCurrentUser.TabIndex = 0;
@@ -138,11 +187,11 @@
             // lbType
             // 
             this.lbType.AutoSize = true;
-            this.lbType.Font = new System.Drawing.Font("AniMe Vision - MB_EN", 9.749999F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbType.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.lbType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.749999F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbType.ForeColor = System.Drawing.Color.Chocolate;
             this.lbType.Location = new System.Drawing.Point(600, 78);
             this.lbType.Name = "lbType";
-            this.lbType.Size = new System.Drawing.Size(54, 16);
+            this.lbType.Size = new System.Drawing.Size(39, 16);
             this.lbType.TabIndex = 6;
             this.lbType.Text = "Type";
             this.lbType.Click += new System.EventHandler(this.lbType_Click);
@@ -151,7 +200,7 @@
             // 
             this.lbStock.AutoSize = true;
             this.lbStock.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbStock.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.lbStock.ForeColor = System.Drawing.Color.Chocolate;
             this.lbStock.Location = new System.Drawing.Point(603, 371);
             this.lbStock.Name = "lbStock";
             this.lbStock.Size = new System.Drawing.Size(55, 20);
@@ -162,7 +211,7 @@
             // 
             this.tbName.BackColor = System.Drawing.Color.Azure;
             this.tbName.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbName.Font = new System.Drawing.Font("AniMe Vision - MB_EN", 18F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbName.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbName.Location = new System.Drawing.Point(598, 103);
             this.tbName.Multiline = true;
             this.tbName.Name = "tbName";
@@ -170,52 +219,7 @@
             this.tbName.Size = new System.Drawing.Size(474, 74);
             this.tbName.TabIndex = 8;
             this.tbName.Text = "TITLE";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Montserrat ExtraBold", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.DarkGreen;
-            this.label1.Location = new System.Drawing.Point(19, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(128, 48);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Game";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Montserrat ExtraBold", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.Desktop;
-            this.label2.Location = new System.Drawing.Point(138, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(114, 48);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Shop";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.label3.Font = new System.Drawing.Font("Montserrat ExtraBold", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(244, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(69, 48);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "🎮";
-            // 
-            // btnCart
-            // 
-            this.btnCart.BackColor = System.Drawing.Color.YellowGreen;
-            this.btnCart.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCart.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnCart.Location = new System.Drawing.Point(1042, 3);
-            this.btnCart.Name = "btnCart";
-            this.btnCart.Size = new System.Drawing.Size(51, 38);
-            this.btnCart.TabIndex = 5;
-            this.btnCart.Text = " 🛒";
-            this.btnCart.UseVisualStyleBackColor = false;
+            this.tbName.TextChanged += new System.EventHandler(this.tbName_TextChanged);
             // 
             // btnAddToCart
             // 
@@ -227,6 +231,7 @@
             this.btnAddToCart.TabIndex = 9;
             this.btnAddToCart.Text = "Add to Cart";
             this.btnAddToCart.UseVisualStyleBackColor = false;
+            this.btnAddToCart.Click += new System.EventHandler(this.btnAddToCart_Click);
             // 
             // tbQuantity
             // 
@@ -282,6 +287,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dgvProducts);
             this.Name = "Home";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Home";
             this.Load += new System.EventHandler(this.Home_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).EndInit();
