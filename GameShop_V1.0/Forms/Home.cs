@@ -12,6 +12,8 @@ using System.Windows.Forms;
 using System.Data.Entity;
 using GameShop_V1._0.ViewModels;
 using Business.businessLogic;
+using System.Threading;
+using System.Timers;
 
 namespace GameShop_V1._0.Forms
 {
@@ -21,6 +23,7 @@ namespace GameShop_V1._0.Forms
         private ProductBusiness productBusiness => new ProductBusiness(context);
         private List<ProductViewModel> productViews;
         private bool sortAscending = true;
+        private System.Windows.Forms.Timer timer;
 
         private int quantity;
 
@@ -32,6 +35,17 @@ namespace GameShop_V1._0.Forms
         private void Home_Load(object sender, EventArgs e)
         {
             lbCurrentUser.Text = GlobalInfo.CurrentUser.UserName;
+
+            if (GlobalInfo.CurrentUser.IsAdmin)
+            {
+                btnAdmin.Enabled = true;
+                btnAdmin.Visible = true;
+            }
+            else
+            {
+                btnAdmin.Enabled = false;
+                btnAdmin.Visible = false;
+            }
 
             productViews = context.Products
                 .Include(p => p.TypeProduct)
@@ -54,6 +68,7 @@ namespace GameShop_V1._0.Forms
 
             dgvProducts.ColumnHeaderMouseClick += dgvProducts_ColumnHeaderMouseClick;
             dgvProducts.SelectionChanged += dgvProducts_SelectionChanged;
+            dvgProducts_SetSelectedProduct();
         }
 
         private void dgvProducts_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -75,21 +90,20 @@ namespace GameShop_V1._0.Forms
 
         private void dgvProducts_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvProducts.CurrentRow == null || dgvProducts.CurrentRow.DataBoundItem == null)
-                return;
+            dvgProducts_SetSelectedProduct();
+        }
 
+        private void dvgProducts_SetSelectedProduct()
+        {
             var selectedProduct = dgvProducts.CurrentRow.DataBoundItem as ProductViewModel;
-            if (selectedProduct == null)
-                return;
 
             tbName.Text = selectedProduct.Name;
             lbType.Text = selectedProduct.TypeProduct;
             lbPrice.Text = selectedProduct.Price;
             lbStock.Text = selectedProduct.StockStatus;
             Product product = productBusiness.GetProductByName(selectedProduct.Name);
-            tbDescription.Text = product.Description;
+            tbDescription.Text = product.Description + $"{Environment.NewLine}Developed by {product.Company}";
         }
-
 
         private void dgvProducts_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -103,6 +117,7 @@ namespace GameShop_V1._0.Forms
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
+            GlobalInfo.Cart = new List<CartProductViewModel>();
             GlobalInfo.CurrentUser = null;
             Login login = new Login();
             login.Show();
@@ -144,11 +159,47 @@ namespace GameShop_V1._0.Forms
             Product product = productBusiness.GetProductByName(selectedProductView.Name);
 
             int quantity = int.Parse(tbQuantity.Text);
+
+            CartProductViewModel cartProductView = new CartProductViewModel()
+            {
+                Name = product.Name,
+                Type = product.TypeProduct.Name,
+                Price = product.Price,
+                Quantity = quantity,
+            };
+
+            GlobalInfo.Cart.Add(cartProductView);
+            ShowAddedToCartFor2Seconds();
         }
 
         private void tbName_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnAdmin_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ShowAddedToCartFor2Seconds()
+        {
+            lbAddedToCartMessage.Visible = true;
+
+            // Create and configure the timer
+            timer = new System.Windows.Forms.Timer();
+            timer.Interval = 2000; // 4 seconds (4000 milliseconds)
+            timer.Tick += Timer_Tick; // Event handler when timer ticks
+            timer.Start();
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            // Hide the label after the timer ticks
+            lbAddedToCartMessage.Visible = false;
+
+            // Stop the timer
+            timer.Stop();
         }
     }
 }

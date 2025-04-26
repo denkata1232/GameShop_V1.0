@@ -1,5 +1,6 @@
 ﻿
 using Data.Models;
+using GameShop_V1._0.ViewModels;
 using System.Collections.Generic;
 
 namespace GameShop_V1._0
@@ -8,6 +9,6 @@ namespace GameShop_V1._0
     {
         public const string SecretAdminPassword = "admin123";
         public static User CurrentUser = null;
-        public static List<Product> Cart = new List<Product>();
+        public static List<CartProductViewModel> Cart = new List<CartProductViewModel>();
     }
 }

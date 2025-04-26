@@ -69,6 +69,32 @@ namespace GameShop_V1._0
             string username = tbUsername.Text;
             string password = tbPassword.Text;
             string email = tbEmail.Text;
+
+            if (username.Length < 3)
+            {
+                MessageBox.Show("Username too short!");
+            }
+            if (username.Length > 25)
+            {
+                MessageBox.Show("Username too long!");
+            }
+            if (password.Length < 3)
+            {
+                MessageBox.Show("Password too short!");
+            }
+            if (password.Length > 100)
+            {
+                MessageBox.Show("Password too long!");
+            }
+            if (email.Length < 3)
+            {
+                MessageBox.Show("Email too short!");
+            }
+            if (email.Length > 254)
+            {
+                MessageBox.Show("Email too long!");
+            }
+
             User user = new User()
             {
                 UserName = username,

@@ -35,7 +35,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnLogOut = new System.Windows.Forms.Button();
-            this.lbCurrentUser = new System.Windows.Forms.Label();
             this.tbDescription = new System.Windows.Forms.TextBox();
             this.lbPriceText = new System.Windows.Forms.Label();
             this.lbPrice = new System.Windows.Forms.Label();
@@ -46,6 +45,10 @@
             this.tbQuantity = new System.Windows.Forms.TextBox();
             this.btnPlus = new System.Windows.Forms.Button();
             this.btnMinus = new System.Windows.Forms.Button();
+            this.lbMessage = new System.Windows.Forms.Label();
+            this.btnAdmin = new System.Windows.Forms.Button();
+            this.lbCurrentUser = new System.Windows.Forms.TextBox();
+            this.lbAddedToCartMessage = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -68,12 +71,13 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.lbCurrentUser);
+            this.panel1.Controls.Add(this.btnAdmin);
             this.panel1.Controls.Add(this.btnCart);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.btnLogOut);
-            this.panel1.Controls.Add(this.lbCurrentUser);
             this.panel1.Location = new System.Drawing.Point(-9, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1109, 52);
@@ -84,7 +88,7 @@
             this.btnCart.BackColor = System.Drawing.Color.YellowGreen;
             this.btnCart.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCart.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnCart.Location = new System.Drawing.Point(1042, 3);
+            this.btnCart.Location = new System.Drawing.Point(1042, 5);
             this.btnCart.Name = "btnCart";
             this.btnCart.Size = new System.Drawing.Size(51, 38);
             this.btnCart.TabIndex = 5;
@@ -131,23 +135,13 @@
             this.btnLogOut.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.btnLogOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogOut.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnLogOut.Location = new System.Drawing.Point(912, 3);
+            this.btnLogOut.Location = new System.Drawing.Point(912, 5);
             this.btnLogOut.Name = "btnLogOut";
             this.btnLogOut.Size = new System.Drawing.Size(124, 38);
             this.btnLogOut.TabIndex = 1;
             this.btnLogOut.Text = "Log out";
             this.btnLogOut.UseVisualStyleBackColor = false;
             this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
-            // 
-            // lbCurrentUser
-            // 
-            this.lbCurrentUser.AutoSize = true;
-            this.lbCurrentUser.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbCurrentUser.Location = new System.Drawing.Point(784, 13);
-            this.lbCurrentUser.Name = "lbCurrentUser";
-            this.lbCurrentUser.Size = new System.Drawing.Size(55, 21);
-            this.lbCurrentUser.TabIndex = 0;
-            this.lbCurrentUser.Text = "label1";
             // 
             // tbDescription
             // 
@@ -187,11 +181,11 @@
             // lbType
             // 
             this.lbType.AutoSize = true;
-            this.lbType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.749999F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbType.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lbType.ForeColor = System.Drawing.Color.Chocolate;
             this.lbType.Location = new System.Drawing.Point(600, 78);
             this.lbType.Name = "lbType";
-            this.lbType.Size = new System.Drawing.Size(39, 16);
+            this.lbType.Size = new System.Drawing.Size(43, 16);
             this.lbType.TabIndex = 6;
             this.lbType.Text = "Type";
             this.lbType.Click += new System.EventHandler(this.lbType_Click);
@@ -211,7 +205,7 @@
             // 
             this.tbName.BackColor = System.Drawing.Color.Azure;
             this.tbName.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbName.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbName.Font = new System.Drawing.Font("Swis721 Blk BT", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbName.Location = new System.Drawing.Point(598, 103);
             this.tbName.Multiline = true;
             this.tbName.Name = "tbName";
@@ -268,12 +262,65 @@
             this.btnMinus.UseVisualStyleBackColor = false;
             this.btnMinus.Click += new System.EventHandler(this.btnMinus_Click);
             // 
+            // lbMessage
+            // 
+            this.lbMessage.AutoSize = true;
+            this.lbMessage.Font = new System.Drawing.Font("Microsoft YaHei", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbMessage.ForeColor = System.Drawing.Color.Red;
+            this.lbMessage.Location = new System.Drawing.Point(603, 460);
+            this.lbMessage.Name = "lbMessage";
+            this.lbMessage.Size = new System.Drawing.Size(0, 16);
+            this.lbMessage.TabIndex = 6;
+            // 
+            // btnAdmin
+            // 
+            this.btnAdmin.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.btnAdmin.Enabled = false;
+            this.btnAdmin.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdmin.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnAdmin.Location = new System.Drawing.Point(281, 5);
+            this.btnAdmin.Name = "btnAdmin";
+            this.btnAdmin.Size = new System.Drawing.Size(124, 38);
+            this.btnAdmin.TabIndex = 6;
+            this.btnAdmin.Text = "Admin";
+            this.btnAdmin.UseVisualStyleBackColor = false;
+            this.btnAdmin.Visible = false;
+            this.btnAdmin.Click += new System.EventHandler(this.btnAdmin_Click);
+            // 
+            // lbCurrentUser
+            // 
+            this.lbCurrentUser.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.lbCurrentUser.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbCurrentUser.Font = new System.Drawing.Font("Microsoft YaHei", 12F);
+            this.lbCurrentUser.Location = new System.Drawing.Point(651, 13);
+            this.lbCurrentUser.Multiline = true;
+            this.lbCurrentUser.Name = "lbCurrentUser";
+            this.lbCurrentUser.ReadOnly = true;
+            this.lbCurrentUser.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lbCurrentUser.Size = new System.Drawing.Size(257, 28);
+            this.lbCurrentUser.TabIndex = 12;
+            this.lbCurrentUser.Text = "username";
+            // 
+            // lbAddedToCartMessage
+            // 
+            this.lbAddedToCartMessage.AutoSize = true;
+            this.lbAddedToCartMessage.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbAddedToCartMessage.ForeColor = System.Drawing.Color.Red;
+            this.lbAddedToCartMessage.Location = new System.Drawing.Point(893, 53);
+            this.lbAddedToCartMessage.Name = "lbAddedToCartMessage";
+            this.lbAddedToCartMessage.Size = new System.Drawing.Size(176, 19);
+            this.lbAddedToCartMessage.TabIndex = 12;
+            this.lbAddedToCartMessage.Text = "Product added to cart  ↑";
+            this.lbAddedToCartMessage.Visible = false;
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(1098, 626);
+            this.Controls.Add(this.lbAddedToCartMessage);
+            this.Controls.Add(this.lbMessage);
             this.Controls.Add(this.btnMinus);
             this.Controls.Add(this.btnPlus);
             this.Controls.Add(this.tbQuantity);
@@ -302,7 +349,6 @@
 
         private System.Windows.Forms.DataGridView dgvProducts;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label lbCurrentUser;
         private System.Windows.Forms.TextBox tbDescription;
         private System.Windows.Forms.Label lbPriceText;
         private System.Windows.Forms.Label lbPrice;
@@ -318,5 +364,9 @@
         private System.Windows.Forms.TextBox tbQuantity;
         private System.Windows.Forms.Button btnPlus;
         private System.Windows.Forms.Button btnMinus;
+        private System.Windows.Forms.Label lbMessage;
+        private System.Windows.Forms.Button btnAdmin;
+        private System.Windows.Forms.TextBox lbCurrentUser;
+        private System.Windows.Forms.Label lbAddedToCartMessage;
     }
 }

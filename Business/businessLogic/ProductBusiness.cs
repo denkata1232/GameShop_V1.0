@@ -25,7 +25,9 @@ namespace Business.businessLogic
         }
         public Product GetProductByName(string name)
         {
-            return context.Products.FirstOrDefault(x => x.Name == name);
+            return context.Products
+                .Include("TypeProduct")
+                .FirstOrDefault(x => x.Name == name);
         }
 
         public string AddProduct(Product product)
