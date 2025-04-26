@@ -17,6 +17,9 @@ namespace Data
         public GameShopContext() : base("name=GameShopContext")
         {
         }
+        public GameShopContext(System.Data.Common.DbConnection connectionString) : base(connectionString,true)
+        {
+        }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
