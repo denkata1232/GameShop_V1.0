@@ -66,5 +66,13 @@ namespace Business.businessLogic
             }
             return $"User with Name: {user.UserName} not found!";
         }
+
+        public List<User> GetAllUsersWithAGameOfChoice(Product product)
+        {
+            return context.Orders.Where(o => o.OrderProducts.Any(op => op.ProductId == product.ProductId))
+                .Select(o => o.User)
+                .Distinct()
+                .ToList();
+        }
     }
 }

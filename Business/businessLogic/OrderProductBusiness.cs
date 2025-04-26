@@ -33,5 +33,29 @@ namespace Business.businessLogic
             context.SaveChanges();
             return $"OrderProduct added successfully!";
         }
+
+        public string UpdateOrderProduct(OrderProduct orderProduct)
+        {
+            OrderProduct orderProductToUpdate = context.OrderProducts.Find(orderProduct.OrderId);
+            if (orderProductToUpdate != null)
+            {
+                context.Entry(orderProductToUpdate).CurrentValues.SetValues(orderProduct);
+                context.SaveChanges();
+                return $"OrderProduct updated successfully!";
+            }
+            return $"OrderProduct not found!";
+        }
+
+        public string DeleteOrderProduct(OrderProduct orderProduct)
+        {
+            OrderProduct orderProductToDelete = context.OrderProducts.Find(orderProduct.OrderId);
+            if (orderProductToDelete != null)
+            {
+                context.OrderProducts.Remove(orderProductToDelete);
+                context.SaveChanges();
+                return $"OrderProduct deleted successfully!";
+            }
+            return $"OrderProduct not found!";
+        }
     }
 }
