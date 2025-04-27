@@ -30,6 +30,8 @@
         {
             this.dgvProducts = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lbCurrentUser = new System.Windows.Forms.TextBox();
+            this.btnAdmin = new System.Windows.Forms.Button();
             this.btnCart = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -46,8 +48,6 @@
             this.btnPlus = new System.Windows.Forms.Button();
             this.btnMinus = new System.Windows.Forms.Button();
             this.lbMessage = new System.Windows.Forms.Label();
-            this.btnAdmin = new System.Windows.Forms.Button();
-            this.lbCurrentUser = new System.Windows.Forms.TextBox();
             this.lbAddedToCartMessage = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
             this.panel1.SuspendLayout();
@@ -78,17 +78,46 @@
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.btnLogOut);
-            this.panel1.Location = new System.Drawing.Point(-9, 0);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1109, 52);
+            this.panel1.Size = new System.Drawing.Size(1100, 52);
             this.panel1.TabIndex = 1;
+            // 
+            // lbCurrentUser
+            // 
+            this.lbCurrentUser.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.lbCurrentUser.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lbCurrentUser.Font = new System.Drawing.Font("Microsoft YaHei", 12F);
+            this.lbCurrentUser.Location = new System.Drawing.Point(642, 13);
+            this.lbCurrentUser.Multiline = true;
+            this.lbCurrentUser.Name = "lbCurrentUser";
+            this.lbCurrentUser.ReadOnly = true;
+            this.lbCurrentUser.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.lbCurrentUser.Size = new System.Drawing.Size(257, 28);
+            this.lbCurrentUser.TabIndex = 12;
+            this.lbCurrentUser.Text = "username";
+            // 
+            // btnAdmin
+            // 
+            this.btnAdmin.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.btnAdmin.Enabled = false;
+            this.btnAdmin.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdmin.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnAdmin.Location = new System.Drawing.Point(272, 5);
+            this.btnAdmin.Name = "btnAdmin";
+            this.btnAdmin.Size = new System.Drawing.Size(124, 38);
+            this.btnAdmin.TabIndex = 6;
+            this.btnAdmin.Text = "Admin";
+            this.btnAdmin.UseVisualStyleBackColor = false;
+            this.btnAdmin.Visible = false;
+            this.btnAdmin.Click += new System.EventHandler(this.btnAdmin_Click);
             // 
             // btnCart
             // 
             this.btnCart.BackColor = System.Drawing.Color.YellowGreen;
             this.btnCart.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCart.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnCart.Location = new System.Drawing.Point(1042, 5);
+            this.btnCart.Location = new System.Drawing.Point(1033, 5);
             this.btnCart.Name = "btnCart";
             this.btnCart.Size = new System.Drawing.Size(51, 38);
             this.btnCart.TabIndex = 5;
@@ -102,7 +131,7 @@
             this.label3.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(219, 4);
+            this.label3.Location = new System.Drawing.Point(210, 4);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(56, 39);
             this.label3.TabIndex = 4;
@@ -113,7 +142,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.ForeColor = System.Drawing.Color.Chocolate;
-            this.label2.Location = new System.Drawing.Point(127, 4);
+            this.label2.Location = new System.Drawing.Point(118, 4);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(101, 39);
             this.label2.TabIndex = 3;
@@ -124,7 +153,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.DarkGreen;
-            this.label1.Location = new System.Drawing.Point(19, 4);
+            this.label1.Location = new System.Drawing.Point(10, 4);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(116, 39);
             this.label1.TabIndex = 2;
@@ -135,7 +164,7 @@
             this.btnLogOut.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.btnLogOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogOut.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnLogOut.Location = new System.Drawing.Point(912, 5);
+            this.btnLogOut.Location = new System.Drawing.Point(903, 5);
             this.btnLogOut.Name = "btnLogOut";
             this.btnLogOut.Size = new System.Drawing.Size(124, 38);
             this.btnLogOut.TabIndex = 1;
@@ -271,35 +300,6 @@
             this.lbMessage.Name = "lbMessage";
             this.lbMessage.Size = new System.Drawing.Size(0, 16);
             this.lbMessage.TabIndex = 6;
-            // 
-            // btnAdmin
-            // 
-            this.btnAdmin.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.btnAdmin.Enabled = false;
-            this.btnAdmin.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdmin.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnAdmin.Location = new System.Drawing.Point(281, 5);
-            this.btnAdmin.Name = "btnAdmin";
-            this.btnAdmin.Size = new System.Drawing.Size(124, 38);
-            this.btnAdmin.TabIndex = 6;
-            this.btnAdmin.Text = "Admin";
-            this.btnAdmin.UseVisualStyleBackColor = false;
-            this.btnAdmin.Visible = false;
-            this.btnAdmin.Click += new System.EventHandler(this.btnAdmin_Click);
-            // 
-            // lbCurrentUser
-            // 
-            this.lbCurrentUser.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.lbCurrentUser.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.lbCurrentUser.Font = new System.Drawing.Font("Microsoft YaHei", 12F);
-            this.lbCurrentUser.Location = new System.Drawing.Point(651, 13);
-            this.lbCurrentUser.Multiline = true;
-            this.lbCurrentUser.Name = "lbCurrentUser";
-            this.lbCurrentUser.ReadOnly = true;
-            this.lbCurrentUser.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lbCurrentUser.Size = new System.Drawing.Size(257, 28);
-            this.lbCurrentUser.TabIndex = 12;
-            this.lbCurrentUser.Text = "username";
             // 
             // lbAddedToCartMessage
             // 

@@ -19,6 +19,8 @@ namespace GameShop_V1._0.Forms
     {
         private GameShopContext context = new GameShopContext();
         private ProductBusiness productBusiness => new ProductBusiness(context);
+        private OrderBusiness orderBusiness => new OrderBusiness(context);
+        private OrderProductBusiness orderProductBusiness => new OrderProductBusiness(context);
         private int quantity;
         public Cart()
         {
@@ -38,21 +40,20 @@ namespace GameShop_V1._0.Forms
 
         private void label1_Click(object sender, EventArgs e)
         {
-            Home home = new Home();
-            home.Show();
-            home.FormClosing += (obj, args) => { this.Close(); };
-            this.Hide();
+            LoadHome();
         }
 
         private void label2_Click(object sender, EventArgs e)
         {
-            Home home = new Home();
-            home.Show();
-            home.FormClosing += (obj, args) => { this.Close(); };
-            this.Hide();
+            LoadHome();
         }
 
         private void label3_Click(object sender, EventArgs e)
+        {
+            LoadHome();
+        }
+
+        private void LoadHome()
         {
             Home home = new Home();
             home.Show();
@@ -71,6 +72,21 @@ namespace GameShop_V1._0.Forms
 
         private void btnConfirmPurchase_Click(object sender, EventArgs e)
         {
+
+            Order order = new Order()
+            {
+                User = GlobalInfo.CurrentUser,
+                Date = DateTime.Now,
+                OrderProducts = new List<OrderProduct>()
+            };
+
+            orderBusiness.AddOrder(order);
+
+            foreach (var product in GlobalInfo.Cart)
+            {
+                Product productInBase = productBusiness.GetProductByName(product.Name);
+                orderBusiness.AddProductToOrder(order, productInBase, product.Quantity);
+            }
 
         }
 
