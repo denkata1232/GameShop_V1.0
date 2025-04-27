@@ -249,6 +249,68 @@ namespace GameShop_V1._0_Tests
             ClassicAssert.AreEqual("Quantity is out of bound!", result);
             ClassicAssert.AreEqual(null, context.Orders.Find(1));
         }
+        [Test]
+        public void OrderGetByUserIdTest()
+        {
+            // Test getting orders by user ID
+            var user = context.Users.Find(1);
+            var orders = orderBusiness.GetOrdersByUserId(user);
+            ClassicAssert.AreEqual(1, orders.Count);
+            ClassicAssert.AreEqual(1, orders[0].OrderId);
+        }
+        [Test]
+        public void OrderUpdatePassTest()
+        {
+            // Test updating an order
+            var order = context.Orders.Find(1);
+            order.UserId = 2;
+            string result = orderBusiness.UpdateOrder(order);
+            ClassicAssert.AreEqual($"Order: {order.OrderId} updated successfully!", result);
+            ClassicAssert.AreEqual(2, context.Orders.Find(1).UserId);
+        }
+        [Test]
+        public void OrderUpdateFailTest()
+        {
+            // Test updating an order with invalid ID
+            var order = new Order
+            {
+                OrderId = 5,
+                UserId = 1,
+                Date = DateTime.Now,
+                OrderProducts = new List<OrderProduct>(),
+                User = context.Users.Find(1)
+            };
+            string result = orderBusiness.UpdateOrder(order);
+            ClassicAssert.AreEqual($"Order with ID: {order.OrderId} not found!", result);
+        }
+        [Test]
+        public void OrderDeletePassTest()
+        {
+            // Test deleting an order
+            int countBefore = orderBusiness.GetAllOrders().Count;
+            var order = context.Orders.Find(1);
+            string result = orderBusiness.DeleteOrder(order);
+            ClassicAssert.AreEqual($"Order: {order.OrderId} deleted successfully!", result);
+            ClassicAssert.AreEqual(null, context.Orders.Find(1));
+            ClassicAssert.AreEqual(countBefore - 1, orderBusiness.GetAllOrders().Count);
+        }
+        [Test]
+        public void OrderDeleteFailTest()
+        {
+            // Test deleting an order with invalid ID
+            int countBefore = orderBusiness.GetAllOrders().Count;
+            var order = new Order
+            {
+                OrderId = 5,
+                UserId = 1,
+                Date = DateTime.Now,
+                OrderProducts = new List<OrderProduct>(),
+                User = context.Users.Find(1)
+            };
+            string result = orderBusiness.DeleteOrder(order);
+            ClassicAssert.AreEqual($"Order with ID: {order.OrderId} not found!", result);
+            ClassicAssert.AreEqual(countBefore, orderBusiness.GetAllOrders().Count);
+        }
 
         [TearDown]
         public void Finish()
