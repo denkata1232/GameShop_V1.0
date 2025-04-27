@@ -142,13 +142,14 @@
             this.dgvProducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvProducts.Size = new System.Drawing.Size(568, 275);
             this.dgvProducts.TabIndex = 1;
+            this.dgvProducts.DataSourceChanged += new System.EventHandler(this.dgvProducts_DataSourceChanged);
             // 
             // lbTotalPrice
             // 
             this.lbTotalPrice.AutoSize = true;
             this.lbTotalPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbTotalPrice.ForeColor = System.Drawing.Color.MediumSeaGreen;
-            this.lbTotalPrice.Location = new System.Drawing.Point(1002, 281);
+            this.lbTotalPrice.Location = new System.Drawing.Point(957, 281);
             this.lbTotalPrice.Name = "lbTotalPrice";
             this.lbTotalPrice.Size = new System.Drawing.Size(76, 29);
             this.lbTotalPrice.TabIndex = 7;
@@ -159,7 +160,7 @@
             this.lbTotalPriceText.AutoSize = true;
             this.lbTotalPriceText.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbTotalPriceText.ForeColor = System.Drawing.Color.DarkGreen;
-            this.lbTotalPriceText.Location = new System.Drawing.Point(853, 280);
+            this.lbTotalPriceText.Location = new System.Drawing.Point(808, 280);
             this.lbTotalPriceText.Name = "lbTotalPriceText";
             this.lbTotalPriceText.Size = new System.Drawing.Size(148, 29);
             this.lbTotalPriceText.TabIndex = 6;

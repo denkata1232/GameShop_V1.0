@@ -76,13 +76,18 @@ namespace GameShop_V1._0.Forms
 
         private void btnRemoveFromCart_Click(object sender, EventArgs e)
         {
-            if (dgvProducts.CurrentRow != null)
+            if (dgvProducts.SelectedRows[0] != null && GlobalInfo.Cart.Count != 0)
             {
-                var selectedProduct = dgvProducts.CurrentRow.DataBoundItem as CartProductViewModel;
+                var selectedProduct = dgvProducts.SelectedRows[0].DataBoundItem as CartProductViewModel;
+
                 GlobalInfo.Cart.Remove(selectedProduct);
+                dgvProducts.SelectedRows[0].Selected = false;
+                dgvProducts.DataSource = null;
+                dgvProducts.Refresh();
+                dgvProducts.DataSource = GlobalInfo.Cart;
+                dgvProducts.Columns["Name"].Width = 225;
                 UpdateTotalPrice();
 
-                dgvProducts.CurrentRow.Dispose();
 
                 if (!GlobalInfo.Cart.Any())
                 {
@@ -90,50 +95,50 @@ namespace GameShop_V1._0.Forms
                     tbName.Text = "Title";
                     lbPrice.Text = "00.00$";
                     tbQuantity.Text = "1";
-                    dgvProducts.DataSource = new List<CartProductViewModel>();
                 }
-                else
-                {
-                    dgvProducts.Refresh();
-                }
-
             }
                 
         }
 
         private void btnPlus_Click(object sender, EventArgs e)
         {
-            quantity = int.Parse(tbQuantity.Text);
-            if (quantity + 1 < 100)
+            if (GlobalInfo.Cart.Count != 0)
             {
-                quantity++;
+                quantity = int.Parse(tbQuantity.Text);
+                if (quantity + 1 < 100)
+                {
+                    quantity++;
+                }
+                tbQuantity.Text = quantity.ToString();
+                NewQuantity(tbName.Text);
+                dvgProducts_SetSelectedProduct();
+                dgvProducts.Refresh();
+                UpdateTotalPrice();
             }
-            tbQuantity.Text = quantity.ToString();
-            NewQuantity(tbName.Text);
-            dvgProducts_SetSelectedProduct();
-            dgvProducts.Refresh();
-            UpdateTotalPrice();
         }
 
         private void btnMinus_Click(object sender, EventArgs e)
         {
-            quantity = int.Parse(tbQuantity.Text);
-            if (quantity - 1 != 0)
+            if (GlobalInfo.Cart.Count != 0)
             {
-                quantity--;
+                quantity = int.Parse(tbQuantity.Text);
+                if (quantity - 1 != 0)
+                {
+                    quantity--;
+                }
+                tbQuantity.Text = quantity.ToString();
+                NewQuantity(tbName.Text);
+                dvgProducts_SetSelectedProduct();
+                dgvProducts.Refresh();
+                UpdateTotalPrice();
             }
-            tbQuantity.Text = quantity.ToString();
-            NewQuantity(tbName.Text);
-            dvgProducts_SetSelectedProduct();
-            dgvProducts.Refresh();
-            UpdateTotalPrice();
         }
 
         private void dvgProducts_SetSelectedProduct()
         {
-            if (dgvProducts.CurrentRow != null)
+            if (dgvProducts.SelectedRows[0].Index >= 0)
             {
-                var selectedProduct = dgvProducts.CurrentRow.DataBoundItem as CartProductViewModel;
+                var selectedProduct = dgvProducts.SelectedRows[0].DataBoundItem as CartProductViewModel;
                 tbName.Text = selectedProduct.Name;
                 lbType.Text = selectedProduct.Type;
                 lbPrice.Text = (selectedProduct.Price * selectedProduct.Quantity).ToString() + "$";
@@ -144,7 +149,12 @@ namespace GameShop_V1._0.Forms
 
         private void dgvProducts_SelectionChanged(object sender, EventArgs e)
         {
-            if (dgvProducts.Rows.Count != 0)
+            if (dgvProducts.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            if (GlobalInfo.Cart.Count != 0 && dgvProducts.DataSource != null)
             {
                 dvgProducts_SetSelectedProduct();
             }      
@@ -159,6 +169,12 @@ namespace GameShop_V1._0.Forms
         private void UpdateTotalPrice()
         {
             lbTotalPrice.Text = (GlobalInfo.Cart.Sum(x => x.Quantity * x.Price)).ToString() + "$";
+        }
+
+        private void dgvProducts_DataSourceChanged(object sender, EventArgs e)
+        {
+           
+               
         }
     }
 }
