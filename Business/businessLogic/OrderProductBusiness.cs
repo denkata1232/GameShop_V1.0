@@ -29,6 +29,10 @@ namespace Business.businessLogic
 
         public string AddOrderProduct(OrderProduct orderProduct)
         {
+            if(context.OrderProducts.Any(op => op.OrderId == orderProduct.OrderId && op.ProductId == orderProduct.ProductId))
+            {
+                return $"OrderProduct with OrderId: {orderProduct.OrderId} and ProductId: {orderProduct.ProductId} already exists!";
+            }
             context.OrderProducts.Add(orderProduct);
             context.SaveChanges();
             return $"OrderProduct added successfully!";

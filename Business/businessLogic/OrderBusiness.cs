@@ -11,10 +11,11 @@ namespace Business.businessLogic
     public class OrderBusiness
     {
         private GameShopContext context;
-
+        private OrderProductBusiness orderProductBusiness;
         public OrderBusiness(GameShopContext context)
         {
             this.context = context;
+            this.orderProductBusiness = new OrderProductBusiness(context);
         }
 
         public List<Order> GetAllOrders()
@@ -29,6 +30,10 @@ namespace Business.businessLogic
 
         public string AddOrder(Order order)
         {
+            if(context.Orders.Any(o => o.OrderId == order.OrderId))
+            {
+                return $"Order with ID: {order.OrderId} already exists!";
+            }
             context.Orders.Add(order);
             context.SaveChanges();
             return $"Order: {order.OrderId} added successfully!";
@@ -64,21 +69,25 @@ namespace Business.businessLogic
             {
                 return "Product or Order cannot be null!";
             }
-            if(product.ProductId == null || order.OrderId == null)
+            if(context.Products.Find(product.ProductId)==null)
             {
-                return "Product ID or Order ID cannot be null!";
+                return "Product doesn't exist!";
             }
             if(quantity <= 0 || quantity > product.Quantity)
             {
+                this.DeleteOrder(order);
                 return "Quantity is out of bound!";
             }
+            this.AddOrder(order);
             OrderProduct orderProduct = new OrderProduct
             {
                 OrderId = order.OrderId,
+                Order = order,
                 ProductId = product.ProductId,
+                Product = product,
                 Quantity = quantity
             };
-            context.OrderProducts.Add(orderProduct);
+            orderProductBusiness.AddOrderProduct(orderProduct);
             return $"Product: {product.Name} added to Order: {order.OrderId} successfully!";
         }
 
