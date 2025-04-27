@@ -29,6 +29,10 @@ namespace Business.businessLogic
 
         public string AddTypeProduct(TypeProduct typeProduct)
         {
+            if(context.TypeProducts.Any(tp => tp.Name == typeProduct.Name))
+            {
+                return $"TypeProduct with Name: {typeProduct.Name} already exists";
+            }
             context.TypeProducts.Add(typeProduct);
             context.SaveChanges();
             return $"TypeProduct: {typeProduct.Name} added successfully";

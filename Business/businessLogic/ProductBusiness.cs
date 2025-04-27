@@ -32,6 +32,10 @@ namespace Business.businessLogic
 
         public string AddProduct(Product product)
         {
+            if(context.Products.Any(p => p.Name == product.Name))
+            {
+                return $"Product with Name: {product.Name} already exists";
+            }
             context.Products.Add(product);
             context.SaveChanges();
             return $"Product: {product.Name} added successfully";

@@ -65,10 +65,10 @@ namespace GameShop_V1._0_Tests
         }
 
         [Test]
-        public void ProductAddTest()
+        public void ProductAddPassTest()
         {
             int countBefore = context.Products.Count();
-            context.Products.Add(new Product
+            productBusiness.AddProduct(new Product
             {
                 ProductId = 4,
                 Name = "Test Product Add",
@@ -82,7 +82,24 @@ namespace GameShop_V1._0_Tests
             
             ClassicAssert.AreEqual(countBefore+1, products.Count);
         }
+        [Test]
+        public void ProductAddFailTest()
+        {
+            int countBefore = context.Products.Count();
+            productBusiness.AddProduct(new Product
+            {
+                ProductId = 5,
+                Name = "Test Product",
+                Description = "Test Description",
+                TypeProductId = 1,
+                Price = 9.99m,
+                Quantity = 10
+            });
+            context.SaveChanges();
+            var products = productBusiness.GetAllProducts();
 
+            ClassicAssert.AreEqual(countBefore, products.Count);
+        }
         [Test]
         public void ProductGetByIdTest()
         {
@@ -96,6 +113,65 @@ namespace GameShop_V1._0_Tests
             var product = productBusiness.GetProductByName("Test Product");
 
             ClassicAssert.AreEqual(1, product.ProductId);
+        }
+        [Test]
+        public void ProductUpdatePassTest()
+        {
+            var product = productBusiness.GetProductById(1);
+            product.Name = "Updated Product";
+            string message = productBusiness.UpdateProduct(product);
+            context.SaveChanges();
+
+            var updatedProduct = productBusiness.GetProductById(1);
+            ClassicAssert.AreEqual("Updated Product", updatedProduct.Name);
+            ClassicAssert.AreEqual($"Product: {product.Name} updated successfully", message);
+        }
+        [Test]
+        public void ProductUpdateFailTest()
+        {
+            Product product = new Product()
+            {
+                ProductId = 5,
+                Name = "Updated Product",
+                Description = "Updated Description",
+                TypeProductId = 1,
+                Price = 19.99m,
+                Quantity = 5
+            };
+            string message = productBusiness.UpdateProduct(product);
+            context.SaveChanges();
+            ClassicAssert.AreEqual($"Product with Name: {product.Name} not found", message);
+        }
+        [Test]
+        public void ProductDeletePassTest()
+        {
+            int countBefore = productBusiness.GetAllProducts().Count();
+            var product = productBusiness.GetProductById(1);
+            string message = productBusiness.DeleteProduct(product);
+            context.SaveChanges();
+
+            var deletedProduct = productBusiness.GetProductById(1);
+            ClassicAssert.AreEqual($"Product: {product.Name} deleted successfully", message);
+            ClassicAssert.IsNull(deletedProduct);
+            ClassicAssert.AreEqual(countBefore - 1, productBusiness.GetAllProducts().Count());
+        }
+        [Test]
+        public void ProductDeleteFailTest()
+        {
+            int countBefore = productBusiness.GetAllProducts().Count();
+            Product product = new Product()
+            {
+                ProductId = 5,
+                Name = "Test Product",
+                Description = "Test Description",
+                TypeProductId = 1,
+                Price = 9.99m,
+                Quantity = 10
+            };
+            string message = productBusiness.DeleteProduct(product);
+            context.SaveChanges();
+            ClassicAssert.AreEqual($"Product with Name: {product.Name} not found", message);
+            ClassicAssert.AreEqual(countBefore, productBusiness.GetAllProducts().Count());
         }
         [TearDown]
         public void Finish()
