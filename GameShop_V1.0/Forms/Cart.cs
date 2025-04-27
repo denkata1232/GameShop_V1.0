@@ -80,13 +80,29 @@ namespace GameShop_V1._0.Forms
                 OrderProducts = new List<OrderProduct>()
             };
 
-            orderBusiness.AddOrder(order);
-
+            string message = string.Empty;
             foreach (var product in GlobalInfo.Cart)
             {
                 Product productInBase = productBusiness.GetProductByName(product.Name);
-                orderBusiness.AddProductToOrder(order, productInBase, product.Quantity);
+                message = orderBusiness.AddProductToOrder(order, productInBase, product.Quantity);
+
+                if (message == "Quantity is out of bound!")
+                {
+                    MessageBox.Show($"Not enough quantity in stock for product: {product.Name}");
+                    return;
+                }
             }
+
+            foreach (var product in GlobalInfo.Cart)
+            {
+                Product productToUpdate = productBusiness.GetProductByName(product.Name);
+                productToUpdate.Quantity -= product.Quantity;
+                productBusiness.UpdateProduct(productToUpdate);
+            }
+
+            MessageBox.Show(orderBusiness.OrderToString(order), "Successfull order!");
+            GlobalInfo.Cart.Clear();
+            LoadHome();
 
         }
 

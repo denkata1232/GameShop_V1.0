@@ -105,5 +105,27 @@ namespace Business.businessLogic
         {
             return context.Orders.Where(o => o.Date.Date >= startDate.Date && o.Date.Date <= endDate.Date).ToList();
         }
+
+        public string OrderToString(Order order)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"Order: {order.OrderId}{Environment.NewLine}" +
+                $"User: {order.User.UserName}{Environment.NewLine}" +
+                $"Date: {order.Date.ToString("dd:MM:yyyy")}");
+                sb.AppendLine("---------------------------------------------");
+            sb.AppendLine($"Products:");
+
+            decimal total = 0;
+            foreach (var product in order.OrderProducts)
+            {
+                decimal TotalForProduct = product.Product.Price * product.Quantity;
+                sb.AppendLine($"Name: {product.Product.Name} Price: {product.Product.Price:f2}$ X {product.Quantity} - {TotalForProduct:f2}$");
+                total += TotalForProduct;
+            }
+            sb.AppendLine("---------------------------------------------");
+            sb.AppendLine($"Total Price paid: {total:f2}$");
+
+            return sb.ToString();
+        }
     }
 }
