@@ -234,7 +234,7 @@
             // 
             this.tbName.BackColor = System.Drawing.Color.Azure;
             this.tbName.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbName.Font = new System.Drawing.Font("Swis721 Blk BT", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbName.Location = new System.Drawing.Point(598, 103);
             this.tbName.Multiline = true;
             this.tbName.Name = "tbName";
@@ -264,6 +264,7 @@
             this.tbQuantity.Size = new System.Drawing.Size(27, 29);
             this.tbQuantity.TabIndex = 10;
             this.tbQuantity.Text = "1";
+            this.tbQuantity.TextChanged += new System.EventHandler(this.tbQuantity_TextChanged);
             // 
             // btnPlus
             // 

@@ -25,7 +25,7 @@ namespace GameShop_V1._0.Forms
         private bool sortAscending = true;
         private System.Windows.Forms.Timer timer;
 
-        private int quantity;
+        private int quantity = 1;
 
         public Home()
         {
@@ -158,8 +158,6 @@ namespace GameShop_V1._0.Forms
             var selectedProductView = dgvProducts.CurrentRow.DataBoundItem as ProductViewModel;
             Product product = productBusiness.GetProductByName(selectedProductView.Name);
 
-            int quantity = int.Parse(tbQuantity.Text);
-
             CartProductViewModel cartProductView = new CartProductViewModel()
             {
                 Name = product.Name,
@@ -187,7 +185,10 @@ namespace GameShop_V1._0.Forms
 
         private void btnAdmin_Click(object sender, EventArgs e)
         {
-
+            Admin admin = new Admin();
+            admin.Show();
+            admin.FormClosing += (obj, args) => { this.Close(); };
+            this.Hide();
         }
 
         private void ShowAddedToCartFor2Seconds()
@@ -196,7 +197,7 @@ namespace GameShop_V1._0.Forms
 
             // Create and configure the timer
             timer = new System.Windows.Forms.Timer();
-            timer.Interval = 2000; // 4 seconds (4000 milliseconds)
+            timer.Interval = 2000; // 2 seconds (2000 milliseconds)
             timer.Tick += Timer_Tick; // Event handler when timer ticks
             timer.Start();
         }
@@ -208,6 +209,29 @@ namespace GameShop_V1._0.Forms
 
             // Stop the timer
             timer.Stop();
+        }
+
+        private void tbQuantity_TextChanged(object sender, EventArgs e)
+        {
+            int num;
+            if (int.TryParse(tbQuantity.Text, out num))
+            {
+                if (int.Parse(tbQuantity.Text) > 99)
+                {
+                    num = 99;
+                    tbQuantity.Text = num.ToString();
+                    quantity = num;
+                    return;
+                }
+
+                if (int.Parse(tbQuantity.Text) <= 0)
+                {
+                    num = 1;
+                    tbQuantity.Text = num.ToString();
+                    quantity = num;
+                    return;
+                }
+            }
         }
     }
 }

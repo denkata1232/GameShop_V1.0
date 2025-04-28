@@ -29,13 +29,25 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lbAdminText = new System.Windows.Forms.Label();
             this.lbCurrentUser = new System.Windows.Forms.TextBox();
             this.btnLogOut = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvProducts = new System.Windows.Forms.DataGridView();
-            this.lbAdminText = new System.Windows.Forms.Label();
+            this.tbProductName = new System.Windows.Forms.TextBox();
+            this.cbType = new System.Windows.Forms.ComboBox();
+            this.tbCompany = new System.Windows.Forms.TextBox();
+            this.tbDescription = new System.Windows.Forms.TextBox();
+            this.tbPrice = new System.Windows.Forms.TextBox();
+            this.lbProductName = new System.Windows.Forms.Label();
+            this.lbType = new System.Windows.Forms.Label();
+            this.lbCompany = new System.Windows.Forms.Label();
+            this.lbDescription = new System.Windows.Forms.Label();
+            this.lbPrice = new System.Windows.Forms.Label();
+            this.lbQuantity = new System.Windows.Forms.Label();
+            this.tbQuantity = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
             this.SuspendLayout();
@@ -53,6 +65,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1100, 52);
             this.panel1.TabIndex = 1;
+            // 
+            // lbAdminText
+            // 
+            this.lbAdminText.AutoSize = true;
+            this.lbAdminText.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbAdminText.ForeColor = System.Drawing.Color.DarkRed;
+            this.lbAdminText.Location = new System.Drawing.Point(265, 12);
+            this.lbAdminText.Name = "lbAdminText";
+            this.lbAdminText.Size = new System.Drawing.Size(192, 31);
+            this.lbAdminText.TabIndex = 14;
+            this.lbAdminText.Text = "Admin control";
             // 
             // lbCurrentUser
             // 
@@ -129,21 +152,118 @@
             this.dgvProducts.MultiSelect = false;
             this.dgvProducts.Name = "dgvProducts";
             this.dgvProducts.ReadOnly = true;
-            this.dgvProducts.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgvProducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvProducts.Size = new System.Drawing.Size(568, 520);
             this.dgvProducts.TabIndex = 2;
             // 
-            // lbAdminText
+            // tbProductName
             // 
-            this.lbAdminText.AutoSize = true;
-            this.lbAdminText.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lbAdminText.ForeColor = System.Drawing.Color.DarkRed;
-            this.lbAdminText.Location = new System.Drawing.Point(265, 12);
-            this.lbAdminText.Name = "lbAdminText";
-            this.lbAdminText.Size = new System.Drawing.Size(192, 31);
-            this.lbAdminText.TabIndex = 14;
-            this.lbAdminText.Text = "Admin control";
+            this.tbProductName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbProductName.Location = new System.Drawing.Point(639, 78);
+            this.tbProductName.Name = "tbProductName";
+            this.tbProductName.Size = new System.Drawing.Size(435, 24);
+            this.tbProductName.TabIndex = 3;
+            // 
+            // cbType
+            // 
+            this.cbType.FormattingEnabled = true;
+            this.cbType.Location = new System.Drawing.Point(639, 108);
+            this.cbType.Name = "cbType";
+            this.cbType.Size = new System.Drawing.Size(174, 21);
+            this.cbType.TabIndex = 4;
+            // 
+            // tbCompany
+            // 
+            this.tbCompany.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbCompany.Location = new System.Drawing.Point(639, 135);
+            this.tbCompany.Name = "tbCompany";
+            this.tbCompany.Size = new System.Drawing.Size(231, 24);
+            this.tbCompany.TabIndex = 5;
+            // 
+            // tbDescription
+            // 
+            this.tbDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbDescription.Location = new System.Drawing.Point(639, 165);
+            this.tbDescription.Multiline = true;
+            this.tbDescription.Name = "tbDescription";
+            this.tbDescription.Size = new System.Drawing.Size(435, 94);
+            this.tbDescription.TabIndex = 6;
+            // 
+            // tbPrice
+            // 
+            this.tbPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbPrice.Location = new System.Drawing.Point(639, 265);
+            this.tbPrice.Name = "tbPrice";
+            this.tbPrice.Size = new System.Drawing.Size(102, 24);
+            this.tbPrice.TabIndex = 7;
+            // 
+            // lbProductName
+            // 
+            this.lbProductName.AutoSize = true;
+            this.lbProductName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbProductName.Location = new System.Drawing.Point(586, 81);
+            this.lbProductName.Name = "lbProductName";
+            this.lbProductName.Size = new System.Drawing.Size(52, 18);
+            this.lbProductName.TabIndex = 8;
+            this.lbProductName.Text = "Name:";
+            // 
+            // lbType
+            // 
+            this.lbType.AutoSize = true;
+            this.lbType.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbType.Location = new System.Drawing.Point(586, 111);
+            this.lbType.Name = "lbType";
+            this.lbType.Size = new System.Drawing.Size(44, 18);
+            this.lbType.TabIndex = 9;
+            this.lbType.Text = "Type:";
+            // 
+            // lbCompany
+            // 
+            this.lbCompany.AutoSize = true;
+            this.lbCompany.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbCompany.Location = new System.Drawing.Point(586, 141);
+            this.lbCompany.Name = "lbCompany";
+            this.lbCompany.Size = new System.Drawing.Size(53, 18);
+            this.lbCompany.TabIndex = 10;
+            this.lbCompany.Text = "Comp:";
+            // 
+            // lbDescription
+            // 
+            this.lbDescription.AutoSize = true;
+            this.lbDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbDescription.Location = new System.Drawing.Point(586, 168);
+            this.lbDescription.Name = "lbDescription";
+            this.lbDescription.Size = new System.Drawing.Size(47, 18);
+            this.lbDescription.TabIndex = 11;
+            this.lbDescription.Text = "Desc:";
+            // 
+            // lbPrice
+            // 
+            this.lbPrice.AutoSize = true;
+            this.lbPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbPrice.Location = new System.Drawing.Point(583, 268);
+            this.lbPrice.Name = "lbPrice";
+            this.lbPrice.Size = new System.Drawing.Size(46, 18);
+            this.lbPrice.TabIndex = 12;
+            this.lbPrice.Text = "Price:";
+            // 
+            // lbQuantity
+            // 
+            this.lbQuantity.AutoSize = true;
+            this.lbQuantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbQuantity.Location = new System.Drawing.Point(583, 298);
+            this.lbQuantity.Name = "lbQuantity";
+            this.lbQuantity.Size = new System.Drawing.Size(52, 18);
+            this.lbQuantity.TabIndex = 14;
+            this.lbQuantity.Text = "Quant:";
+            // 
+            // tbQuantity
+            // 
+            this.tbQuantity.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbQuantity.Location = new System.Drawing.Point(639, 295);
+            this.tbQuantity.Name = "tbQuantity";
+            this.tbQuantity.Size = new System.Drawing.Size(102, 24);
+            this.tbQuantity.TabIndex = 13;
             // 
             // Admin
             // 
@@ -151,15 +271,29 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(1098, 626);
+            this.Controls.Add(this.lbQuantity);
+            this.Controls.Add(this.tbQuantity);
+            this.Controls.Add(this.lbPrice);
+            this.Controls.Add(this.lbDescription);
+            this.Controls.Add(this.lbCompany);
+            this.Controls.Add(this.lbType);
+            this.Controls.Add(this.lbProductName);
+            this.Controls.Add(this.tbPrice);
+            this.Controls.Add(this.tbDescription);
+            this.Controls.Add(this.tbCompany);
+            this.Controls.Add(this.cbType);
+            this.Controls.Add(this.tbProductName);
             this.Controls.Add(this.dgvProducts);
             this.Controls.Add(this.panel1);
             this.Name = "Admin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Admin";
+            this.Load += new System.EventHandler(this.Admin_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -173,5 +307,17 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgvProducts;
         private System.Windows.Forms.Label lbAdminText;
+        private System.Windows.Forms.TextBox tbProductName;
+        private System.Windows.Forms.ComboBox cbType;
+        private System.Windows.Forms.TextBox tbCompany;
+        private System.Windows.Forms.TextBox tbDescription;
+        private System.Windows.Forms.TextBox tbPrice;
+        private System.Windows.Forms.Label lbProductName;
+        private System.Windows.Forms.Label lbType;
+        private System.Windows.Forms.Label lbCompany;
+        private System.Windows.Forms.Label lbDescription;
+        private System.Windows.Forms.Label lbPrice;
+        private System.Windows.Forms.Label lbQuantity;
+        private System.Windows.Forms.TextBox tbQuantity;
     }
 }

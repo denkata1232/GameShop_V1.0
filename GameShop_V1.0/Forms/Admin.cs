@@ -1,4 +1,7 @@
-﻿using GameShop_V1._0.ViewModels;
+﻿using Business.businessLogic;
+using Data;
+using Data.Models;
+using GameShop_V1._0.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +16,13 @@ namespace GameShop_V1._0.Forms
 {
     public partial class Admin : Form
     {
+        private GameShopContext context = new GameShopContext();
+        private ProductBusiness productBusiness => new ProductBusiness(context);
+        private TypeProductBusiness TypeProductBusiness => new TypeProductBusiness(context);
+        OrderBusiness orderBusiness => new OrderBusiness(context);
+        private UserBusiness userBusiness => new UserBusiness(context);
+        private List<AdminProductViewModel> productsViews = new List<AdminProductViewModel>();
+
         public Admin()
         {
             InitializeComponent();
@@ -50,6 +60,53 @@ namespace GameShop_V1._0.Forms
             login.Show();
             login.FormClosing += (obj, args) => { this.Close(); };
             this.Hide();
+        }
+
+        private void Admin_Load(object sender, EventArgs e)
+        {
+            productsViews = context.Products
+                .Select(x => new AdminProductViewModel
+                {
+                    ProductId = x.ProductId,
+                    Name = x.Name,
+                    Company = x.Company,
+                    Description = x.Description,
+                    TypeProduct = x.TypeProduct.Name,
+                    Price = x.Price,
+                    Quantity = x.Quantity
+                }).ToList();
+
+            dgvProducts.DataSource = productsViews;
+            cbType.DataSource = context.TypeProducts.Select(x => x.Name).ToList();
+            dgvProducts.SelectionChanged += dgvProducts_SelectionChanged;
+            dvgProducts_SetSelectedProduct();
+        }
+
+        private void dgvProducts_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvProducts.SelectedRows.Count == 0)
+            {
+                return;
+            }
+
+            if (context.Products.Count() != 0 && dgvProducts.DataSource != null)
+            {
+                dvgProducts_SetSelectedProduct();
+            }
+        }
+
+        private void dvgProducts_SetSelectedProduct()
+        {
+            if (context.Products.Count() != 0)
+            {
+                AdminProductViewModel product = dgvProducts.SelectedRows[0].DataBoundItem as AdminProductViewModel;
+                tbProductName.Text = product.Name;
+                tbCompany.Text = product.Company;
+                tbDescription.Text = product.Description;
+                tbPrice.Text = product.Price.ToString();
+                tbQuantity.Text = product.Quantity.ToString();
+                cbType.SelectedItem = product.TypeProduct;
+            }
         }
     }
 }

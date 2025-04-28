@@ -108,7 +108,7 @@ namespace GameShop_V1._0.Forms
 
         private void btnRemoveFromCart_Click(object sender, EventArgs e)
         {
-            if (dgvProducts.SelectedRows[0] != null && GlobalInfo.Cart.Count != 0)
+            if (GlobalInfo.Cart.Count != 0 && dgvProducts.SelectedRows[0] != null)
             {
                 var selectedProduct = dgvProducts.SelectedRows[0].DataBoundItem as CartProductViewModel;
 
@@ -168,7 +168,7 @@ namespace GameShop_V1._0.Forms
 
         private void dvgProducts_SetSelectedProduct()
         {
-            if (dgvProducts.SelectedRows[0].Index >= 0)
+            if (GlobalInfo.Cart.Count > 0 && dgvProducts.SelectedRows[0].Index >= 0)
             {
                 var selectedProduct = dgvProducts.SelectedRows[0].DataBoundItem as CartProductViewModel;
                 tbName.Text = selectedProduct.Name;
