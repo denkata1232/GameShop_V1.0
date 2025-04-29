@@ -21,7 +21,10 @@ namespace GameShop_V1._0.Forms
         private TypeProductBusiness TypeProductBusiness => new TypeProductBusiness(context);
         OrderBusiness orderBusiness => new OrderBusiness(context);
         private UserBusiness userBusiness => new UserBusiness(context);
-        private List<AdminProductViewModel> productsViews = new List<AdminProductViewModel>();
+        private List<AdminProductViewModel> productViews = new List<AdminProductViewModel>();
+        List<Control> controlsProducts = new List<Control>();
+
+        private bool sortAscending = true;
 
         public Admin()
         {
@@ -64,7 +67,24 @@ namespace GameShop_V1._0.Forms
 
         private void Admin_Load(object sender, EventArgs e)
         {
-            productsViews = context.Products
+            controlsProducts.AddRange(new List<Control>() 
+            { 
+                dgvProducts,
+                lbProductName,
+                lbType,
+                lbDescription,
+                lbCompany,
+                lbPrice,
+                lbQuantity,
+                tbProductName,
+                cbType,
+                tbDescription,
+                tbCompany,
+                tbPrice,
+                tbQuantity
+            });
+
+            productViews = context.Products
                 .Select(x => new AdminProductViewModel
                 {
                     ProductId = x.ProductId,
@@ -76,10 +96,13 @@ namespace GameShop_V1._0.Forms
                     Quantity = x.Quantity
                 }).ToList();
 
-            dgvProducts.DataSource = productsViews;
+            dgvProducts.DataSource = productViews;
             cbType.DataSource = context.TypeProducts.Select(x => x.Name).ToList();
             dgvProducts.SelectionChanged += dgvProducts_SelectionChanged;
             dvgProducts_SetSelectedProduct();
+            dgvProducts.ColumnHeaderMouseClick += dgvProducts_ColumnHeaderMouseClick;
+
+            
         }
 
         private void dgvProducts_SelectionChanged(object sender, EventArgs e)
@@ -107,6 +130,43 @@ namespace GameShop_V1._0.Forms
                 tbQuantity.Text = product.Quantity.ToString();
                 cbType.SelectedItem = product.TypeProduct;
             }
+        }
+
+        private void dgvProducts_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            string columnName = dgvProducts.Columns[e.ColumnIndex].DataPropertyName;
+
+            if (string.IsNullOrEmpty(columnName)) return;
+
+            var prop = typeof(AdminProductViewModel).GetProperty(columnName);
+            if (prop == null) return;
+
+            var sorted = sortAscending
+                ? productViews.OrderBy(p => prop.GetValue(p)).ToList()
+                : productViews.OrderByDescending(p => prop.GetValue(p)).ToList();
+
+            dgvProducts.DataSource = sorted;
+            sortAscending = !sortAscending;
+        }
+
+        private void btnProducts_Click(object sender, EventArgs e)
+        {
+            controlsProducts.ForEach(x => x.Visible = true);
+        }
+
+        private void btnTypeProducts_Click(object sender, EventArgs e)
+        {
+            controlsProducts.ForEach(x => x.Visible = false);
+        }
+
+        private void tbUsers_Click(object sender, EventArgs e)
+        {
+            controlsProducts.ForEach(x => x.Visible = false);
+        }
+
+        private void btnOrders_Click(object sender, EventArgs e)
+        {
+            controlsProducts.ForEach(x => x.Visible = false);
         }
     }
 }

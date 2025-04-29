@@ -48,6 +48,12 @@
             this.lbPrice = new System.Windows.Forms.Label();
             this.lbQuantity = new System.Windows.Forms.Label();
             this.tbQuantity = new System.Windows.Forms.TextBox();
+            this.btnProducts = new System.Windows.Forms.Button();
+            this.btnOrders = new System.Windows.Forms.Button();
+            this.tbUsers = new System.Windows.Forms.Button();
+            this.btnTypeProducts = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
+            this.btnRemove = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
             this.SuspendLayout();
@@ -55,6 +61,10 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.panel1.Controls.Add(this.btnTypeProducts);
+            this.panel1.Controls.Add(this.tbUsers);
+            this.panel1.Controls.Add(this.btnOrders);
+            this.panel1.Controls.Add(this.btnProducts);
             this.panel1.Controls.Add(this.lbAdminText);
             this.panel1.Controls.Add(this.lbCurrentUser);
             this.panel1.Controls.Add(this.btnLogOut);
@@ -265,12 +275,90 @@
             this.tbQuantity.Size = new System.Drawing.Size(102, 24);
             this.tbQuantity.TabIndex = 13;
             // 
+            // btnProducts
+            // 
+            this.btnProducts.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.btnProducts.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnProducts.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnProducts.Location = new System.Drawing.Point(498, 7);
+            this.btnProducts.Name = "btnProducts";
+            this.btnProducts.Size = new System.Drawing.Size(82, 38);
+            this.btnProducts.TabIndex = 15;
+            this.btnProducts.Text = "Products";
+            this.btnProducts.UseVisualStyleBackColor = false;
+            this.btnProducts.Click += new System.EventHandler(this.btnProducts_Click);
+            // 
+            // btnOrders
+            // 
+            this.btnOrders.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.btnOrders.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOrders.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnOrders.Location = new System.Drawing.Point(762, 7);
+            this.btnOrders.Name = "btnOrders";
+            this.btnOrders.Size = new System.Drawing.Size(82, 38);
+            this.btnOrders.TabIndex = 16;
+            this.btnOrders.Text = "Orders";
+            this.btnOrders.UseVisualStyleBackColor = false;
+            this.btnOrders.Click += new System.EventHandler(this.btnOrders_Click);
+            // 
+            // tbUsers
+            // 
+            this.tbUsers.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.tbUsers.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbUsers.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.tbUsers.Location = new System.Drawing.Point(674, 7);
+            this.tbUsers.Name = "tbUsers";
+            this.tbUsers.Size = new System.Drawing.Size(82, 38);
+            this.tbUsers.TabIndex = 17;
+            this.tbUsers.Text = "Users";
+            this.tbUsers.UseVisualStyleBackColor = false;
+            this.tbUsers.Click += new System.EventHandler(this.tbUsers_Click);
+            // 
+            // btnTypeProducts
+            // 
+            this.btnTypeProducts.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.btnTypeProducts.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTypeProducts.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnTypeProducts.Location = new System.Drawing.Point(586, 7);
+            this.btnTypeProducts.Name = "btnTypeProducts";
+            this.btnTypeProducts.Size = new System.Drawing.Size(82, 38);
+            this.btnTypeProducts.TabIndex = 18;
+            this.btnTypeProducts.Text = "Types";
+            this.btnTypeProducts.UseVisualStyleBackColor = false;
+            this.btnTypeProducts.Click += new System.EventHandler(this.btnTypeProducts_Click);
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdate.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnUpdate.Location = new System.Drawing.Point(586, 339);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(124, 38);
+            this.btnUpdate.TabIndex = 19;
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.UseVisualStyleBackColor = false;
+            // 
+            // btnRemove
+            // 
+            this.btnRemove.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRemove.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnRemove.Location = new System.Drawing.Point(720, 339);
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.Size = new System.Drawing.Size(124, 38);
+            this.btnRemove.TabIndex = 20;
+            this.btnRemove.Text = "Remove";
+            this.btnRemove.UseVisualStyleBackColor = false;
+            // 
             // Admin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(1098, 626);
+            this.Controls.Add(this.btnRemove);
+            this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.lbQuantity);
             this.Controls.Add(this.tbQuantity);
             this.Controls.Add(this.lbPrice);
@@ -319,5 +407,11 @@
         private System.Windows.Forms.Label lbPrice;
         private System.Windows.Forms.Label lbQuantity;
         private System.Windows.Forms.TextBox tbQuantity;
+        private System.Windows.Forms.Button btnProducts;
+        private System.Windows.Forms.Button btnTypeProducts;
+        private System.Windows.Forms.Button tbUsers;
+        private System.Windows.Forms.Button btnOrders;
+        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Button btnRemove;
     }
 }
