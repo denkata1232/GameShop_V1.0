@@ -18,11 +18,15 @@ namespace GameShop_V1._0.Forms
     {
         private GameShopContext context = new GameShopContext();
         private ProductBusiness productBusiness => new ProductBusiness(context);
-        private TypeProductBusiness TypeProductBusiness => new TypeProductBusiness(context);
+        private TypeProductBusiness typeProductBusiness => new TypeProductBusiness(context);
         OrderBusiness orderBusiness => new OrderBusiness(context);
         private UserBusiness userBusiness => new UserBusiness(context);
+
         private List<AdminProductViewModel> productViews = new List<AdminProductViewModel>();
         List<Control> controlsProducts = new List<Control>();
+        List<Control> controlsTypes = new List<Control>();
+        List<Control> controlsUsers = new List<Control>();
+        List<Control> controlsOrders = new List<Control>();
 
         private bool sortAscending = true;
 
@@ -167,6 +171,35 @@ namespace GameShop_V1._0.Forms
         private void btnOrders_Click(object sender, EventArgs e)
         {
             controlsProducts.ForEach(x => x.Visible = false);
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (controlsProducts.Any(x => x.Visible))
+            {
+                int id = Convert.ToInt32(dgvProducts.SelectedRows[0].Cells[0].Value);
+                string name = tbProductName.Text;
+                TypeProduct type = context.TypeProducts.FirstOrDefault(x => x.Name == cbType.Text);
+                int typeProductId = context.TypeProducts.FirstOrDefault(x => x.TypeProductId == type.TypeProductId).TypeProductId;
+                string company = tbCompany.Text;
+                string description = tbDescription.Text;
+                decimal price = decimal.Parse(tbPrice.Text);
+                int quantity = int.Parse(tbQuantity.Text);
+
+                Product updatedProduct = new Product()
+                {
+                    ProductId = id,
+                    Name = name,
+                    TypeProductId = typeProductId,
+                    TypeProduct = type,
+                    Company = company,
+                    Description = description,
+                    Price = price,
+                    Quantity = quantity
+                };
+
+                productBusiness.UpdateProduct(updatedProduct);
+            }
         }
     }
 }
