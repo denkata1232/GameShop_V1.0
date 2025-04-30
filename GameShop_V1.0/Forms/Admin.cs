@@ -28,6 +28,8 @@ namespace GameShop_V1._0.Forms
         List<Control> controlsUsers = new List<Control>();
         List<Control> controlsOrders = new List<Control>();
 
+        private Timer timer;
+
         private bool sortAscending = true;
 
         public Admin()
@@ -88,25 +90,15 @@ namespace GameShop_V1._0.Forms
                 tbQuantity
             });
 
-            productViews = context.Products
-                .Select(x => new AdminProductViewModel
-                {
-                    ProductId = x.ProductId,
-                    Name = x.Name,
-                    Company = x.Company,
-                    Description = x.Description,
-                    TypeProduct = x.TypeProduct.Name,
-                    Price = x.Price,
-                    Quantity = x.Quantity
-                }).ToList();
+            UpdateDgvProductsViews();
 
             dgvProducts.DataSource = productViews;
+            dgvProducts.ClearSelection();
             cbType.DataSource = context.TypeProducts.Select(x => x.Name).ToList();
-            dgvProducts.SelectionChanged += dgvProducts_SelectionChanged;
-            dvgProducts_SetSelectedProduct();
-            dgvProducts.ColumnHeaderMouseClick += dgvProducts_ColumnHeaderMouseClick;
-
             
+            dgvProducts.SelectionChanged += dgvProducts_SelectionChanged;
+
+            dgvProducts.ColumnHeaderMouseClick += dgvProducts_ColumnHeaderMouseClick;           
         }
 
         private void dgvProducts_SelectionChanged(object sender, EventArgs e)
@@ -198,7 +190,122 @@ namespace GameShop_V1._0.Forms
                     Quantity = quantity
                 };
 
-                productBusiness.UpdateProduct(updatedProduct);
+                tbOutputMessage.Text = productBusiness.UpdateProduct(updatedProduct);
+                ShowOutputMessageFor3Seconds();
+
+                UpdateDgvProductsViews();
+            }
+        }
+
+        private void UpdateDgvProductsViews()
+        {
+            dgvProducts.DataSource = null;
+            productViews = context.Products
+                .Select(x => new AdminProductViewModel
+                {
+                    ProductId = x.ProductId,
+                    Name = x.Name,
+                    Company = x.Company,
+                    Description = x.Description,
+                    TypeProduct = x.TypeProduct.Name,
+                    Price = x.Price,
+                    Quantity = x.Quantity
+                }).ToList();
+
+            dgvProducts.DataSource = productViews;
+            dgvProducts.Columns[0].Width = 20;
+            dgvProducts.Columns["Price"].Width = 45;
+            dgvProducts.Columns["Quantity"].Width = 45;
+        }
+
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+            if (controlsProducts.Any(x => x.Visible))
+            {
+                AdminProductViewModel adminProductView = dgvProducts.SelectedRows[0].DataBoundItem as AdminProductViewModel;
+
+                Product product = productBusiness.GetProductByName(adminProductView.Name);
+                tbOutputMessage.Text = productBusiness.DeleteProduct(product);
+                ShowOutputMessageFor3Seconds();
+                UpdateDgvProductsViews();
+            }
+        }
+        private void ShowOutputMessageFor3Seconds()
+        {
+            tbOutputMessage.Visible = true;
+
+            // Create and configure the timer
+            timer = new Timer();
+            timer.Interval = 3000; // 3 seconds (3000 milliseconds)
+            timer.Tick += Timer_Tick; // Event handler when timer ticks
+            timer.Start();
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            // Hide the label after the timer ticks
+            tbOutputMessage.Visible = false;
+
+            // Stop the timer
+            timer.Stop();
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            if (controlsProducts.Any(x => x.Visible))
+            {
+                SetControlsToEmpty(controlsProducts);
+                dgvProducts.ClearSelection();
+            }
+            else if (controlsTypes.Any(x => x.Visible))
+            {
+                SetControlsToEmpty(controlsTypes);
+            }
+            else if (controlsUsers.Any(x => x.Visible))
+            {
+                SetControlsToEmpty(controlsUsers);
+            }
+            else if (controlsOrders.Any(x => x.Visible))
+            {
+                SetControlsToEmpty(controlsOrders);
+            }
+        }
+
+        private void SetControlsToEmpty(List<Control> controls)
+        {
+            foreach (var control in controls)
+            {
+                if (control.GetType() == typeof(TextBox) || control.GetType() == typeof(ComboBox))
+                {
+                    control.Text = "";
+                }
+            }
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            if (controlsProducts.Any(x => x.Visible))
+            {
+                string name = tbProductName.Text;
+                TypeProduct type = context.TypeProducts.FirstOrDefault(x => x.Name == cbType.Text);
+                string company = tbCompany.Text;
+                string description = tbDescription.Text;
+                decimal price = decimal.Parse(tbPrice.Text);
+                int quantity = int.Parse(tbQuantity.Text);
+
+                Product productToAdd = new Product()
+                {
+                    Name = name,
+                    Company = company,
+                    TypeProduct = type,
+                    Description = description,
+                    Price = price,
+                    Quantity = quantity,
+                };
+
+                tbOutputMessage.Text = productBusiness.AddProduct(productToAdd);
+                ShowOutputMessageFor3Seconds();
+                UpdateDgvProductsViews();
             }
         }
     }
