@@ -57,8 +57,21 @@
             this.tbOutputMessage = new System.Windows.Forms.TextBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
+            this.dgvTypeProduct = new System.Windows.Forms.DataGridView();
+            this.lbTypeProductName = new System.Windows.Forms.Label();
+            this.tbTypeProductName = new System.Windows.Forms.TextBox();
+            this.lbUserName = new System.Windows.Forms.Label();
+            this.tbUserName = new System.Windows.Forms.TextBox();
+            this.lbPassword = new System.Windows.Forms.Label();
+            this.tbPassword = new System.Windows.Forms.TextBox();
+            this.lbEmail = new System.Windows.Forms.Label();
+            this.tbEmail = new System.Windows.Forms.TextBox();
+            this.chbIsAdmin = new System.Windows.Forms.CheckBox();
+            this.dgvUsers = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTypeProduct)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -393,12 +406,142 @@
             this.btnNew.UseVisualStyleBackColor = false;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
+            // dgvTypeProduct
+            // 
+            this.dgvTypeProduct.AllowUserToOrderColumns = true;
+            this.dgvTypeProduct.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTypeProduct.Location = new System.Drawing.Point(12, 78);
+            this.dgvTypeProduct.MultiSelect = false;
+            this.dgvTypeProduct.Name = "dgvTypeProduct";
+            this.dgvTypeProduct.ReadOnly = true;
+            this.dgvTypeProduct.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvTypeProduct.Size = new System.Drawing.Size(568, 520);
+            this.dgvTypeProduct.TabIndex = 24;
+            this.dgvTypeProduct.Visible = false;
+            // 
+            // lbTypeProductName
+            // 
+            this.lbTypeProductName.AutoSize = true;
+            this.lbTypeProductName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbTypeProductName.Location = new System.Drawing.Point(586, 81);
+            this.lbTypeProductName.Name = "lbTypeProductName";
+            this.lbTypeProductName.Size = new System.Drawing.Size(52, 18);
+            this.lbTypeProductName.TabIndex = 26;
+            this.lbTypeProductName.Text = "Name:";
+            this.lbTypeProductName.Visible = false;
+            // 
+            // tbTypeProductName
+            // 
+            this.tbTypeProductName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbTypeProductName.Location = new System.Drawing.Point(639, 78);
+            this.tbTypeProductName.Name = "tbTypeProductName";
+            this.tbTypeProductName.Size = new System.Drawing.Size(435, 24);
+            this.tbTypeProductName.TabIndex = 25;
+            this.tbTypeProductName.Visible = false;
+            // 
+            // lbUserName
+            // 
+            this.lbUserName.AutoSize = true;
+            this.lbUserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbUserName.Location = new System.Drawing.Point(587, 81);
+            this.lbUserName.Name = "lbUserName";
+            this.lbUserName.Size = new System.Drawing.Size(81, 18);
+            this.lbUserName.TabIndex = 28;
+            this.lbUserName.Text = "Username:";
+            this.lbUserName.Visible = false;
+            // 
+            // tbUserName
+            // 
+            this.tbUserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbUserName.Location = new System.Drawing.Point(674, 78);
+            this.tbUserName.Name = "tbUserName";
+            this.tbUserName.Size = new System.Drawing.Size(401, 24);
+            this.tbUserName.TabIndex = 27;
+            this.tbUserName.Visible = false;
+            // 
+            // lbPassword
+            // 
+            this.lbPassword.AutoSize = true;
+            this.lbPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbPassword.Location = new System.Drawing.Point(589, 111);
+            this.lbPassword.Name = "lbPassword";
+            this.lbPassword.Size = new System.Drawing.Size(79, 18);
+            this.lbPassword.TabIndex = 30;
+            this.lbPassword.Text = "Password:";
+            this.lbPassword.Visible = false;
+            // 
+            // tbPassword
+            // 
+            this.tbPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbPassword.Location = new System.Drawing.Point(674, 108);
+            this.tbPassword.Name = "tbPassword";
+            this.tbPassword.Size = new System.Drawing.Size(401, 24);
+            this.tbPassword.TabIndex = 29;
+            this.tbPassword.Visible = false;
+            // 
+            // lbEmail
+            // 
+            this.lbEmail.AutoSize = true;
+            this.lbEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbEmail.Location = new System.Drawing.Point(590, 138);
+            this.lbEmail.Name = "lbEmail";
+            this.lbEmail.Size = new System.Drawing.Size(49, 18);
+            this.lbEmail.TabIndex = 32;
+            this.lbEmail.Text = "Email:";
+            this.lbEmail.Visible = false;
+            // 
+            // tbEmail
+            // 
+            this.tbEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbEmail.Location = new System.Drawing.Point(674, 138);
+            this.tbEmail.Name = "tbEmail";
+            this.tbEmail.Size = new System.Drawing.Size(401, 24);
+            this.tbEmail.TabIndex = 31;
+            this.tbEmail.Visible = false;
+            // 
+            // chbIsAdmin
+            // 
+            this.chbIsAdmin.AutoSize = true;
+            this.chbIsAdmin.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chbIsAdmin.Location = new System.Drawing.Point(589, 168);
+            this.chbIsAdmin.Name = "chbIsAdmin";
+            this.chbIsAdmin.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chbIsAdmin.Size = new System.Drawing.Size(79, 22);
+            this.chbIsAdmin.TabIndex = 34;
+            this.chbIsAdmin.Text = "IsAdmin";
+            this.chbIsAdmin.UseVisualStyleBackColor = true;
+            this.chbIsAdmin.Visible = false;
+            // 
+            // dgvUsers
+            // 
+            this.dgvUsers.AllowUserToOrderColumns = true;
+            this.dgvUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvUsers.Location = new System.Drawing.Point(12, 78);
+            this.dgvUsers.MultiSelect = false;
+            this.dgvUsers.Name = "dgvUsers";
+            this.dgvUsers.ReadOnly = true;
+            this.dgvUsers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvUsers.Size = new System.Drawing.Size(568, 520);
+            this.dgvUsers.TabIndex = 35;
+            this.dgvUsers.Visible = false;
+            // 
             // Admin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(1098, 626);
+            this.Controls.Add(this.dgvUsers);
+            this.Controls.Add(this.chbIsAdmin);
+            this.Controls.Add(this.lbEmail);
+            this.Controls.Add(this.tbEmail);
+            this.Controls.Add(this.lbPassword);
+            this.Controls.Add(this.tbPassword);
+            this.Controls.Add(this.lbUserName);
+            this.Controls.Add(this.tbUserName);
+            this.Controls.Add(this.lbTypeProductName);
+            this.Controls.Add(this.tbTypeProductName);
+            this.Controls.Add(this.dgvTypeProduct);
             this.Controls.Add(this.btnNew);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.tbOutputMessage);
@@ -425,6 +568,8 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTypeProduct)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -461,5 +606,16 @@
         private System.Windows.Forms.TextBox tbOutputMessage;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnNew;
+        private System.Windows.Forms.DataGridView dgvTypeProduct;
+        private System.Windows.Forms.Label lbTypeProductName;
+        private System.Windows.Forms.TextBox tbTypeProductName;
+        private System.Windows.Forms.Label lbUserName;
+        private System.Windows.Forms.TextBox tbUserName;
+        private System.Windows.Forms.Label lbPassword;
+        private System.Windows.Forms.TextBox tbPassword;
+        private System.Windows.Forms.Label lbEmail;
+        private System.Windows.Forms.TextBox tbEmail;
+        private System.Windows.Forms.CheckBox chbIsAdmin;
+        private System.Windows.Forms.DataGridView dgvUsers;
     }
 }

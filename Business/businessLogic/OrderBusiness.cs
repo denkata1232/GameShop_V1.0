@@ -111,7 +111,7 @@ namespace Business.businessLogic
             StringBuilder sb = new StringBuilder();
             sb.AppendLine($"Order: {order.OrderId}{Environment.NewLine}" +
                 $"User: {order.User.UserName}{Environment.NewLine}" +
-                $"Date: {order.Date.ToString("dd:MM:yyyy")}");
+                $"Date: {order.Date.ToString("dd.MM.yyyy")}");
                 sb.AppendLine("---------------------------------------------");
             sb.AppendLine($"Products:");
 
