@@ -22,9 +22,9 @@ namespace Business.businessLogic
             return context.OrderProducts.ToList();
         }
 
-        public OrderProduct GetOrderProductById(int id)
+        public OrderProduct GetOrderProductById(int ProductId, int OrderId)
         {
-            return context.OrderProducts.Find(id);
+            return context.OrderProducts.Find(ProductId,OrderId);
         }
 
         public string AddOrderProduct(OrderProduct orderProduct)
@@ -40,7 +40,7 @@ namespace Business.businessLogic
 
         public string UpdateOrderProduct(OrderProduct orderProduct)
         {
-            OrderProduct orderProductToUpdate = context.OrderProducts.Find(orderProduct.OrderId);
+            OrderProduct orderProductToUpdate = context.OrderProducts.Find(orderProduct.ProductId, orderProduct.OrderId);
             if (orderProductToUpdate != null)
             {
                 context.Entry(orderProductToUpdate).CurrentValues.SetValues(orderProduct);
@@ -52,7 +52,7 @@ namespace Business.businessLogic
 
         public string DeleteOrderProduct(OrderProduct orderProduct)
         {
-            OrderProduct orderProductToDelete = context.OrderProducts.Find(orderProduct.OrderId);
+            OrderProduct orderProductToDelete = context.OrderProducts.Find(orderProduct.ProductId, orderProduct.OrderId);
             if (orderProductToDelete != null)
             {
                 context.OrderProducts.Remove(orderProductToDelete);
