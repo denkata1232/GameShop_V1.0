@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -114,6 +115,31 @@ namespace GameShop_V1._0.Forms
                 tbPassword,
                 tbEmail,
                 chbIsAdmin
+            });
+
+            controlsOrders.AddRange(new List<Control>()
+            {
+                lbFindOrder,
+                rbByDate,
+                rbByDateRange,
+                tbDateToFind,
+                tbStartDateToFind,
+                tbEndDateToFind,
+                lbOrdersByDate,
+                btnFindOrdersByDate,
+                dgvOrders,
+                lbUserNameOrder,
+                lbDate,
+                lbOrderProducts,
+                lblProductsOrder,
+                lbTotalPrice,
+                tbUserNameOrder,
+                tbDate,
+                cbProductToAddInOrder,
+                tbQuantityOrder,
+                btnAddProductToOrder,
+                btnRemoveFromOrder,
+                tbTotalPrice
             });
 
             /// updating products grid view
@@ -332,6 +358,7 @@ namespace GameShop_V1._0.Forms
                 SetControlsToEmpty(controlsUsers);
                 dgvUsers.ClearSelection();
                 chbIsAdmin.Checked = false;
+                lbUserWithProducts.Items.Clear();
             }
             else if (controlsOrders.Any(x => x.Visible))
             {
@@ -410,7 +437,7 @@ namespace GameShop_V1._0.Forms
             }
             else if (controlsUsers.Any(x => x.Visible))
             {
-                if (controlsUsers.GetRange(4, controlsUsers.Count - 4).Any(x => x.Text == ""))
+                if (controlsUsers.GetRange(5, controlsUsers.Count - 5).Any(x => x.Text == ""))
                 {
                     return;
                 }
@@ -506,7 +533,7 @@ namespace GameShop_V1._0.Forms
             }
             else if (controlsUsers.Any(x => x.Visible))
             {
-                if (controlsUsers.GetRange(4, controlsUsers.Count - 4).Any(x => x.Text == ""))
+                if (controlsUsers.GetRange(5, controlsUsers.Count - 5).Any(x => x.Text == ""))
                 {
                     return;
                 }
@@ -566,7 +593,7 @@ namespace GameShop_V1._0.Forms
             }
             else if (controlsUsers.Any(x => x.Visible))
             {
-                if (controlsUsers.GetRange(4, controlsUsers.Count - 4).Any(x => x.Text == ""))
+                if (controlsUsers.GetRange(5, controlsUsers.Count - 5).Any(x => x.Text == ""))
                 {
                     return;
                 }
@@ -613,7 +640,15 @@ namespace GameShop_V1._0.Forms
 
         private void lbUserWithProducts_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+            string username = lbUserWithProducts.Text;
+
+            dgvUsers.Rows
+                .OfType<DataGridViewRow>()
+                .Where(x => (string)x.Cells["UserName"].Value == username)
+                .ToArray<DataGridViewRow>()[0]
+                .Selected = true;
+
+            dgvUsers_SetSelectedUser();
         }
     }
 }

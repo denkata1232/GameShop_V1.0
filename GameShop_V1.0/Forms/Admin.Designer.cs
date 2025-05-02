@@ -72,10 +72,32 @@
             this.lbAllUsersWithAgame = new System.Windows.Forms.Label();
             this.tbAllUsersWithAgame = new System.Windows.Forms.TextBox();
             this.btnFind = new System.Windows.Forms.Button();
+            this.lbUserNameOrder = new System.Windows.Forms.Label();
+            this.tbUserNameOrder = new System.Windows.Forms.TextBox();
+            this.tbDate = new System.Windows.Forms.TextBox();
+            this.lbDate = new System.Windows.Forms.Label();
+            this.lbOrderProducts = new System.Windows.Forms.ListBox();
+            this.btnRemoveFromOrder = new System.Windows.Forms.Button();
+            this.cbProductToAddInOrder = new System.Windows.Forms.ComboBox();
+            this.btnAddProductToOrder = new System.Windows.Forms.Button();
+            this.lblProductsOrder = new System.Windows.Forms.Label();
+            this.tbQuantityOrder = new System.Windows.Forms.TextBox();
+            this.lbTotalPrice = new System.Windows.Forms.Label();
+            this.tbTotalPrice = new System.Windows.Forms.TextBox();
+            this.lbOrdersByDate = new System.Windows.Forms.ListBox();
+            this.btnFindOrdersByDate = new System.Windows.Forms.Button();
+            this.rbByDate = new System.Windows.Forms.RadioButton();
+            this.rbByDateRange = new System.Windows.Forms.RadioButton();
+            this.tbDateToFind = new System.Windows.Forms.TextBox();
+            this.tbStartDateToFind = new System.Windows.Forms.TextBox();
+            this.tbEndDateToFind = new System.Windows.Forms.TextBox();
+            this.lbFindOrder = new System.Windows.Forms.Label();
+            this.dgvOrders = new System.Windows.Forms.DataGridView();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTypeProduct)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -533,9 +555,9 @@
             // lbUserWithProducts
             // 
             this.lbUserWithProducts.FormattingEnabled = true;
-            this.lbUserWithProducts.Location = new System.Drawing.Point(591, 464);
+            this.lbUserWithProducts.Location = new System.Drawing.Point(593, 464);
             this.lbUserWithProducts.Name = "lbUserWithProducts";
-            this.lbUserWithProducts.Size = new System.Drawing.Size(483, 134);
+            this.lbUserWithProducts.Size = new System.Drawing.Size(481, 134);
             this.lbUserWithProducts.TabIndex = 36;
             this.lbUserWithProducts.Visible = false;
             this.lbUserWithProducts.SelectedIndexChanged += new System.EventHandler(this.lbUserWithProducts_SelectedIndexChanged);
@@ -575,12 +597,254 @@
             this.btnFind.Visible = false;
             this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
             // 
+            // lbUserNameOrder
+            // 
+            this.lbUserNameOrder.AutoSize = true;
+            this.lbUserNameOrder.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbUserNameOrder.Location = new System.Drawing.Point(587, 81);
+            this.lbUserNameOrder.Name = "lbUserNameOrder";
+            this.lbUserNameOrder.Size = new System.Drawing.Size(81, 18);
+            this.lbUserNameOrder.TabIndex = 40;
+            this.lbUserNameOrder.Text = "Username:";
+            this.lbUserNameOrder.Visible = false;
+            // 
+            // tbUserNameOrder
+            // 
+            this.tbUserNameOrder.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbUserNameOrder.Location = new System.Drawing.Point(674, 78);
+            this.tbUserNameOrder.Name = "tbUserNameOrder";
+            this.tbUserNameOrder.Size = new System.Drawing.Size(401, 24);
+            this.tbUserNameOrder.TabIndex = 41;
+            this.tbUserNameOrder.Visible = false;
+            // 
+            // tbDate
+            // 
+            this.tbDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbDate.Location = new System.Drawing.Point(674, 108);
+            this.tbDate.Name = "tbDate";
+            this.tbDate.Size = new System.Drawing.Size(401, 24);
+            this.tbDate.TabIndex = 43;
+            this.tbDate.Visible = false;
+            // 
+            // lbDate
+            // 
+            this.lbDate.AutoSize = true;
+            this.lbDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbDate.Location = new System.Drawing.Point(587, 111);
+            this.lbDate.Name = "lbDate";
+            this.lbDate.Size = new System.Drawing.Size(43, 18);
+            this.lbDate.TabIndex = 42;
+            this.lbDate.Text = "Date:";
+            this.lbDate.Visible = false;
+            // 
+            // lbOrderProducts
+            // 
+            this.lbOrderProducts.FormattingEnabled = true;
+            this.lbOrderProducts.Location = new System.Drawing.Point(590, 141);
+            this.lbOrderProducts.Name = "lbOrderProducts";
+            this.lbOrderProducts.Size = new System.Drawing.Size(485, 95);
+            this.lbOrderProducts.TabIndex = 44;
+            this.lbOrderProducts.Visible = false;
+            // 
+            // btnRemoveFromOrder
+            // 
+            this.btnRemoveFromOrder.Location = new System.Drawing.Point(991, 239);
+            this.btnRemoveFromOrder.Name = "btnRemoveFromOrder";
+            this.btnRemoveFromOrder.Size = new System.Drawing.Size(84, 29);
+            this.btnRemoveFromOrder.TabIndex = 45;
+            this.btnRemoveFromOrder.Text = "Remove";
+            this.btnRemoveFromOrder.UseVisualStyleBackColor = true;
+            this.btnRemoveFromOrder.Visible = false;
+            // 
+            // cbProductToAddInOrder
+            // 
+            this.cbProductToAddInOrder.FormattingEnabled = true;
+            this.cbProductToAddInOrder.Location = new System.Drawing.Point(674, 247);
+            this.cbProductToAddInOrder.Name = "cbProductToAddInOrder";
+            this.cbProductToAddInOrder.Size = new System.Drawing.Size(186, 21);
+            this.cbProductToAddInOrder.TabIndex = 46;
+            this.cbProductToAddInOrder.Visible = false;
+            // 
+            // btnAddProductToOrder
+            // 
+            this.btnAddProductToOrder.Location = new System.Drawing.Point(901, 239);
+            this.btnAddProductToOrder.Name = "btnAddProductToOrder";
+            this.btnAddProductToOrder.Size = new System.Drawing.Size(84, 29);
+            this.btnAddProductToOrder.TabIndex = 47;
+            this.btnAddProductToOrder.Text = "Add";
+            this.btnAddProductToOrder.UseVisualStyleBackColor = true;
+            this.btnAddProductToOrder.Visible = false;
+            // 
+            // lblProductsOrder
+            // 
+            this.lblProductsOrder.AutoSize = true;
+            this.lblProductsOrder.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblProductsOrder.Location = new System.Drawing.Point(587, 250);
+            this.lblProductsOrder.Name = "lblProductsOrder";
+            this.lblProductsOrder.Size = new System.Drawing.Size(72, 18);
+            this.lblProductsOrder.TabIndex = 48;
+            this.lblProductsOrder.Text = "Products:";
+            this.lblProductsOrder.Visible = false;
+            // 
+            // tbQuantityOrder
+            // 
+            this.tbQuantityOrder.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbQuantityOrder.Location = new System.Drawing.Point(866, 244);
+            this.tbQuantityOrder.Name = "tbQuantityOrder";
+            this.tbQuantityOrder.Size = new System.Drawing.Size(29, 24);
+            this.tbQuantityOrder.TabIndex = 49;
+            this.tbQuantityOrder.Text = "1";
+            this.tbQuantityOrder.Visible = false;
+            // 
+            // lbTotalPrice
+            // 
+            this.lbTotalPrice.AutoSize = true;
+            this.lbTotalPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbTotalPrice.Location = new System.Drawing.Point(587, 286);
+            this.lbTotalPrice.Name = "lbTotalPrice";
+            this.lbTotalPrice.Size = new System.Drawing.Size(81, 18);
+            this.lbTotalPrice.TabIndex = 50;
+            this.lbTotalPrice.Text = "Total price:";
+            this.lbTotalPrice.Visible = false;
+            // 
+            // tbTotalPrice
+            // 
+            this.tbTotalPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbTotalPrice.Location = new System.Drawing.Point(674, 283);
+            this.tbTotalPrice.Name = "tbTotalPrice";
+            this.tbTotalPrice.ReadOnly = true;
+            this.tbTotalPrice.Size = new System.Drawing.Size(87, 24);
+            this.tbTotalPrice.TabIndex = 51;
+            this.tbTotalPrice.Visible = false;
+            // 
+            // lbOrdersByDate
+            // 
+            this.lbOrdersByDate.FormattingEnabled = true;
+            this.lbOrdersByDate.Location = new System.Drawing.Point(590, 464);
+            this.lbOrdersByDate.Name = "lbOrdersByDate";
+            this.lbOrdersByDate.Size = new System.Drawing.Size(485, 134);
+            this.lbOrdersByDate.TabIndex = 52;
+            this.lbOrdersByDate.Visible = false;
+            // 
+            // btnFindOrdersByDate
+            // 
+            this.btnFindOrdersByDate.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnFindOrdersByDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFindOrdersByDate.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnFindOrdersByDate.Location = new System.Drawing.Point(590, 436);
+            this.btnFindOrdersByDate.Name = "btnFindOrdersByDate";
+            this.btnFindOrdersByDate.Size = new System.Drawing.Size(485, 27);
+            this.btnFindOrdersByDate.TabIndex = 53;
+            this.btnFindOrdersByDate.Text = "Find";
+            this.btnFindOrdersByDate.UseVisualStyleBackColor = false;
+            this.btnFindOrdersByDate.Visible = false;
+            // 
+            // rbByDate
+            // 
+            this.rbByDate.AutoSize = true;
+            this.rbByDate.Checked = true;
+            this.rbByDate.Location = new System.Drawing.Point(593, 414);
+            this.rbByDate.Name = "rbByDate";
+            this.rbByDate.Size = new System.Drawing.Size(61, 17);
+            this.rbByDate.TabIndex = 54;
+            this.rbByDate.TabStop = true;
+            this.rbByDate.Text = "By date";
+            this.rbByDate.UseVisualStyleBackColor = true;
+            this.rbByDate.Visible = false;
+            // 
+            // rbByDateRange
+            // 
+            this.rbByDateRange.AutoSize = true;
+            this.rbByDateRange.Location = new System.Drawing.Point(789, 415);
+            this.rbByDateRange.Name = "rbByDateRange";
+            this.rbByDateRange.Size = new System.Drawing.Size(91, 17);
+            this.rbByDateRange.TabIndex = 55;
+            this.rbByDateRange.Text = "By date range";
+            this.rbByDateRange.UseVisualStyleBackColor = true;
+            this.rbByDateRange.Visible = false;
+            // 
+            // tbDateToFind
+            // 
+            this.tbDateToFind.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbDateToFind.Location = new System.Drawing.Point(650, 413);
+            this.tbDateToFind.Name = "tbDateToFind";
+            this.tbDateToFind.Size = new System.Drawing.Size(91, 20);
+            this.tbDateToFind.TabIndex = 56;
+            this.tbDateToFind.Text = "date - dd.mm.yyyy";
+            this.tbDateToFind.Visible = false;
+            // 
+            // tbStartDateToFind
+            // 
+            this.tbStartDateToFind.Enabled = false;
+            this.tbStartDateToFind.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbStartDateToFind.Location = new System.Drawing.Point(886, 413);
+            this.tbStartDateToFind.Name = "tbStartDateToFind";
+            this.tbStartDateToFind.Size = new System.Drawing.Size(91, 20);
+            this.tbStartDateToFind.TabIndex = 57;
+            this.tbStartDateToFind.Text = "start date";
+            this.tbStartDateToFind.Visible = false;
+            // 
+            // tbEndDateToFind
+            // 
+            this.tbEndDateToFind.Enabled = false;
+            this.tbEndDateToFind.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbEndDateToFind.Location = new System.Drawing.Point(983, 413);
+            this.tbEndDateToFind.Name = "tbEndDateToFind";
+            this.tbEndDateToFind.Size = new System.Drawing.Size(91, 20);
+            this.tbEndDateToFind.TabIndex = 58;
+            this.tbEndDateToFind.Text = "end date ";
+            this.tbEndDateToFind.Visible = false;
+            // 
+            // lbFindOrder
+            // 
+            this.lbFindOrder.AutoSize = true;
+            this.lbFindOrder.Location = new System.Drawing.Point(587, 402);
+            this.lbFindOrder.Name = "lbFindOrder";
+            this.lbFindOrder.Size = new System.Drawing.Size(57, 13);
+            this.lbFindOrder.TabIndex = 59;
+            this.lbFindOrder.Text = "Find order:";
+            this.lbFindOrder.Visible = false;
+            // 
+            // dgvOrders
+            // 
+            this.dgvOrders.AllowUserToOrderColumns = true;
+            this.dgvOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvOrders.Location = new System.Drawing.Point(12, 78);
+            this.dgvOrders.MultiSelect = false;
+            this.dgvOrders.Name = "dgvOrders";
+            this.dgvOrders.ReadOnly = true;
+            this.dgvOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvOrders.Size = new System.Drawing.Size(568, 520);
+            this.dgvOrders.TabIndex = 60;
+            this.dgvOrders.Visible = false;
+            // 
             // Admin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(1098, 626);
+            this.Controls.Add(this.dgvOrders);
+            this.Controls.Add(this.lbFindOrder);
+            this.Controls.Add(this.tbEndDateToFind);
+            this.Controls.Add(this.tbStartDateToFind);
+            this.Controls.Add(this.tbDateToFind);
+            this.Controls.Add(this.rbByDateRange);
+            this.Controls.Add(this.rbByDate);
+            this.Controls.Add(this.btnFindOrdersByDate);
+            this.Controls.Add(this.lbOrdersByDate);
+            this.Controls.Add(this.tbTotalPrice);
+            this.Controls.Add(this.lbTotalPrice);
+            this.Controls.Add(this.tbQuantityOrder);
+            this.Controls.Add(this.lblProductsOrder);
+            this.Controls.Add(this.btnAddProductToOrder);
+            this.Controls.Add(this.cbProductToAddInOrder);
+            this.Controls.Add(this.btnRemoveFromOrder);
+            this.Controls.Add(this.lbOrderProducts);
+            this.Controls.Add(this.tbDate);
+            this.Controls.Add(this.lbDate);
+            this.Controls.Add(this.tbUserNameOrder);
+            this.Controls.Add(this.lbUserNameOrder);
             this.Controls.Add(this.btnFind);
             this.Controls.Add(this.tbAllUsersWithAgame);
             this.Controls.Add(this.lbAllUsersWithAgame);
@@ -624,6 +888,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTypeProduct)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -675,5 +940,26 @@
         private System.Windows.Forms.Label lbAllUsersWithAgame;
         private System.Windows.Forms.TextBox tbAllUsersWithAgame;
         private System.Windows.Forms.Button btnFind;
+        private System.Windows.Forms.Label lbUserNameOrder;
+        private System.Windows.Forms.TextBox tbUserNameOrder;
+        private System.Windows.Forms.TextBox tbDate;
+        private System.Windows.Forms.Label lbDate;
+        private System.Windows.Forms.ListBox lbOrderProducts;
+        private System.Windows.Forms.Button btnRemoveFromOrder;
+        private System.Windows.Forms.ComboBox cbProductToAddInOrder;
+        private System.Windows.Forms.Button btnAddProductToOrder;
+        private System.Windows.Forms.Label lblProductsOrder;
+        private System.Windows.Forms.TextBox tbQuantityOrder;
+        private System.Windows.Forms.Label lbTotalPrice;
+        private System.Windows.Forms.TextBox tbTotalPrice;
+        private System.Windows.Forms.ListBox lbOrdersByDate;
+        private System.Windows.Forms.Button btnFindOrdersByDate;
+        private System.Windows.Forms.RadioButton rbByDate;
+        private System.Windows.Forms.RadioButton rbByDateRange;
+        private System.Windows.Forms.TextBox tbDateToFind;
+        private System.Windows.Forms.TextBox tbStartDateToFind;
+        private System.Windows.Forms.TextBox tbEndDateToFind;
+        private System.Windows.Forms.Label lbFindOrder;
+        private System.Windows.Forms.DataGridView dgvOrders;
     }
 }
