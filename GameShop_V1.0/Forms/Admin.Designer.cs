@@ -68,6 +68,10 @@
             this.tbEmail = new System.Windows.Forms.TextBox();
             this.chbIsAdmin = new System.Windows.Forms.CheckBox();
             this.dgvUsers = new System.Windows.Forms.DataGridView();
+            this.lbUserWithProducts = new System.Windows.Forms.ListBox();
+            this.lbAllUsersWithAgame = new System.Windows.Forms.Label();
+            this.tbAllUsersWithAgame = new System.Windows.Forms.TextBox();
+            this.btnFind = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTypeProduct)).BeginInit();
@@ -377,6 +381,7 @@
             this.tbOutputMessage.ForeColor = System.Drawing.Color.Red;
             this.tbOutputMessage.Location = new System.Drawing.Point(586, 383);
             this.tbOutputMessage.Name = "tbOutputMessage";
+            this.tbOutputMessage.ReadOnly = true;
             this.tbOutputMessage.Size = new System.Drawing.Size(483, 19);
             this.tbOutputMessage.TabIndex = 21;
             // 
@@ -525,12 +530,61 @@
             this.dgvUsers.TabIndex = 35;
             this.dgvUsers.Visible = false;
             // 
+            // lbUserWithProducts
+            // 
+            this.lbUserWithProducts.FormattingEnabled = true;
+            this.lbUserWithProducts.Location = new System.Drawing.Point(591, 464);
+            this.lbUserWithProducts.Name = "lbUserWithProducts";
+            this.lbUserWithProducts.Size = new System.Drawing.Size(483, 134);
+            this.lbUserWithProducts.TabIndex = 36;
+            this.lbUserWithProducts.Visible = false;
+            this.lbUserWithProducts.SelectedIndexChanged += new System.EventHandler(this.lbUserWithProducts_SelectedIndexChanged);
+            // 
+            // lbAllUsersWithAgame
+            // 
+            this.lbAllUsersWithAgame.AutoSize = true;
+            this.lbAllUsersWithAgame.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbAllUsersWithAgame.Location = new System.Drawing.Point(589, 415);
+            this.lbAllUsersWithAgame.Name = "lbAllUsersWithAgame";
+            this.lbAllUsersWithAgame.Size = new System.Drawing.Size(151, 18);
+            this.lbAllUsersWithAgame.TabIndex = 37;
+            this.lbAllUsersWithAgame.Text = "All users with a game:";
+            this.lbAllUsersWithAgame.Visible = false;
+            // 
+            // tbAllUsersWithAgame
+            // 
+            this.tbAllUsersWithAgame.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbAllUsersWithAgame.Location = new System.Drawing.Point(743, 412);
+            this.tbAllUsersWithAgame.Name = "tbAllUsersWithAgame";
+            this.tbAllUsersWithAgame.Size = new System.Drawing.Size(331, 24);
+            this.tbAllUsersWithAgame.TabIndex = 38;
+            this.tbAllUsersWithAgame.Text = "Name of a game";
+            this.tbAllUsersWithAgame.Visible = false;
+            // 
+            // btnFind
+            // 
+            this.btnFind.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnFind.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFind.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnFind.Location = new System.Drawing.Point(592, 436);
+            this.btnFind.Name = "btnFind";
+            this.btnFind.Size = new System.Drawing.Size(482, 27);
+            this.btnFind.TabIndex = 39;
+            this.btnFind.Text = "Find";
+            this.btnFind.UseVisualStyleBackColor = false;
+            this.btnFind.Visible = false;
+            this.btnFind.Click += new System.EventHandler(this.btnFind_Click);
+            // 
             // Admin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(1098, 626);
+            this.Controls.Add(this.btnFind);
+            this.Controls.Add(this.tbAllUsersWithAgame);
+            this.Controls.Add(this.lbAllUsersWithAgame);
+            this.Controls.Add(this.lbUserWithProducts);
             this.Controls.Add(this.dgvUsers);
             this.Controls.Add(this.chbIsAdmin);
             this.Controls.Add(this.lbEmail);
@@ -617,5 +671,9 @@
         private System.Windows.Forms.TextBox tbEmail;
         private System.Windows.Forms.CheckBox chbIsAdmin;
         private System.Windows.Forms.DataGridView dgvUsers;
+        private System.Windows.Forms.ListBox lbUserWithProducts;
+        private System.Windows.Forms.Label lbAllUsersWithAgame;
+        private System.Windows.Forms.TextBox tbAllUsersWithAgame;
+        private System.Windows.Forms.Button btnFind;
     }
 }

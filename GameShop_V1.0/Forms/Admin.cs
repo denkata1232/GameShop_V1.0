@@ -102,6 +102,10 @@ namespace GameShop_V1._0.Forms
 
             controlsUsers.AddRange(new List<Control>()
             {
+                lbAllUsersWithAgame,
+                tbAllUsersWithAgame,
+                lbUserWithProducts,
+                btnFind,
                 dgvUsers,
                 lbUserName,
                 lbPassword,
@@ -348,8 +352,13 @@ namespace GameShop_V1._0.Forms
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (controlsProducts.Any(x => x.Visible) && controlsProducts.All(x => x.Text != ""))
+            if (controlsProducts.Any(x => x.Visible))
             {
+                if (controlsProducts.GetRange(1, controlsProducts.Count - 1).Any(x => x.Text == ""))
+                {
+                    return;
+                }
+
                 string name = tbProductName.Text;
                 TypeProduct type = context.TypeProducts.FirstOrDefault(x => x.Name == cbType.Text);
                 string company = tbCompany.Text;
@@ -376,8 +385,13 @@ namespace GameShop_V1._0.Forms
                     .ToArray()[0]
                     .Selected = true;
             }
-            else if (controlsTypes.Any(x => x.Visible) && controlsTypes.All(x => x.Text != ""))
+            else if (controlsTypes.Any(x => x.Visible))
             {
+                if (controlsTypes.GetRange(1, controlsTypes.Count - 1).Any(x => x.Text == ""))
+                {
+                    return;
+                }
+
                 string name = tbTypeProductName.Text;
 
                 TypeProduct typeProductToAdd = new TypeProduct()
@@ -394,8 +408,13 @@ namespace GameShop_V1._0.Forms
                     .ToArray()[0]
                     .Selected = true;
             }
-            else if (controlsUsers.Any(x => x.Visible) && controlsUsers.All(x => x.Text != ""))
+            else if (controlsUsers.Any(x => x.Visible))
             {
+                if (controlsUsers.GetRange(4, controlsUsers.Count - 4).Any(x => x.Text == ""))
+                {
+                    return;
+                }
+
                 string username = tbUserName.Text;
                 string password = tbPassword.Text;
                 string email = tbEmail.Text;
@@ -423,8 +442,13 @@ namespace GameShop_V1._0.Forms
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (controlsProducts.Any(x => x.Visible) && controlsProducts.All(x => x.Text != ""))
+            if (controlsProducts.Any(x => x.Visible))
             {
+                if (controlsProducts.GetRange(1, controlsProducts.Count - 1).Any(x => x.Text == ""))
+                {
+                    return;
+                }
+
                 int id = Convert.ToInt32(dgvProducts.SelectedRows[0].Cells[0].Value);
                 string name = tbProductName.Text;
                 TypeProduct type = context.TypeProducts.FirstOrDefault(x => x.Name == cbType.Text);
@@ -455,8 +479,13 @@ namespace GameShop_V1._0.Forms
                     .ToArray()[0]
                     .Selected = true;
             }
-            else if (controlsTypes.Any(x => x.Visible) && controlsTypes.All(x => x.Text != ""))
+            else if (controlsTypes.Any(x => x.Visible))
             {
+                if (controlsTypes.GetRange(1, controlsTypes.Count - 1).Any(x => x.Text == ""))
+                {
+                    return;
+                }
+
                 int id = Convert.ToInt32(dgvTypeProduct.SelectedRows[0].Cells[0].Value);
                 string name = tbTypeProductName.Text;
 
@@ -475,8 +504,13 @@ namespace GameShop_V1._0.Forms
                     .ToArray()[0]
                     .Selected = true;
             }
-            else if (controlsUsers.Any(x => x.Visible) && controlsUsers.All(x => x.Text != ""))
+            else if (controlsUsers.Any(x => x.Visible))
             {
+                if (controlsUsers.GetRange(4, controlsUsers.Count - 4).Any(x => x.Text == ""))
+                {
+                    return;
+                }
+
                 int id = Convert.ToInt32(dgvUsers.SelectedRows[0].Cells[0].Value);
                 string username = tbUserName.Text;
                 string password = tbPassword.Text;
@@ -506,22 +540,37 @@ namespace GameShop_V1._0.Forms
 
         private void btnRemove_Click(object sender, EventArgs e)
         {
-            if (controlsProducts.Any(x => x.Visible) && controlsProducts.All(x => x.Text != ""))
+            if (controlsProducts.Any(x => x.Visible))
             {
+                if (controlsProducts.GetRange(1, controlsProducts.Count - 1).Any(x => x.Text == ""))
+                {
+                    return;
+                }
+
                 AdminProductViewModel adminProductView = dgvProducts.SelectedRows[0].DataBoundItem as AdminProductViewModel;
 
                 Product productToRemove = productBusiness.GetProductByName(adminProductView.Name);
                 tbOutputMessage.Text = productBusiness.DeleteProduct(productToRemove);
                 UpdateDgvProducts();
             }
-            else if (controlsTypes.Any(x => x.Visible) && controlsUsers.All(x => x.Text != ""))
+            else if (controlsTypes.Any(x => x.Visible))
             {
+                if (controlsTypes.GetRange(1, controlsTypes.Count - 1).Any(x => x.Text == ""))
+                {
+                    return;
+                }
+
                 TypeProduct typeProductToRemove = dgvTypeProduct.SelectedRows[0].DataBoundItem as TypeProduct;
                 tbOutputMessage.Text = typeProductBusiness.DeleteTypeProduct(typeProductToRemove);
                 UpdateDgvTypeProducts();
             }
-            else if (controlsUsers.Any(x => x.Visible) && controlsUsers.All(x => x.Text != ""))
+            else if (controlsUsers.Any(x => x.Visible))
             {
+                if (controlsUsers.GetRange(4, controlsUsers.Count - 4).Any(x => x.Text == ""))
+                {
+                    return;
+                }
+
                 User userToRemove = dgvUsers.SelectedRows[0].DataBoundItem as User;
                 tbOutputMessage.Text = userBusiness.DeleteUser(userToRemove);
                 UpdateDgvUsers();
@@ -548,6 +597,23 @@ namespace GameShop_V1._0.Forms
             timer.Stop();
         }
 
-        
+        private void btnFind_Click(object sender, EventArgs e)
+        {
+            Product product = productBusiness.GetProductByName(tbAllUsersWithAgame.Text); 
+            if (product != null)
+            {
+                List<User> usersWithGame = userBusiness.GetAllUsersWithAGameOfChoice(product);
+                lbUserWithProducts.DataSource = usersWithGame.Select(x => x.UserName).ToList();
+                tbOutputMessage.Text = $"All users that have bought {product.Name}.";
+                ShowOutputMessageFor3Seconds();
+                return;
+            }
+            tbOutputMessage.Text = "Invalid input!";
+        }
+
+        private void lbUserWithProducts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
