@@ -38,7 +38,9 @@ namespace Business.businessLogic
 
         public Order GetOrderById(int id)
         {
-            return context.Orders.Find(id);
+            return context.Orders
+                .Include("OrderProducts")
+                .FirstOrDefault(x => x.OrderId == id);
         }
 
         /// <summary>

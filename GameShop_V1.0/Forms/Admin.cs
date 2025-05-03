@@ -172,6 +172,7 @@ namespace GameShop_V1._0.Forms
             dgvOrders.ClearSelection();
 
             dgvOrders.SelectionChanged += dgvOrders_SelectionChanged;
+            dgvOrders.ColumnHeaderMouseClick += dgvOrders_ColumnHeaderMouseClick;
         }
 
         private void HandleSelectionChanged(DataGridView gridView, Func<bool> hasData, Action onSelect)
@@ -263,10 +264,15 @@ namespace GameShop_V1._0.Forms
                 List<string> productsInOrder = new List<string>();
                 foreach (var orderProduct in orderProducts)
                 {
+                    orderProduct.Product = productBusiness.GetProductById(orderProduct.ProductId);
                     productsInOrder.Add($"{orderProduct.Product.Name} X {orderProduct.Quantity}");
                     totalPrice += orderProduct.Product.Price * orderProduct.Quantity;
                 }
                 lbOrderProducts.DataSource = productsInOrder;
+                tbTotalPrice.Text = totalPrice.ToString();
+
+                List<string> productsAsStrings = context.Products.Select(x => x.Name).ToList();
+                cbProductToAddInOrder.DataSource = productsAsStrings;
             }
         }
 
@@ -300,6 +306,10 @@ namespace GameShop_V1._0.Forms
         private void dgvUsers_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             DataGridView_ColumnHeaderMouseClick(sender, e, dgvUsers, ref users);
+        }
+        private void dgvOrders_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridView_ColumnHeaderMouseClick(sender, e, dgvOrders, ref orderViews);
         }
 
         private void btnProducts_Click(object sender, EventArgs e)
