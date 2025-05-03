@@ -65,7 +65,6 @@
             this.dgvProducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvProducts.Size = new System.Drawing.Size(568, 520);
             this.dgvProducts.TabIndex = 0;
-            this.dgvProducts.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProducts_CellContentClick);
             // 
             // panel1
             // 
@@ -217,7 +216,6 @@
             this.lbType.Size = new System.Drawing.Size(43, 16);
             this.lbType.TabIndex = 6;
             this.lbType.Text = "Type";
-            this.lbType.Click += new System.EventHandler(this.lbType_Click);
             // 
             // lbStock
             // 
@@ -242,7 +240,6 @@
             this.tbName.Size = new System.Drawing.Size(474, 74);
             this.tbName.TabIndex = 8;
             this.tbName.Text = "TITLE";
-            this.tbName.TextChanged += new System.EventHandler(this.tbName_TextChanged);
             // 
             // btnAddToCart
             // 

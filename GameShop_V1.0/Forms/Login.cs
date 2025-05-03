@@ -24,6 +24,12 @@ namespace GameShop_V1._0
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Shows the appropriate labels and text boxes based on the selected option
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
         private void rbLogin_CheckedChanged(object sender, EventArgs e)
         {
             lbUsername.Visible = true;
@@ -38,6 +44,12 @@ namespace GameShop_V1._0
             btnRegister.Visible = false;
 
         }
+
+        /// <summary>
+        /// Shows the appropriate labels and text boxes based on the selected option
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void rbRegister_CheckedChanged(object sender, EventArgs e)
         {
@@ -54,15 +66,11 @@ namespace GameShop_V1._0
 
         }
 
-        private void rbUser_CheckedChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void rbAdmin_CheckedChanged(object sender, EventArgs e)
-        {
-            
-        }
+        /// <summary>
+        /// Method to handle the Register button click event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
@@ -116,6 +124,12 @@ namespace GameShop_V1._0
 
         }
 
+        /// <summary>
+        /// Method to handle the Login button click event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string username = tbUsername.Text;
@@ -138,10 +152,6 @@ namespace GameShop_V1._0
             home.FormClosing += (obj, args) => { this.Close(); };
             this.Hide();
         }
-
-        private void Login_Load(object sender, EventArgs e)
-        {
-
-        }
+        
     }
 }

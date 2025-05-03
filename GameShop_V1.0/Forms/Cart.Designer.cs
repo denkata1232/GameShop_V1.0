@@ -142,7 +142,6 @@
             this.dgvProducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvProducts.Size = new System.Drawing.Size(568, 275);
             this.dgvProducts.TabIndex = 1;
-            this.dgvProducts.DataSourceChanged += new System.EventHandler(this.dgvProducts_DataSourceChanged);
             // 
             // lbTotalPrice
             // 
