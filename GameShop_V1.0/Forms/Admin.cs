@@ -27,6 +27,8 @@ namespace GameShop_V1._0.Forms
         private List<TypeProduct> typeProducts = new List<TypeProduct>();
         private List<User> users = new List<User>();
         private List<AdminOrderViewModel> orderViews = new List<AdminOrderViewModel>();
+        private List<string> productsInOrder = new List<string>();
+        private decimal totalPrice = 0;
 
         List<Control> controlsProducts = new List<Control>();
         List<Control> controlsTypes = new List<Control>();
@@ -259,17 +261,16 @@ namespace GameShop_V1._0.Forms
 
                 Order orderInBase = orderBusiness.GetOrderById(order.OrderId);
 
-                decimal totalPrice = 0;
+                
                 List<OrderProduct> orderProducts = orderInBase.OrderProducts.ToList();
-                List<string> productsInOrder = new List<string>();
+                productsInOrder.Clear();
                 foreach (var orderProduct in orderProducts)
                 {
                     orderProduct.Product = productBusiness.GetProductById(orderProduct.ProductId);
                     productsInOrder.Add($"{orderProduct.Product.Name} X {orderProduct.Quantity}");
-                    totalPrice += orderProduct.Product.Price * orderProduct.Quantity;
                 }
                 lbOrderProducts.DataSource = productsInOrder;
-                tbTotalPrice.Text = totalPrice.ToString();
+                CalculateTotalPrice();
 
                 List<string> productsAsStrings = context.Products.Select(x => x.Name).ToList();
                 cbProductToAddInOrder.DataSource = productsAsStrings;
@@ -399,6 +400,33 @@ namespace GameShop_V1._0.Forms
             dgvOrders.DataSource = orderViews;
         }
 
+        private void btnAddProductToOrder_Click(object sender, EventArgs e)
+        {
+            string productName = cbProductToAddInOrder.Text;
+            string quantity = tbQuantityOrder.Text;
+            productsInOrder.Add($"{productName} X {quantity}");
+            lbOrderProducts.DataSource = null;
+            lbOrderProducts.DataSource = productsInOrder;
+            CalculateTotalPrice();
+        }
+
+        private void btnRemoveFromOrder_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void CalculateTotalPrice()
+        {
+            foreach (var item in lbOrderProducts.Items)
+            {
+                string[] tokens = item.ToString().Split(new[] { " X " }, StringSplitOptions.None).ToArray();
+                Product product = productBusiness.GetProductByName(tokens[0]);
+                int quantity = int.Parse(tokens[1]);
+                totalPrice += product.Price * quantity;
+            }
+            tbTotalPrice.Text = totalPrice.ToString();
+        }
+
         private void btnNew_Click(object sender, EventArgs e)
         {
             if (controlsProducts.Any(x => x.Visible))
@@ -421,6 +449,10 @@ namespace GameShop_V1._0.Forms
             else if (controlsOrders.Any(x => x.Visible))
             {
                 SetControlsToEmpty(controlsOrders);
+                dgvOrders.ClearSelection();
+                lbOrderProducts.Items.Clear();
+                tbByProduct.Text = "Product name";
+                tbByUser.Text = "Username";
             }
         }
 
