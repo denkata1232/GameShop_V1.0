@@ -654,6 +654,7 @@
             this.btnRemoveFromOrder.Text = "Remove";
             this.btnRemoveFromOrder.UseVisualStyleBackColor = true;
             this.btnRemoveFromOrder.Visible = false;
+            this.btnRemoveFromOrder.Click += new System.EventHandler(this.btnRemoveFromOrder_Click);
             // 
             // cbProductToAddInOrder
             // 
@@ -673,6 +674,7 @@
             this.btnAddProductToOrder.Text = "Add";
             this.btnAddProductToOrder.UseVisualStyleBackColor = true;
             this.btnAddProductToOrder.Visible = false;
+            this.btnAddProductToOrder.Click += new System.EventHandler(this.btnAddProductToOrder_Click);
             // 
             // lblProductsOrder
             // 
