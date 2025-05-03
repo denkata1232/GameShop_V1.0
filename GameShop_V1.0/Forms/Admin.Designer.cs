@@ -85,13 +85,15 @@
             this.lbTotalPrice = new System.Windows.Forms.Label();
             this.tbTotalPrice = new System.Windows.Forms.TextBox();
             this.lbOrdersQuerrie = new System.Windows.Forms.ListBox();
-            this.btnFindOrdersByDate = new System.Windows.Forms.Button();
+            this.btnFindOrdersBy = new System.Windows.Forms.Button();
             this.rbByProduct = new System.Windows.Forms.RadioButton();
             this.rbByUser = new System.Windows.Forms.RadioButton();
             this.tbByProduct = new System.Windows.Forms.TextBox();
             this.tbByUser = new System.Windows.Forms.TextBox();
             this.lbFindOrder = new System.Windows.Forms.Label();
             this.dgvOrders = new System.Windows.Forms.DataGridView();
+            this.lbCopiesSold = new System.Windows.Forms.Label();
+            this.tbSoldCopies = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTypeProduct)).BeginInit();
@@ -727,19 +729,21 @@
             this.lbOrdersQuerrie.Size = new System.Drawing.Size(485, 134);
             this.lbOrdersQuerrie.TabIndex = 52;
             this.lbOrdersQuerrie.Visible = false;
+            this.lbOrdersQuerrie.SelectedIndexChanged += new System.EventHandler(this.lbOrdersQuerrie_SelectedIndexChanged);
             // 
-            // btnFindOrdersByDate
+            // btnFindOrdersBy
             // 
-            this.btnFindOrdersByDate.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnFindOrdersByDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFindOrdersByDate.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnFindOrdersByDate.Location = new System.Drawing.Point(590, 436);
-            this.btnFindOrdersByDate.Name = "btnFindOrdersByDate";
-            this.btnFindOrdersByDate.Size = new System.Drawing.Size(485, 27);
-            this.btnFindOrdersByDate.TabIndex = 53;
-            this.btnFindOrdersByDate.Text = "Find";
-            this.btnFindOrdersByDate.UseVisualStyleBackColor = false;
-            this.btnFindOrdersByDate.Visible = false;
+            this.btnFindOrdersBy.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnFindOrdersBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFindOrdersBy.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnFindOrdersBy.Location = new System.Drawing.Point(590, 436);
+            this.btnFindOrdersBy.Name = "btnFindOrdersBy";
+            this.btnFindOrdersBy.Size = new System.Drawing.Size(485, 27);
+            this.btnFindOrdersBy.TabIndex = 53;
+            this.btnFindOrdersBy.Text = "Find";
+            this.btnFindOrdersBy.UseVisualStyleBackColor = false;
+            this.btnFindOrdersBy.Visible = false;
+            this.btnFindOrdersBy.Click += new System.EventHandler(this.btnFindOrdersBy_Click);
             // 
             // rbByProduct
             // 
@@ -753,6 +757,7 @@
             this.rbByProduct.Text = "By product";
             this.rbByProduct.UseVisualStyleBackColor = true;
             this.rbByProduct.Visible = false;
+            this.rbByProduct.CheckedChanged += new System.EventHandler(this.rbByProduct_CheckedChanged);
             // 
             // rbByUser
             // 
@@ -764,6 +769,7 @@
             this.rbByUser.Text = "By User";
             this.rbByUser.UseVisualStyleBackColor = true;
             this.rbByUser.Visible = false;
+            this.rbByUser.CheckedChanged += new System.EventHandler(this.rbByUser_CheckedChanged);
             // 
             // tbByProduct
             // 
@@ -809,19 +815,40 @@
             this.dgvOrders.TabIndex = 60;
             this.dgvOrders.Visible = false;
             // 
+            // lbCopiesSold
+            // 
+            this.lbCopiesSold.AutoSize = true;
+            this.lbCopiesSold.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbCopiesSold.Location = new System.Drawing.Point(590, 411);
+            this.lbCopiesSold.Name = "lbCopiesSold";
+            this.lbCopiesSold.Size = new System.Drawing.Size(293, 18);
+            this.lbCopiesSold.TabIndex = 62;
+            this.lbCopiesSold.Text = "Copies sold (count of their ProductOrders):";
+            // 
+            // tbSoldCopies
+            // 
+            this.tbSoldCopies.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbSoldCopies.Location = new System.Drawing.Point(886, 409);
+            this.tbSoldCopies.Name = "tbSoldCopies";
+            this.tbSoldCopies.Size = new System.Drawing.Size(70, 24);
+            this.tbSoldCopies.TabIndex = 61;
+            this.tbSoldCopies.Text = "0";
+            // 
             // Admin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Azure;
             this.ClientSize = new System.Drawing.Size(1098, 626);
+            this.Controls.Add(this.lbCopiesSold);
+            this.Controls.Add(this.tbSoldCopies);
             this.Controls.Add(this.dgvOrders);
             this.Controls.Add(this.lbFindOrder);
             this.Controls.Add(this.tbByUser);
             this.Controls.Add(this.tbByProduct);
             this.Controls.Add(this.rbByUser);
             this.Controls.Add(this.rbByProduct);
-            this.Controls.Add(this.btnFindOrdersByDate);
+            this.Controls.Add(this.btnFindOrdersBy);
             this.Controls.Add(this.lbOrdersQuerrie);
             this.Controls.Add(this.tbTotalPrice);
             this.Controls.Add(this.lbTotalPrice);
@@ -943,12 +970,14 @@
         private System.Windows.Forms.Label lbTotalPrice;
         private System.Windows.Forms.TextBox tbTotalPrice;
         private System.Windows.Forms.ListBox lbOrdersQuerrie;
-        private System.Windows.Forms.Button btnFindOrdersByDate;
+        private System.Windows.Forms.Button btnFindOrdersBy;
         private System.Windows.Forms.RadioButton rbByProduct;
         private System.Windows.Forms.RadioButton rbByUser;
         private System.Windows.Forms.TextBox tbByProduct;
         private System.Windows.Forms.TextBox tbByUser;
         private System.Windows.Forms.Label lbFindOrder;
         private System.Windows.Forms.DataGridView dgvOrders;
+        private System.Windows.Forms.Label lbCopiesSold;
+        private System.Windows.Forms.TextBox tbSoldCopies;
     }
 }
