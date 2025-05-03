@@ -26,6 +26,7 @@ namespace GameShop_V1._0.Forms
         private List<AdminProductViewModel> productViews = new List<AdminProductViewModel>();
         private List<TypeProduct> typeProducts = new List<TypeProduct>();
         private List<User> users = new List<User>();
+        private List<AdminOrderViewModel> orderViews = new List<AdminOrderViewModel>();
 
         List<Control> controlsProducts = new List<Control>();
         List<Control> controlsTypes = new List<Control>();
@@ -120,12 +121,11 @@ namespace GameShop_V1._0.Forms
             controlsOrders.AddRange(new List<Control>()
             {
                 lbFindOrder,
-                rbByDate,
-                rbByDateRange,
-                tbDateToFind,
-                tbStartDateToFind,
-                tbEndDateToFind,
-                lbOrdersByDate,
+                rbByProduct,
+                rbByUser,
+                tbByProduct,
+                tbByUser,
+                lbOrdersQuerrie,
                 btnFindOrdersByDate,
                 dgvOrders,
                 lbUserNameOrder,
@@ -166,7 +166,12 @@ namespace GameShop_V1._0.Forms
             dgvUsers.SelectionChanged += dgvUsers_SelectionChanged;
             dgvUsers.ColumnHeaderMouseClick += dgvUsers_ColumnHeaderMouseClick;
 
+            /// updating orders grid view
+            UpdateDgvOrders();
 
+            dgvOrders.ClearSelection();
+
+            dgvOrders.SelectionChanged += dgvOrders_SelectionChanged;
         }
 
         private void HandleSelectionChanged(DataGridView gridView, Func<bool> hasData, Action onSelect)
@@ -201,6 +206,13 @@ namespace GameShop_V1._0.Forms
                            dgvUsers_SetSelectedUser);
         }
 
+        private void dgvOrders_SelectionChanged(object sender, EventArgs e)
+        {
+            HandleSelectionChanged(dgvOrders,
+                           () => context.Orders.Any(),
+                           dgvOrders_SetSelectedOrder);
+        }
+
         private void dvgProducts_SetSelectedProduct()
         {
             if (context.Products.Count() != 0)
@@ -233,6 +245,28 @@ namespace GameShop_V1._0.Forms
                 tbPassword.Text = user.Password;
                 tbEmail.Text = user.Email;
                 chbIsAdmin.Checked = user.IsAdmin;
+            }
+        }
+
+        private void dgvOrders_SetSelectedOrder()
+        {
+            if (context.Orders.Count() != 0)
+            {
+                AdminOrderViewModel order = dgvOrders.SelectedRows[0].DataBoundItem as AdminOrderViewModel;
+                tbUserNameOrder.Text = order.UserName;
+                tbDate.Text = order.Date.ToString();
+
+                Order orderInBase = orderBusiness.GetOrderById(order.OrderId);
+
+                decimal totalPrice = 0;
+                List<OrderProduct> orderProducts = orderInBase.OrderProducts.ToList();
+                List<string> productsInOrder = new List<string>();
+                foreach (var orderProduct in orderProducts)
+                {
+                    productsInOrder.Add($"{orderProduct.Product.Name} X {orderProduct.Quantity}");
+                    totalPrice += orderProduct.Product.Price * orderProduct.Quantity;
+                }
+                lbOrderProducts.DataSource = productsInOrder;
             }
         }
 
@@ -338,7 +372,21 @@ namespace GameShop_V1._0.Forms
             dgvUsers.DataSource = null;
             users = context.Users.ToList();
             dgvUsers.DataSource = users;
+        }
 
+        private void UpdateDgvOrders()
+        {
+            dgvOrders.DataSource = null;
+            orderViews = context.Orders
+                .Select(x => new AdminOrderViewModel()
+                {
+                    OrderId = x.OrderId,
+                    UserName = x.User.UserName,
+                    Date = x.Date,
+                    ProductCount = x.OrderProducts.Count
+                }).ToList();
+
+            dgvOrders.DataSource = orderViews;
         }
 
         private void btnNew_Click(object sender, EventArgs e)
