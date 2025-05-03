@@ -13,11 +13,16 @@ using NUnit.Framework.Legacy;
 namespace GameShop_V1._0_Tests
 {
     [TestFixture]
-    internal class TypeProductTests
+    public class TypeProductTests
     {
         private EffortConnection connection;
         private GameShopContext context;
         private TypeProductBusiness typeProductBusiness;
+
+        /// <summary>
+        /// Setup method to initialize the test environment
+        /// </summary>
+
         [SetUp]
         public void Setup()
         {
@@ -27,6 +32,10 @@ namespace GameShop_V1._0_Tests
             TestDataFill();
             context.SaveChanges();
         }
+
+        /// <summary>
+        /// Fills the database with test data
+        /// </summary>
 
         private void TestDataFill()
         {
@@ -46,6 +55,11 @@ namespace GameShop_V1._0_Tests
                 Name = "Test Type 3"
             });
         }
+
+        /// <summary>
+        /// Tests the GetAllTypeProducts method
+        /// </summary>
+
         [Test]
         public void TypeProductGetAllTest()
         {
@@ -53,6 +67,11 @@ namespace GameShop_V1._0_Tests
             var typeProducts = typeProductBusiness.GetAllTypeProducts();
             ClassicAssert.AreEqual(3, typeProducts.Count);
         }
+
+        /// <summary>
+        /// Tests the GetTypeProductById method
+        /// </summary>
+
         [Test]
         public void TypeProductGetByIdTest()
         {
@@ -60,6 +79,11 @@ namespace GameShop_V1._0_Tests
             var typeProduct = typeProductBusiness.GetTypeProductById(1);
             ClassicAssert.AreEqual("Test Type", typeProduct.Name);
         }
+
+        /// <summary>
+        /// Tests the AddTypeProduct method when it should pass
+        /// </summary>
+
         [Test]
         public void TypeProductAddPassTest()
         {
@@ -73,6 +97,11 @@ namespace GameShop_V1._0_Tests
             ClassicAssert.AreEqual("TypeProduct: Test Type 4 added successfully", result);
             ClassicAssert.AreEqual(4, typeProductBusiness.GetAllTypeProducts().Count);
         }
+
+        /// <summary>
+        /// Tests the AddTypeProduct method when it should fail
+        /// </summary>
+
         [Test]
         public void TypeProductAddFailTest()
         {
@@ -86,6 +115,11 @@ namespace GameShop_V1._0_Tests
             ClassicAssert.AreEqual("TypeProduct with Name: Test Type already exists", result);
             ClassicAssert.AreEqual(3, typeProductBusiness.GetAllTypeProducts().Count);
         }
+
+        /// <summary>
+        /// Tests the UpdateTypeProduct method when it should pass
+        /// </summary>
+
         [Test]
         public void TypeProductUpdatePassTest()
         {
@@ -97,6 +131,11 @@ namespace GameShop_V1._0_Tests
             ClassicAssert.AreEqual("TypeProduct: Updated Type updated successfully", result);
             ClassicAssert.AreEqual("Updated Type", typeProductBusiness.GetTypeProductById(1).Name);
         }
+
+        /// <summary>
+        /// Tests the UpdateTypeProduct method when it should fail
+        /// </summary>
+
         [Test]
         public void TypeProductUpdateFailTest()
         {
@@ -109,6 +148,11 @@ namespace GameShop_V1._0_Tests
             string result = typeProductBusiness.UpdateTypeProduct(typeProduct);
             ClassicAssert.AreEqual("TypeProduct with Name: Non-existing Type not found", result);
         }
+
+        /// <summary>
+        /// Tests the DeleteTypeProduct method when it should pass
+        /// </summary>
+
         [Test]
         public void TypeProductDeletePassTest()
         {
@@ -120,6 +164,11 @@ namespace GameShop_V1._0_Tests
             ClassicAssert.AreEqual("TypeProduct: Test Type deleted successfully", result);
             ClassicAssert.AreEqual(countBefore-1, typeProductBusiness.GetAllTypeProducts().Count);
         }
+
+        /// <summary>
+        /// Tests the DeleteTypeProduct method when it should fail
+        /// </summary>
+
         [Test]
         public void TypeProductDeleteFailTest()
         {
@@ -134,6 +183,10 @@ namespace GameShop_V1._0_Tests
             ClassicAssert.AreEqual("TypeProduct with Name: Non-existing Type not found", result);
             ClassicAssert.AreEqual(countBefore, typeProductBusiness.GetAllTypeProducts().Count);
         }
+
+        /// <summary>
+        /// TearDown method to clean up the test environment
+        /// </summary>
 
         [TearDown]
         public void Finish()

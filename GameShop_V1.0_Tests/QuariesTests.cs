@@ -171,6 +171,10 @@ namespace GameShop_V1._0_Tests
             });
         }
 
+        /// <summary>
+        /// Tests the GetOrdersByUserId method
+        /// </summary>
+
         [Test]
         public void GetAllUsersWithAGameOfChoiceTest()
         {
@@ -181,6 +185,10 @@ namespace GameShop_V1._0_Tests
             ClassicAssert.AreEqual(2, users.Count);
         }
 
+        /// <summary>
+        /// Tests the GetOrdersByUser method
+        /// </summary>
+
         [Test]
         public void GetOrdersByUserNameTest()
         {
@@ -189,6 +197,10 @@ namespace GameShop_V1._0_Tests
             ClassicAssert.IsNotNull(orders);
             ClassicAssert.AreEqual(1, orders.Count);
         }
+
+        /// <summary>
+        /// Tests GetAllOrdersContainingAGameOfChoice method
+        /// </summary>
 
         [Test]
         public void GetAllOrdersContainingAGameOfChoiceTest()

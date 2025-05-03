@@ -95,6 +95,11 @@ namespace GameShop_V1._0_Tests
             
             ClassicAssert.AreEqual(countBefore+1, products.Count);
         }
+
+        /// <summary>
+        /// Tests the AddProduct method when it should fail
+        /// </summary>
+
         [Test]
         public void ProductAddFailTest()
         {
@@ -113,6 +118,11 @@ namespace GameShop_V1._0_Tests
 
             ClassicAssert.AreEqual(countBefore, products.Count);
         }
+
+        /// <summary>
+        /// Tests the GetProductById method
+        /// </summary>
+
         [Test]
         public void ProductGetByIdTest()
         {
@@ -120,6 +130,11 @@ namespace GameShop_V1._0_Tests
 
             ClassicAssert.AreEqual("Test Product", product.Name);
         }
+
+        /// <summary>
+        /// Tests the GetProductByName method
+        /// </summary>
+
         [Test]
         public void ProductGetByNameTest()
         {
@@ -127,6 +142,11 @@ namespace GameShop_V1._0_Tests
 
             ClassicAssert.AreEqual(1, product.ProductId);
         }
+
+        /// <summary>
+        /// Tests the UpdateProduct method when it should succeed
+        /// </summary>
+
         [Test]
         public void ProductUpdatePassTest()
         {
@@ -139,6 +159,11 @@ namespace GameShop_V1._0_Tests
             ClassicAssert.AreEqual("Updated Product", updatedProduct.Name);
             ClassicAssert.AreEqual($"Product: {product.Name} updated successfully", message);
         }
+
+        /// <summary>
+        /// Tests the UpdateProduct method when it should fail
+        /// </summary>
+
         [Test]
         public void ProductUpdateFailTest()
         {
@@ -155,6 +180,11 @@ namespace GameShop_V1._0_Tests
             context.SaveChanges();
             ClassicAssert.AreEqual($"Product with Name: {product.Name} not found", message);
         }
+
+        /// <summary>
+        /// Tests the DeleteProduct method when it should succeed
+        /// </summary>
+
         [Test]
         public void ProductDeletePassTest()
         {
@@ -168,6 +198,11 @@ namespace GameShop_V1._0_Tests
             ClassicAssert.IsNull(deletedProduct);
             ClassicAssert.AreEqual(countBefore - 1, productBusiness.GetAllProducts().Count());
         }
+
+        /// <summary>
+        /// Tests the DeleteProduct method when it should fail
+        /// </summary>
+
         [Test]
         public void ProductDeleteFailTest()
         {
@@ -186,6 +221,11 @@ namespace GameShop_V1._0_Tests
             ClassicAssert.AreEqual($"Product with Name: {product.Name} not found", message);
             ClassicAssert.AreEqual(countBefore, productBusiness.GetAllProducts().Count());
         }
+
+        /// <summary>
+        /// Cleans up the test environment
+        /// </summary>
+
         [TearDown]
         public void Finish()
         {

@@ -13,11 +13,16 @@ using NUnit.Framework.Legacy;
 namespace GameShop_V1._0_Tests
 {
     [TestFixture]
-    internal class UserTests
+    public class UserTests
     {
         private EffortConnection connection;
         private GameShopContext context;
         private UserBusiness userBusiness;
+
+        /// <summary>
+        /// Setup method to initialize the test environment
+        /// </summary>
+
         [SetUp]
         public void Setup()
         {
@@ -27,6 +32,10 @@ namespace GameShop_V1._0_Tests
             TestDataFill();
             context.SaveChanges();
         }
+
+        /// <summary>
+        /// Fills the database with test data
+        /// </summary>
 
         private void TestDataFill()
         {
@@ -54,6 +63,10 @@ namespace GameShop_V1._0_Tests
             });
         }
 
+        /// <summary>
+        /// Tests the AddUser method when it should pass
+        /// </summary>
+
         [Test]
         public void UserAddPassTest()
         {
@@ -74,6 +87,11 @@ namespace GameShop_V1._0_Tests
             ClassicAssert.AreEqual("NewUser", createdUser.UserName);
             ClassicAssert.AreEqual(initialCount+1, context.Users.Count());
         }
+
+        /// <summary>
+        /// Tests the AddUser method when it should fail
+        /// </summary>
+
         [Test]
         public void UserAddFailTest()
         {
@@ -90,6 +108,11 @@ namespace GameShop_V1._0_Tests
 
             ClassicAssert.AreEqual($"User: {user.UserName} already exists!", message);
         }
+
+        /// <summary>
+        /// Tests the GetUserById method
+        /// </summary>
+
         [Test]
         public void GetUserByIdTest()
         {
@@ -98,6 +121,11 @@ namespace GameShop_V1._0_Tests
             ClassicAssert.IsNotNull(user);
             ClassicAssert.AreEqual("TestUser", user.UserName);
         }
+
+        /// <summary>
+        /// Tests the GetUserByUsernameAndPassword method
+        /// </summary>
+
         [Test]
         public void GetUserByNameAndPasswordTest()
         {
@@ -105,6 +133,11 @@ namespace GameShop_V1._0_Tests
             ClassicAssert.IsNotNull(user);
             ClassicAssert.AreEqual("TestUser", user.UserName);
         }
+
+        /// <summary>
+        /// Tests the GetAllUsers method
+        /// </summary>
+
         [Test]
         public void GetAllUsersTest()
         {
@@ -114,6 +147,11 @@ namespace GameShop_V1._0_Tests
             ClassicAssert.AreEqual(3, users.Count());
             ClassicAssert.AreEqual("TestUser", users[0].UserName);
         }
+
+        /// <summary>
+        /// Tests the UpdateUser method when it should pass
+        /// </summary>
+
         [Test]
         public void UpdateUserPassTest()
         {
@@ -128,6 +166,11 @@ namespace GameShop_V1._0_Tests
             ClassicAssert.AreEqual("UpdatedUser", updatedUser.UserName);
             ClassicAssert.AreEqual($"User: {updatedUser.UserName} updated successfully!",message);
         }
+
+        /// <summary>
+        /// Tests the UpdateUser method when it should fail
+        /// </summary>
+
         [Test]
         public void UpdateUserFailTest()
         {
@@ -144,6 +187,11 @@ namespace GameShop_V1._0_Tests
 
 
         }
+
+        /// <summary>
+        /// Tests the DeleteUser method when it should pass
+        /// </summary>
+
         [Test]
         public void DeleteUserPassTest()
         {
@@ -156,6 +204,11 @@ namespace GameShop_V1._0_Tests
             ClassicAssert.IsNull(deletedUser);
             ClassicAssert.AreEqual($"User: {user.UserName} deleted successfully!", message);
         }
+
+        /// <summary>
+        /// Tests the DeleteUser method when it should fail
+        /// </summary>
+
         [Test]
         public void DeleteUserFailTest()
         {
@@ -173,14 +226,22 @@ namespace GameShop_V1._0_Tests
             ClassicAssert.AreEqual($"User with Name: {testUser.UserName} not found!", message);
         }
 
+        /// <summary>
+        /// Tests the GetUserByUsername method when it should pass
+        /// </summary>
+
         [Test]
-        public void GetAllUsersByUserNameTest()
+        public void GetAllUsersByUserNamePassTest()
         {
             // Test getting all users by username
             var user = userBusiness.GetUserByUsername("TestUser");
             ClassicAssert.IsNotNull(user);
             ClassicAssert.AreEqual("TestUser", user.UserName);
         }
+
+        /// <summary>
+        /// Tests the GetUserByUsername method when it should fail
+        /// </summary>
 
         [Test]
         public void GetAllUsersByUserNameFailTest()
