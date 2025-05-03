@@ -32,6 +32,12 @@ namespace GameShop_V1._0.Forms
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Initializes the form, sets the current user label and loads the products into the DataGridView
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
         private void Home_Load(object sender, EventArgs e)
         {
             lbCurrentUser.Text = GlobalInfo.CurrentUser.UserName;
@@ -71,6 +77,12 @@ namespace GameShop_V1._0.Forms
             dvgProducts_SetSelectedProduct();
         }
 
+        /// <summary>
+        /// On column header click, sorts the DataGridView based on the clicked column
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
         private void dgvProducts_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             string columnName = dgvProducts.Columns[e.ColumnIndex].DataPropertyName;
@@ -88,10 +100,20 @@ namespace GameShop_V1._0.Forms
             sortAscending = !sortAscending;
         }
 
+        /// <summary>
+        /// Handles the selection change event of the DataGridView
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
         private void dgvProducts_SelectionChanged(object sender, EventArgs e)
         {
             dvgProducts_SetSelectedProduct();
         }
+
+        /// <summary>
+        /// Sets the selected product details in the respective text boxes and labels
+        /// </summary>
 
         private void dvgProducts_SetSelectedProduct()
         {
@@ -105,15 +127,11 @@ namespace GameShop_V1._0.Forms
             tbDescription.Text = product.Description + $"{Environment.NewLine}Developed by {product.Company}";
         }
 
-        private void dgvProducts_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void lbType_Click(object sender, EventArgs e)
-        {
-
-        }
+        /// <summary>
+        /// On Log Out button click, clears the current user and cart, and opens the Login form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
@@ -124,6 +142,12 @@ namespace GameShop_V1._0.Forms
             login.FormClosing += (obj, args) => { this.Close(); };
             this.Hide();
         }
+
+        /// <summary>
+        /// Handles the click event of the Plus and Minus buttons to increase or decrease the quantity of the selected product
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void btnPlus_Click(object sender, EventArgs e)
         {
@@ -145,6 +169,12 @@ namespace GameShop_V1._0.Forms
             tbQuantity.Text = quantity.ToString();
         }
 
+        /// <summary>
+        /// On Cart button click, opens the Cart form and hides the current form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
         private void btnCart_Click(object sender, EventArgs e)
         {
             Cart cart = new Cart();
@@ -152,6 +182,13 @@ namespace GameShop_V1._0.Forms
             cart.FormClosing += (obj, args) => { this.Close(); };
             this.Hide();
         }
+
+        /// <summary>
+        /// Adds the selected product to the cart with the specified quantity
+        /// Calls the ShowAddedToCartFor2Seconds method to display a message
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void btnAddToCart_Click(object sender, EventArgs e)
         {
@@ -178,10 +215,11 @@ namespace GameShop_V1._0.Forms
             ShowAddedToCartFor2Seconds();
         }
 
-        private void tbName_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        /// <summary>
+        /// Opens the Admin form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void btnAdmin_Click(object sender, EventArgs e)
         {
@@ -190,6 +228,10 @@ namespace GameShop_V1._0.Forms
             admin.FormClosing += (obj, args) => { this.Close(); };
             this.Hide();
         }
+
+        /// <summary>
+        /// Shows a message indicating the product has been added to the cart for 2 seconds
+        /// </summary>
 
         private void ShowAddedToCartFor2Seconds()
         {
@@ -202,6 +244,12 @@ namespace GameShop_V1._0.Forms
             timer.Start();
         }
 
+        /// <summary>
+        /// Responsible for hiding the label after the timer ticks
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
         private void Timer_Tick(object sender, EventArgs e)
         {
             // Hide the label after the timer ticks
@@ -210,6 +258,12 @@ namespace GameShop_V1._0.Forms
             // Stop the timer
             timer.Stop();
         }
+
+        /// <summary>
+        /// Handels the out of range input in the quantity text box
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void tbQuantity_TextChanged(object sender, EventArgs e)
         {

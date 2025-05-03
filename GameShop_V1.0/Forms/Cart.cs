@@ -28,6 +28,12 @@ namespace GameShop_V1._0.Forms
             lbCurrentUser.Text = GlobalInfo.CurrentUser.UserName;
         }
 
+        /// <summary>
+        /// On click of the log out button, clears the cart and current user, shows the login form and hides the current form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
         private void btnLogOut_Click(object sender, EventArgs e)
         {
             GlobalInfo.Cart = new List<CartProductViewModel>();
@@ -37,6 +43,12 @@ namespace GameShop_V1._0.Forms
             login.FormClosing += (obj, args) => { this.Close(); };
             this.Hide();
         }
+
+        /// <summary>
+        /// On click of the home labels, shows the home form and hides the current form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -53,6 +65,10 @@ namespace GameShop_V1._0.Forms
             LoadHome();
         }
 
+        /// <summary>
+        /// On click of the home button, shows the home form and hides the current form
+        /// </summary>
+
         private void LoadHome()
         {
             Home home = new Home();
@@ -60,6 +76,12 @@ namespace GameShop_V1._0.Forms
             home.FormClosing += (obj, args) => { this.Close(); };
             this.Hide();
         }
+
+        /// <summary>
+        /// On form load, sets the data source of the DataGridView to the cart, sets the column width, and updates the total price
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void Cart_Load(object sender, EventArgs e)
         {
@@ -69,6 +91,15 @@ namespace GameShop_V1._0.Forms
             dvgProducts_SetSelectedProduct();
             UpdateTotalPrice();
         }
+
+        /// <summary>
+        /// On click of the confirm purchase button,
+        /// creates an order with the current user and date,
+        /// adds products to the order, updates the product quantities in the database,
+        /// shows a success message and clears the cart
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void btnConfirmPurchase_Click(object sender, EventArgs e)
         {
@@ -106,6 +137,12 @@ namespace GameShop_V1._0.Forms
 
         }
 
+        /// <summary>
+        /// On click of the remove from cart button, removes the selected product from the cart
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
         private void btnRemoveFromCart_Click(object sender, EventArgs e)
         {
             if (GlobalInfo.Cart.Count != 0 && dgvProducts.SelectedRows[0] != null)
@@ -131,6 +168,12 @@ namespace GameShop_V1._0.Forms
             }
                 
         }
+
+        /// <summary>
+        /// On click of the plus or minus button, increases or decreses (respectfully) the quantity of the selected product in the cart
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void btnPlus_Click(object sender, EventArgs e)
         {
@@ -166,6 +209,10 @@ namespace GameShop_V1._0.Forms
             }
         }
 
+        /// <summary>
+        /// Sets the selected product in the DataGridView to the text boxes and labels
+        /// </summary>
+
         private void dvgProducts_SetSelectedProduct()
         {
             if (GlobalInfo.Cart.Count > 0 && dgvProducts.SelectedRows[0].Index >= 0)
@@ -178,6 +225,12 @@ namespace GameShop_V1._0.Forms
                 quantity = selectedProduct.Quantity;
             }       
         }
+
+        /// <summary>
+        /// Makes sure that the selected product in the DataGridView is set to the text boxes and labels
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
 
         private void dgvProducts_SelectionChanged(object sender, EventArgs e)
         {
@@ -192,21 +245,24 @@ namespace GameShop_V1._0.Forms
             }      
         }
 
+        /// <summary>
+        /// Updates the quantity of the selected product in the cart
+        /// </summary>
+        /// <param name="name"></param>
+
         private void NewQuantity(string name)
         {
             CartProductViewModel product = GlobalInfo.Cart.FirstOrDefault(p => p.Name == name);
             product.Quantity = quantity;
         }
 
+        /// <summary>
+        /// Updates the total price label with the sum of all products in the cart
+        /// </summary>
+
         private void UpdateTotalPrice()
         {
             lbTotalPrice.Text = (GlobalInfo.Cart.Sum(x => x.Quantity * x.Price)).ToString() + "$";
-        }
-
-        private void dgvProducts_DataSourceChanged(object sender, EventArgs e)
-        {
-           
-               
-        }
+        }   
     }
 }

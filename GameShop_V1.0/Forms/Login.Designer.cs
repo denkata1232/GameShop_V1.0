@@ -239,7 +239,6 @@
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
-            this.Load += new System.EventHandler(this.Login_Load);
             this.gb1.ResumeLayout(false);
             this.gb1.PerformLayout();
             this.panel1.ResumeLayout(false);
