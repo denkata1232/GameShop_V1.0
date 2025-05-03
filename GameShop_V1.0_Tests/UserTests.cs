@@ -99,9 +99,9 @@ namespace GameShop_V1._0_Tests
             ClassicAssert.AreEqual("TestUser", user.UserName);
         }
         [Test]
-        public void GetUserTest()
+        public void GetUserByNameAndPasswordTest()
         {
-            User user = userBusiness.GetUser("TestUser", "TestPassword");
+            User user = userBusiness.GetUserByUsernameAndPassword("TestUser", "TestPassword");
             ClassicAssert.IsNotNull(user);
             ClassicAssert.AreEqual("TestUser", user.UserName);
         }
@@ -172,6 +172,24 @@ namespace GameShop_V1._0_Tests
 
             ClassicAssert.AreEqual($"User with Name: {testUser.UserName} not found!", message);
         }
+
+        [Test]
+        public void GetAllUsersByUserNameTest()
+        {
+            // Test getting all users by username
+            var user = userBusiness.GetUserByUsername("TestUser");
+            ClassicAssert.IsNotNull(user);
+            ClassicAssert.AreEqual("TestUser", user.UserName);
+        }
+
+        [Test]
+        public void GetAllUsersByUserNameFailTest()
+        {
+            // Test getting all users by invalid username
+            var user = userBusiness.GetUserByUsername("InvalidUser");
+            ClassicAssert.IsNull(user);
+        }
+
         [TearDown]
         public void Finish()
         {
