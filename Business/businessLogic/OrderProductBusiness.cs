@@ -82,7 +82,7 @@ namespace Business.businessLogic
 
         public string DeleteOrderProduct(OrderProduct orderProduct)
         {
-            OrderProduct orderProductToDelete = context.OrderProducts.Find(orderProduct.ProductId, orderProduct.OrderId);
+            OrderProduct orderProductToDelete = context.OrderProducts.FirstOrDefault(x => x.ProductId == orderProduct.ProductId && x.OrderId == orderProduct.OrderId);
             if (orderProductToDelete != null)
             {
                 context.OrderProducts.Remove(orderProductToDelete);
