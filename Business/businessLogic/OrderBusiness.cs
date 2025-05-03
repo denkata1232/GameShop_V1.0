@@ -148,6 +148,7 @@ namespace Business.businessLogic
         {
             return context.Orders
                 .Where(o=>o.User.UserName == name)
+                .Distinct()
                 .ToList();
         }
 
@@ -160,6 +161,7 @@ namespace Business.businessLogic
         {
             return context.Orders
                 .Where(o => o.OrderProducts.Any(op => op.Product.Name == name))
+                .Distinct()
                 .ToList();
         }
 
