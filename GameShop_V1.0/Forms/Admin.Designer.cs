@@ -641,6 +641,7 @@
             this.lbOrderProducts.FormattingEnabled = true;
             this.lbOrderProducts.Location = new System.Drawing.Point(590, 141);
             this.lbOrderProducts.Name = "lbOrderProducts";
+            this.lbOrderProducts.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.lbOrderProducts.Size = new System.Drawing.Size(485, 95);
             this.lbOrderProducts.TabIndex = 44;
             this.lbOrderProducts.Visible = false;

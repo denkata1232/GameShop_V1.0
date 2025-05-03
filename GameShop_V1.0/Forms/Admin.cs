@@ -255,6 +255,8 @@ namespace GameShop_V1._0.Forms
         {
             if (context.Orders.Count() != 0)
             {
+                totalPrice = 0;
+                productsInOrder = new List<string>();
                 AdminOrderViewModel order = dgvOrders.SelectedRows[0].DataBoundItem as AdminOrderViewModel;
                 tbUserNameOrder.Text = order.UserName;
                 tbDate.Text = order.Date.ToString();
@@ -263,7 +265,6 @@ namespace GameShop_V1._0.Forms
 
                 
                 List<OrderProduct> orderProducts = orderInBase.OrderProducts.ToList();
-                productsInOrder.Clear();
                 foreach (var orderProduct in orderProducts)
                 {
                     orderProduct.Product = productBusiness.GetProductById(orderProduct.ProductId);
@@ -412,11 +413,27 @@ namespace GameShop_V1._0.Forms
 
         private void btnRemoveFromOrder_Click(object sender, EventArgs e)
         {
-            
+            var selectedItems = lbOrderProducts.SelectedItems.Cast<string>().ToList();
+
+            foreach (var item in selectedItems)
+            {
+                productsInOrder.Remove(item);
+            }
+            CalculateTotalPrice();
+
+            lbOrderProducts.DataSource = null;
+            lbOrderProducts.DataSource = productsInOrder;
         }
 
         private void CalculateTotalPrice()
         {
+            totalPrice = 0;
+
+            if (lbOrderProducts.Items.Count == 0)
+            {
+                return;
+            }
+
             foreach (var item in lbOrderProducts.Items)
             {
                 string[] tokens = item.ToString().Split(new[] { " X " }, StringSplitOptions.None).ToArray();
