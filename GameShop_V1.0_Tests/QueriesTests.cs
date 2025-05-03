@@ -13,7 +13,7 @@ using NUnit.Framework.Legacy;
 namespace GameShop_V1._0_Tests
 {
     [TestFixture]
-    public class QuariesTests
+    public class QueriesTests
     {
         private EffortConnection connection;
         private GameShopContext context;
@@ -210,6 +210,24 @@ namespace GameShop_V1._0_Tests
             ClassicAssert.IsNotNull(orders);
             ClassicAssert.AreEqual(2, orders.Count);
         }
+
+        /// <summary>
+        /// Tests GetSoldCopiesOfSpecificGame method
+        /// </summary>
+
+        [Test]
+        public void GetSoldCopiesOfSpecificGameTest()
+        {
+            // Test getting sold copies of a specific game
+            var product = context.Products.Find(1);
+            var soldCopies = productBusiness.GetSoldCopiesOfSpecificGame(product);
+            ClassicAssert.IsNotNull(soldCopies);
+            ClassicAssert.AreEqual(6, soldCopies);
+        }
+
+        /// <summary>
+        /// TearDown method to clean up the test environment
+        /// </summary>
 
         [TearDown]
         public void Finish()

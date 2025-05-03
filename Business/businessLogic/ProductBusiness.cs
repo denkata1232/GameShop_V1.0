@@ -99,5 +99,19 @@ namespace Business.businessLogic
             }
             return $"Product with Name: {product.Name} not found";
         }
+
+        /// <summary>
+        /// Returns the number of sold copies of a specific game
+        /// </summary>
+        /// <param name="product"></param>
+
+        public int GetSoldCopiesOfSpecificGame(Product product)
+        {
+            return context.Products
+                .Include("OrderProducts")
+                .Where(p => p.ProductId == product.ProductId)
+                .SelectMany(p=>p.ProductOrders)
+                .Sum(op => op.Quantity);
+        }
     }
 }
