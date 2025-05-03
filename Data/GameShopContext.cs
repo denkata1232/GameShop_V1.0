@@ -9,17 +9,34 @@ namespace Data
 {
     public class GameShopContext : DbContext
     {
+        /// <summary>
+        /// Db Sets for the database tables
+        /// </summary>
         public DbSet<TypeProduct> TypeProducts { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderProduct> OrderProducts { get; set; }
+
+        /// <summary>
+        /// Constructor for the GameShopContext, for main use
+        /// </summary>
         public GameShopContext() : base("name=GameShopContext")
         {
         }
+
+        /// <summary>
+        /// Constructor for the GameShopContext, for testing purposes
+        /// </summary>
+        /// <param name="connectionString"></param>
         public GameShopContext(System.Data.Common.DbConnection connectionString) : base(connectionString,true)
         {
         }
+
+        /// <summary>
+        /// Override the OnModelCreating method to configure the composite key for OrderProduct
+        /// </summary>
+        /// <param name="modelBuilder"></param>
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -27,6 +44,10 @@ namespace Data
             base.OnModelCreating(modelBuilder);
         }
 
+        /// <summary>
+        /// Method to seed the database with initial data
+        /// </summary>
+        
         public void SeedDatabase()
         {
             if (!Users.Any() && !Products.Any() && !Orders.Any())

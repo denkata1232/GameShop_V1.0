@@ -121,7 +121,7 @@ namespace GameShop_V1._0
             string username = tbUsername.Text;
             string password = tbPassword.Text;
 
-            User user = userBusiness.GetUser(username, password);
+            User user = userBusiness.GetUserByUsernameAndPassword(username, password);
 
             if (user == null)
             {

@@ -12,25 +12,60 @@ namespace Business.businessLogic
     {
         private GameShopContext context;
 
+        /// <summary>
+        /// Constructor for UserBusiness
+        /// </summary>
+        /// <param name="context"></param>
+
         public UserBusiness(GameShopContext context)
         {
             this.context = context;
         }
+
+        /// <summary>
+        /// Returns all users from the database
+        /// </summary>
 
         public List<User> GetAllUsers()
         {
             return context.Users.ToList();
         }
 
+        /// <summary>
+        /// Returns a user by its ID
+        /// </summary>
+        /// <param name="id"></param>
+
         public User GetUserById(int id)
         {
             return context.Users.Find(id);
         }
 
-        public User GetUser(string username, string password)
+        /// <summary>
+        /// Returns a user by its username and password
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+
+        public User GetUserByUsernameAndPassword(string username, string password)
         {
             return context.Users.FirstOrDefault(x => x.UserName == username && x.Password == password);
         }
+
+        /// <summary>
+        /// Returns a user by its username
+        /// </summary>
+        /// <param name="username"></param>
+
+        public User GetUserByUsername(string username)
+        {
+            return context.Users.FirstOrDefault(x => x.UserName == username);
+        }
+
+        /// <summary>
+        /// Adds a user to the database
+        /// </summary>
+        /// <param name="user"></param>
 
         public string AddUser(User user)
         {
@@ -42,6 +77,11 @@ namespace Business.businessLogic
             context.SaveChanges();
             return $"User: {user.UserName} added successfully!";
         }
+
+        /// <summary>
+        /// Updates a user in the database
+        /// </summary>
+        /// <param name="user"></param>
 
         public string UpdateUser(User user)
         {
@@ -55,6 +95,11 @@ namespace Business.businessLogic
             return $"User with Name: {user.UserName} not found!";
         }
 
+        /// <summary>
+        /// Deletes a user from the database
+        /// </summary>
+        /// <param name="user"></param>
+
         public string DeleteUser(User user)
         {
             User userToDelete = context.Users.Find(user.UserId);
@@ -66,6 +111,11 @@ namespace Business.businessLogic
             }
             return $"User with Name: {user.UserName} not found!";
         }
+
+        /// <summary>
+        /// Returns all users who have a specific game in their orders
+        /// </summary>
+        /// <param name="product"></param>
 
         public List<User> GetAllUsersWithAGameOfChoice(Product product)
         {

@@ -8,25 +8,38 @@ using NUnit.Framework.Legacy;
 namespace GameShop_V1._0_Tests
 {
     [TestFixture]
-    internal class OrderTests
+    public class OrderTests
     {
         private EffortConnection connection;
         private GameShopContext context;
         private OrderBusiness orderBusiness;
+
+        /// <summary>
+        /// Setup method to initialize the test environment
+        /// </summary>
+
         [SetUp]
         public void Setup()
         {
             connection = DbConnectionFactory.CreateTransient();
             context = new GameShopContext(connection);
             orderBusiness = new OrderBusiness(context);
+            TestDataFill();
+        }
+
+        /// <summary>
+        /// Fills the database with test data
+        /// </summary>
+
+        private void TestDataFill()
+        {
             TestDataFillUser();
             TestDataFillProduct();
             TestDataFillOrderProduct();
-            TestDataFill();
+            TestDataFillOrder();
             context.SaveChanges();
         }
-
-        private void TestDataFill()
+        private void TestDataFillOrder()
         {
             context.Orders.Add(new Order
             {
@@ -145,6 +158,11 @@ namespace GameShop_V1._0_Tests
                 Quantity = 3
             });
         }
+
+        /// <summary>
+        /// Tests the GetAllOrders method
+        /// </summary>
+
         [Test]
         public void OrderGetAllTest()
         {
@@ -152,6 +170,11 @@ namespace GameShop_V1._0_Tests
             var orders = orderBusiness.GetAllOrders();
             ClassicAssert.AreEqual(2, orders.Count);
         }
+
+        /// <summary>
+        /// Tests the GetOrderById method
+        /// </summary>
+
         [Test]
         public void OrderGetByIdTest()
         {
@@ -160,6 +183,11 @@ namespace GameShop_V1._0_Tests
             ClassicAssert.AreEqual(1, order.OrderId);
             ClassicAssert.AreEqual(1, order.UserId);
         }
+
+        /// <summary>
+        /// Tests the GetOrderById method when it should pass
+        /// </summary>
+
         [Test]
         public void OrderAddPassTest()
         {
@@ -176,6 +204,11 @@ namespace GameShop_V1._0_Tests
             ClassicAssert.AreEqual("Order: 3 added successfully!", result);
             ClassicAssert.AreEqual(countBefore + 1, orderBusiness.GetAllOrders().Count);
         }
+
+        /// <summary>
+        /// Tests the AddOrder method when it should fail
+        /// </summary>
+
         [Test]
         public void OrderAddFailTest()
         {
@@ -191,6 +224,11 @@ namespace GameShop_V1._0_Tests
             string result = orderBusiness.AddOrder(order);
             ClassicAssert.AreEqual("Order with ID: 1 already exists!", result);
         }
+
+        /// <summary>
+        /// Tests the AddProductToOrder method when it should pass
+        /// </summary>
+
         [Test]
         public void OrderAddProductToOrderPassTest()
         {
@@ -201,15 +239,23 @@ namespace GameShop_V1._0_Tests
             ClassicAssert.AreEqual($"Product: {product.Name} added to Order: {order.OrderId} successfully!", result);
             ClassicAssert.AreEqual(3, order.OrderProducts.Count);
         }
+
+        /// <summary>
+        /// Tests the AddProductToOrder method when it should fail by null
+        /// </summary>
+
         [Test]
         public void OrderAddProductToOrderFailNullTest()
         {
             // Test adding a product to an order with invalid data
-            var order = context.Orders.Find(1);
-            var product = context.Products.Find(1);
             string result = orderBusiness.AddProductToOrder(null, null, 2);
             ClassicAssert.AreEqual("Product or Order cannot be null!", result);
         }
+
+        /// <summary>
+        /// Tests the AddProductToOrder method when it should pass
+        /// </summary>
+
         [Test]
         public void OrderAddProductToOrderNewOrderPassTest()
         {
@@ -225,6 +271,11 @@ namespace GameShop_V1._0_Tests
             string result = orderBusiness.AddProductToOrder(order, product, 2);
             ClassicAssert.AreEqual($"Product: {product.Name} added to Order: {order.OrderId} successfully!", result);
         }
+
+        /// <summary>
+        /// Tests the AddProductToOrder method when it should fail by invalid product
+        /// </summary>
+
         [Test]
         public void OrderAddProductToOrderFailInvalitProductTest()
         {
@@ -239,6 +290,11 @@ namespace GameShop_V1._0_Tests
             string result = orderBusiness.AddProductToOrder(order, product, 1);
             ClassicAssert.AreEqual("Product doesn't exist!", result);
         }
+
+        /// <summary>
+        /// Tests the AddProductToOrder method when it should fail by invalid quantity
+        /// </summary>
+
         [Test]
         public void OrderAddProductToOrderFailInvalidQuantityTest()
         {
@@ -249,6 +305,11 @@ namespace GameShop_V1._0_Tests
             ClassicAssert.AreEqual("Quantity is out of bound!", result);
             ClassicAssert.AreEqual(null, context.Orders.Find(1));
         }
+
+        /// <summary>
+        /// Tests the GetOrdersByUserId method
+        /// </summary>
+
         [Test]
         public void OrderGetByUserIdTest()
         {
@@ -258,6 +319,11 @@ namespace GameShop_V1._0_Tests
             ClassicAssert.AreEqual(1, orders.Count);
             ClassicAssert.AreEqual(1, orders[0].OrderId);
         }
+
+        /// <summary>
+        /// Tests the OrderUpdate method when it should pass
+        /// </summary>
+
         [Test]
         public void OrderUpdatePassTest()
         {
@@ -268,6 +334,11 @@ namespace GameShop_V1._0_Tests
             ClassicAssert.AreEqual($"Order: {order.OrderId} updated successfully!", result);
             ClassicAssert.AreEqual(2, context.Orders.Find(1).UserId);
         }
+
+        /// <summary>
+        /// Tests the OrderUpdate method when it should fail
+        /// </summary>
+
         [Test]
         public void OrderUpdateFailTest()
         {
@@ -283,6 +354,11 @@ namespace GameShop_V1._0_Tests
             string result = orderBusiness.UpdateOrder(order);
             ClassicAssert.AreEqual($"Order with ID: {order.OrderId} not found!", result);
         }
+
+        /// <summary>
+        /// Tests the OrderDelete method when it should pass
+        /// </summary>
+
         [Test]
         public void OrderDeletePassTest()
         {
@@ -294,6 +370,11 @@ namespace GameShop_V1._0_Tests
             ClassicAssert.AreEqual(null, context.Orders.Find(1));
             ClassicAssert.AreEqual(countBefore - 1, orderBusiness.GetAllOrders().Count);
         }
+
+        /// <summary>
+        /// Tests the OrderDelete method when it should fail
+        /// </summary>
+
         [Test]
         public void OrderDeleteFailTest()
         {
@@ -311,6 +392,10 @@ namespace GameShop_V1._0_Tests
             ClassicAssert.AreEqual($"Order with ID: {order.OrderId} not found!", result);
             ClassicAssert.AreEqual(countBefore, orderBusiness.GetAllOrders().Count);
         }
+
+        /// <summary>
+        /// TearDown method to clean up the test environment
+        /// </summary>
 
         [TearDown]
         public void Finish()

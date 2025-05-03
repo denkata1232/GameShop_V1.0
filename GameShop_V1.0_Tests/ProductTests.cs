@@ -13,6 +13,11 @@ namespace GameShop_V1._0_Tests
         private EffortConnection connection;
         private GameShopContext context;
         private ProductBusiness productBusiness;
+
+        /// <summary>
+        /// Setup method to initialize the test environment
+        /// </summary>
+
         [SetUp]
         public void Setup()
         {
@@ -22,6 +27,10 @@ namespace GameShop_V1._0_Tests
             TestDataFill();
             context.SaveChanges();
         }
+
+        /// <summary>
+        /// Fills the database with test data
+        /// </summary>
 
         private void TestDataFill()
         {
@@ -63,6 +72,10 @@ namespace GameShop_V1._0_Tests
                 Quantity = 15
             });
         }
+
+        /// <summary>
+        /// Tests the AddProduct method when it should succeed
+        /// </summary>
 
         [Test]
         public void ProductAddPassTest()

@@ -12,21 +12,39 @@ namespace Business.businessLogic
     {
         private GameShopContext context;
         private OrderProductBusiness orderProductBusiness;
+
+        /// <summary>
+        /// Constructor for OrderBusiness
+        /// </summary>
+        /// <param name="context"></param>
         public OrderBusiness(GameShopContext context)
         {
             this.context = context;
             this.orderProductBusiness = new OrderProductBusiness(context);
         }
 
+        /// <summary>
+        /// Returns all orders from the database
+        /// </summary>
         public List<Order> GetAllOrders()
         {
             return context.Orders.ToList();
         }
 
+        /// <summary>
+        /// Returns an order by its ID
+        /// </summary>
+        /// <param name="id"></param>
+
         public Order GetOrderById(int id)
         {
             return context.Orders.Find(id);
         }
+
+        /// <summary>
+        /// Adds an order to the database
+        /// </summary>
+        /// <param name="order"></param>
 
         public string AddOrder(Order order)
         {
@@ -38,6 +56,11 @@ namespace Business.businessLogic
             context.SaveChanges();
             return $"Order: {order.OrderId} added successfully!";
         }
+
+        /// <summary>
+        /// Updates an order in the database
+        /// </summary>
+        /// <param name="order"></param>
 
         public string UpdateOrder(Order order)
         {
@@ -51,6 +74,12 @@ namespace Business.businessLogic
             return $"Order with ID: {order.OrderId} not found!";
         }
 
+        /// <summary>
+        /// Deletes an order from the database
+        /// </summary>
+        /// <param name="order"></param>
+        /// <returns></returns>
+
         public string DeleteOrder(Order order)
         {
             Order orderToDelete = context.Orders.Find(order.OrderId);
@@ -62,6 +91,13 @@ namespace Business.businessLogic
             }
             return $"Order with ID: {order.OrderId} not found!";
         }
+
+        /// <summary>
+        /// Adds a product to an order
+        /// </summary>
+        /// <param name="order"></param>
+        /// <param name="product"></param>
+        /// <param name="quantity"></param>
 
         public string AddProductToOrder(Order order, Product product, int quantity)
         {
@@ -91,20 +127,44 @@ namespace Business.businessLogic
             return $"Product: {product.Name} added to Order: {order.OrderId} successfully!";
         }
 
+        /// <summary>
+        /// Returns all orders made by a user
+        /// </summary>
+        /// <param name="user"></param>
+
         public List<Order> GetOrdersByUserId(User user)
         {
             return context.Orders.Where(o => o.UserId == user.UserId).ToList();
         }
 
-        public List<Order> GetOrdersByDate(DateTime date)
+        /// <summary>
+        /// Returns all orders made by a user by their username
+        /// </summary>
+        /// <param name="name"></param>
+
+        public List<Order> GetAllOrdersByUser(string name)
         {
-            return context.Orders.Where(o => o.Date.Date == date.Date).ToList();
+            return context.Orders
+                .Where(o=>o.User.UserName == name)
+                .ToList();
         }
 
-        public List<Order> GetOrdersByDateRange(DateTime startDate, DateTime endDate)
+        /// <summary>
+        /// Returns all orders that contain a specific game by name
+        /// </summary>
+        /// <param name="name"></param>
+
+        public List<Order> GetAllOrdersContainingAGameOfChoise(string name)
         {
-            return context.Orders.Where(o => o.Date.Date >= startDate.Date && o.Date.Date <= endDate.Date).ToList();
+            return context.Orders
+                .Where(o => o.OrderProducts.Any(op => op.Product.Name == name))
+                .ToList();
         }
+
+        /// <summary>
+        /// Returns a string representation of an order
+        /// </summary>
+        /// <param name="order"></param>
 
         public string OrderToString(Order order)
         {
